@@ -70,7 +70,7 @@
      <Compile Include="Assets\Provider\KeyPression.cs" />
      <Compile Include="Assets\Robot.cs" />
  <Reference Include="Facebook.Unity.Settings">
- <HintPath>/home/tommaso/Documenti/Unity3D Projects/Shootball/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ <HintPath>/home/tommaso/git/Shootball/Shootball/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/opt/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
