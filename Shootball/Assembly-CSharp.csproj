@@ -54,7 +54,6 @@
      <Compile Include="Assets\Arena.cs" />
      <Compile Include="Assets\ArenaBounds.cs" />
      <Compile Include="Assets\Global.cs" />
-     <Compile Include="Assets\LaserRay.cs" />
      <Compile Include="Assets\Model\EnemyRobotModel.cs" />
      <Compile Include="Assets\Model\PlayerRobotModel.cs" />
      <Compile Include="Assets\Model\RobotComponents.cs" />
@@ -69,6 +68,7 @@
      <Compile Include="Assets\Provider\Inputs.cs" />
      <Compile Include="Assets\Provider\KeyPression.cs" />
      <Compile Include="Assets\Robot.cs" />
+     <Compile Include="Assets\Utility\LaserShooter.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/home/tommaso/git/Shootball/Shootball/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Shootball.Motion;
+using Shootball.Utility;
 using UnityEngine;
 
 namespace Shootball.Model
@@ -13,9 +13,10 @@ namespace Shootball.Model
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
         private float _aimDegree;
-        private List<GameObject> _laserRays;
 
-        private LineRenderer LaserLine => Components.LaserRaySpawn.GetComponent<LineRenderer>();
+        private LineRenderer _laserLineSingleton;
+        private LineRenderer LaserLine =>
+                _laserLineSingleton ?? (_laserLineSingleton = Components.LaserRaySpawn.GetComponent<LineRenderer>());
 
         protected Vector3 MoveAxis => Components.RobotPosition.forward;
 
@@ -39,7 +40,6 @@ namespace Shootball.Model
 
             _distanceBodyHead = Components.RobotBody.transform.position - Components.RobotHead.transform.position;
             _aimDegree = Settings.StartingAimDegree;
-            _laserRays = new List<GameObject>();
 
             Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(), Components.RobotHead.GetComponent<Collider>());
         }
@@ -106,58 +106,7 @@ namespace Shootball.Model
 
         public void Shoot()
         {
-
-            //var laserRay = UnityEngine.Object.Instantiate(Components.LaserRayPrefab, Components.LaserRaySpawn.position, 
-            //		Quaternion.LookRotation(ShootDirection)) as GameObject;
-            //
-            //laserRay.GetComponent<Rigidbody>().velocity = ShootDirection * Settings.LaserRaySpeed;
-            //Physics.IgnoreCollision(Components.RobotHead.GetComponent<Collider>(), laserRay.GetComponent<Collider>());
-            //Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(), laserRay.GetComponent<Collider>());
-            //
-            //_laserRays.RemoveAll(ray => ray == null);
-            //_laserRays.ForEach(ray => {
-            //	Physics.IgnoreCollision(ray.GetComponent<Collider>(), laserRay.GetComponent<Collider>());
-            //});
-            //_laserRays.Add(laserRay);
-
-            _shooter.Shoot(UnityEngine.Object.Instantiate(LaserLine) as LineRenderer,
-					Components.LaserRaySpawn.transform.position, ShootDirection);
-        }
-    }
-
-    public class LaserShooter
-    {
-        private readonly MonoBehaviour _monoBehaviour;
-        private WaitForSeconds shotDuration = new WaitForSeconds(3f);
-
-        public LaserShooter(MonoBehaviour monoBehaviour)
-        {
-            _monoBehaviour = monoBehaviour;
-        }
-
-        public void Shoot(LineRenderer line, Vector3 origin, Vector3 direction)
-        {
-			line.useWorldSpace = true;
-            _monoBehaviour.StartCoroutine(ShotEffect(line));
-
-            line.SetPosition(0, origin);
-
-            RaycastHit hit;
-            if (Physics.Raycast(origin, direction, out hit))
-            {
-                line.SetPosition(1, hit.point);
-            }
-            else
-            {
-                line.SetPosition(1, origin + direction);
-            }
-        }
-
-        private IEnumerator ShotEffect(LineRenderer line)
-        {
-            line.enabled = true;
-            yield return shotDuration;
-            line.enabled = false;
+            _shooter.Shoot(LaserLine, Components.LaserRaySpawn.transform.position, ShootDirection, 200);
         }
     }
 }

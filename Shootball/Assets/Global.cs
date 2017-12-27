@@ -68,7 +68,7 @@ namespace Shootball
         private void HideCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.visible = false;            
         }
 
         private void ShowCursor()
