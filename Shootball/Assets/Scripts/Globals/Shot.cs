@@ -3,16 +3,15 @@ using Shootball.Model;
 
 public class Shot : MonoBehaviour
 {
-    public float Speed;
-	public IShooter Shooter;
+    public ShotModel ShotModel;
 
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * Speed;
+        ShotModel.Move();
     }
 
 	void OnCollisionEnter(Collision collisionInfo)
 	{
-		Destroy(gameObject);
+        ShotModel.Hit(collisionInfo.gameObject);
 	}
 }

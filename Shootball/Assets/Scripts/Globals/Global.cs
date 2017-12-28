@@ -14,13 +14,13 @@ namespace Shootball
 
         private GameObject enemy;
 
-        private PlayerRobotModel PlayerRobot => (PlayerRobotModel) PlayerRobotObject.GetComponent<Robot>().RobotModel;
-        
+        private PlayerRobotModel PlayerRobot => (PlayerRobotModel)PlayerRobotObject.GetComponent<Robot>().RobotModel;
+
         void Start()
         {
             BuildArena();
             HideCursor();
-            enemy = Instantiate(RobotPrefab, new Vector3(10,3,10), new Quaternion()) as GameObject;
+            enemy = Instantiate(RobotPrefab, new Vector3(10, 3, 10), new Quaternion()) as GameObject;
         }
 
         void Update()
@@ -46,18 +46,18 @@ namespace Shootball
         }
 
         private void BuildArena()
-        {}
+        { }
 
         private void playEnemy()
         {
-            var enemyModel = (EnemyRobotModel) enemy.GetComponent<Robot>().RobotModel;
-            if (Random.Range(-3,3) >= 1)
+            var enemyModel = (EnemyRobotModel)enemy.GetComponent<Robot>().RobotModel;
+            if (Random.Range(-3, 3) >= 1)
             {
                 enemyModel.Shoot();
             }
             else
             {
-                var i = Random.Range(0,3);
+                var i = Random.Range(0, 3);
                 if (i == 0) enemyModel.Move(Direction.Backward);
                 else if (i == 1) enemyModel.Move(Direction.Forward);
                 else if (i == 2) enemyModel.Move(Direction.Left);
@@ -68,7 +68,7 @@ namespace Shootball
         private void HideCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;            
+            Cursor.visible = false;
         }
 
         private void ShowCursor()

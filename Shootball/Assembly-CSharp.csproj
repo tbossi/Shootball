@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Model\RobotComponents.cs" />
      <Compile Include="Assets\Scripts\Model\RobotModel.cs" />
      <Compile Include="Assets\Scripts\Model\RobotSettings.cs" />
+     <Compile Include="Assets\Scripts\Model\ShotModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />
      <Compile Include="Assets\Scripts\Motion\Spin.cs" />
      <Compile Include="Assets\Scripts\Motion\Transformer.cs" />

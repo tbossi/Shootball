@@ -14,13 +14,11 @@ namespace Shootball.Utility
         public void Shoot(GameObject shotPrefab, Vector3 origin, Quaternion rotation, Vector3 direction, float speed)
         {
             var shot = GameObject.Instantiate(shotPrefab, origin, rotation);
-            Physics.IgnoreCollision(shot.GetComponent<Collider>(), shooter.Collider);
+            Physics.IgnoreCollision(shot.GetComponent<Collider>(), shooter.Collider);         
             shot.transform.forward = direction;
             
             var shotScript = shot.GetComponent<Shot>();
-            shotScript.Speed = speed;
-            shotScript.Shooter = shooter;
-
+            shotScript.ShotModel = new ShotModel(shot, shooter, speed);
             shotScript.enabled = true;
         }
     }
