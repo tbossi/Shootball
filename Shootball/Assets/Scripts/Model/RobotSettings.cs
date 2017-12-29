@@ -10,9 +10,12 @@ namespace Shootball.Model
 		public readonly float LowerAimDegree;
 		public readonly float UpperAimDegree;
 		public readonly float LaserRaySpeed;
+        public readonly float ShotRechargeTime;
+        public readonly float FireRate;        
 
         public RobotSettings(float moveSpeed, float fixedMoveSpeed, float turnSpeed, float aimSpeed,
-                float startingAimDegree, float lowerAimDegree, float upperAimDegree, float laserRaySpeed)
+                float startingAimDegree, float lowerAimDegree, float upperAimDegree, float laserRaySpeed,
+                float shotRechargeTime, float fireRate)
         {
             MoveSpeed = moveSpeed;
             FixedMoveSpeed = fixedMoveSpeed;
@@ -22,6 +25,8 @@ namespace Shootball.Model
             LowerAimDegree = lowerAimDegree;
             UpperAimDegree = upperAimDegree;
             LaserRaySpeed = laserRaySpeed;
+            ShotRechargeTime = shotRechargeTime;
+            FireRate = fireRate;
         }
     }
 }

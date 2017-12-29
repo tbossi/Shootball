@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Shootball.Motion;
 using Shootball.Utility;
@@ -10,19 +11,18 @@ namespace Shootball.Model
     {
         Collider Collider { get; }
         void Shoot();
+        IEnumerator RechargeShot();
     }
 
     public abstract class RobotModel : IShooter
     {
         protected readonly RobotSettings Settings;
         protected readonly RobotComponents Components;
+        protected readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
         private float _aimDegree;
-
-        private LineRenderer _laserLineSingleton;
-        private LineRenderer LaserLine =>
-                _laserLineSingleton ?? (_laserLineSingleton = Components.LaserRaySpawn.GetComponent<LineRenderer>());
+        private float _nextFire;
 
         public Collider Collider => Components.RobotHead.GetComponent<Collider>();
 
@@ -34,14 +34,16 @@ namespace Shootball.Model
 
         protected Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
 
-        public RobotModel(RobotSettings settings, RobotComponents components)
+        public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics)
         {
             Settings = settings;
             Components = components;
-            Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(), Components.RobotHead.GetComponent<Collider>());            
+            Statistics = statistics;
+            Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(), Components.RobotHead.GetComponent<Collider>());
 
             _distanceBodyHead = Components.RobotBody.transform.position - Components.RobotHead.transform.position;
             _aimDegree = Settings.StartingAimDegree;
+            _nextFire = 0;
             _shooter = new LaserShooter(this);
         }
 
@@ -53,6 +55,24 @@ namespace Shootball.Model
             var oldParentPosition = Components.RobotPosition.position;
             Components.RobotPosition.position = bodyPosition;
             Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+        }
+
+        public IEnumerator RechargeShot()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Settings.ShotRechargeTime);
+                Statistics.RechargeShot();
+            }
+        }
+
+        public void GetDamaged(float amount)
+        {
+            var isAlive = Statistics.GetDamaged(amount);
+            if (!isAlive)
+            {
+                Debug.Log("Ouch!!!");
+            }
         }
 
         public void Move(Direction direction)
@@ -107,8 +127,12 @@ namespace Shootball.Model
 
         public void Shoot()
         {
-            _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
+            if (Time.time > _nextFire && Statistics.Shoot())
+            {
+                _nextFire = Time.time + Settings.FireRate;
+                _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
                     ShootRotation, ShootDirection, Settings.LaserRaySpeed);
+            }
         }
     }
 }

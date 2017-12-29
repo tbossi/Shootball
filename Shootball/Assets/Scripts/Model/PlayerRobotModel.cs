@@ -5,8 +5,8 @@ namespace Shootball.Model
 {
     public class PlayerRobotModel : RobotModel
     {
-        public PlayerRobotModel(RobotSettings settings, RobotComponents components) : 
-				base(settings, components)
+        public PlayerRobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics)
+				: base(settings, components, statistics)
         {
 			Components.RobotHead.AddComponent<AudioListener>();
         }
