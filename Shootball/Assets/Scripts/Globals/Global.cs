@@ -20,7 +20,7 @@ namespace Shootball
         {
             BuildArena();
             HideCursor();
-            enemy = Instantiate(RobotPrefab, new Vector3(10, 3, 10), new Quaternion()) as GameObject;
+            enemy = Instantiate(RobotPrefab, new Vector3(10, 3, 10), new Quaternion());
         }
 
         void Update()

@@ -51,9 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
      <Compile Include="Assets\Scripts\Globals\Arena.cs" />
      <Compile Include="Assets\Scripts\Globals\ArenaBounds.cs" />
      <Compile Include="Assets\Scripts\Globals\Global.cs" />
+     <Compile Include="Assets\Scripts\Globals\Houses.cs" />
      <Compile Include="Assets\Scripts\Globals\Robot.cs" />
      <Compile Include="Assets\Scripts\Globals\Shot.cs" />
      <Compile Include="Assets\Scripts\Model\EnemyRobotModel.cs" />
@@ -61,6 +63,7 @@
      <Compile Include="Assets\Scripts\Model\RobotComponents.cs" />
      <Compile Include="Assets\Scripts\Model\RobotModel.cs" />
      <Compile Include="Assets\Scripts\Model\RobotSettings.cs" />
+     <Compile Include="Assets\Scripts\Model\RobotStatistics.cs" />
      <Compile Include="Assets\Scripts\Model\ShotModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />
      <Compile Include="Assets\Scripts\Motion\Spin.cs" />
@@ -70,7 +73,9 @@
      <Compile Include="Assets\Scripts\Provider\InputKey.cs" />
      <Compile Include="Assets\Scripts\Provider\Inputs.cs" />
      <Compile Include="Assets\Scripts\Provider\KeyPression.cs" />
+     <Compile Include="Assets\Scripts\Utility\GameObjectBuilder.cs" />
      <Compile Include="Assets\Scripts\Utility\LaserShooter.cs" />
+     <Compile Include="Assets\Scripts\Utility\MapBuilder.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\Utils\TransformExtensionMethods.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineSettings.cs" />

@@ -32,6 +32,14 @@ namespace Shootball.Model
 
         public void Hit(GameObject hitObject)
         {
+            var maybeRobot = hitObject.GetComponent<Robot>() ?? hitObject.GetComponentInParent<Robot>();
+
+            if (maybeRobot != null)
+            {
+                var robotModel = maybeRobot.RobotModel;
+                robotModel.GetDamaged(10);
+            }
+
             Debug.Log("Boom");
 
             GameObject.Destroy(_shot);

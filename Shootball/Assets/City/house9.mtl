@@ -1,0 +1,199 @@
+# Exported from Wings 3D 2.1.5
+newmtl initialShadingGroup
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.34 0.34 0.34
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__lambert3SG8
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.86 0.86 0.86
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__lambert5SG18
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.27 0.27 0.27
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__lambert7SG7
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.5 0.39 0.21
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__lambert9SG1
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert2SG27
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert4SG18
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.15 0.15 0.15
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert5SG10
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.27 0.27 0.27
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert5SG11
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.27 0.27 0.27
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert5SG9
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.27 0.27 0.27
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert6SG4
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.5 0.39 0.21
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__lambert6SG5
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.5 0.39 0.21
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__lambert2SG11
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__lambert2SG21
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__lambert3SG16
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.86 0.86 0.86
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__lambert4SG16
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.15 0.15 0.15
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG10
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG10
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.86 0.86 0.86
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG10
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.15 0.15 0.15
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG2
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.88 0.87 0.74
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG2
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.86 0.86 0.86
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG2
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.15 0.15 0.15
+Ka 0.0 0.0 0.0
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+

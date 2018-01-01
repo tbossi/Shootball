@@ -287,6 +287,56 @@ GameObject:
   m_PrefabParentObject: {fileID: 1164802306739134, guid: d605a45ff092740be90bd28470fe38f2,
     type: 2}
   m_PrefabInternal: {fileID: 855179925}
+--- !u!1 &240244949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 240244951}
+  - component: {fileID: 240244950}
+  m_Layer: 0
+  m_Name: Houses
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &240244950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240244949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf1fad48e2934a658300719914921ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HousePrefabs:
+  - {fileID: 100000, guid: 3574d73d11ec048aeb62b4f0ef2231cc, type: 3}
+  - {fileID: 100000, guid: 8e8a787a7df2341a38fb07c42ba81341, type: 3}
+  - {fileID: 100000, guid: bac7a51f72def477a84be252a119cc66, type: 3}
+  - {fileID: 100000, guid: 67618be7818af42daaf6e9e508f8252f, type: 3}
+  - {fileID: 100000, guid: 43ab8f14797a2454e9ad838814b77cdc, type: 3}
+  - {fileID: 100000, guid: 665c8a34ea0794b9d8504bf93940524e, type: 3}
+  - {fileID: 100000, guid: d30f715161c2b4908aa2a915526ec8f1, type: 3}
+  - {fileID: 100000, guid: 261d6aaa4ff63479c969e199b04530b0, type: 3}
+  - {fileID: 100000, guid: 5483de82c3591437e9a929f8d659de9f, type: 3}
+--- !u!4 &240244951
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 240244949}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &592092331
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +460,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4322655104814462, guid: d605a45ff092740be90bd28470fe38f2, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1164802306739134, guid: d605a45ff092740be90bd28470fe38f2, type: 2}
       propertyPath: m_Name
@@ -488,7 +538,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 38.794003, y: 22.914001, z: -74.700005}
 --- !u!1001 &1004943408
 Prefab:

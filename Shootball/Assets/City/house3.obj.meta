@@ -1,0 +1,626 @@
+fileFormatVersion: 2
+guid: bac7a51f72def477a84be252a119cc66
+timeCreated: 1514632072
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: unnamed_object1_initialShadingGroup
+    100004: unnamed_object1_pasted__pasted__lambert10SG11
+    100006: unnamed_object1_pasted__pasted__lambert12SG9
+    100008: unnamed_object1_pasted__pasted__lambert13SG23
+    100010: unnamed_object1_pasted__pasted__lambert3SG21
+    100012: unnamed_object1_pasted__pasted__lambert4SG21
+    100014: unnamed_object1_pasted__pasted__lambert5SG35
+    100016: unnamed_object1_pasted__pasted__lambert7SG20
+    100018: unnamed_object1_pasted__pasted__lambert9SG7
+    100020: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    100022: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    100024: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    100026: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    100028: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    100030: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    100032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    100034: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    100036: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    100038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    100040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    100042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    100044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    100046: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    100048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    100050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    100052: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    100054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    100056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    100058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    100060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    100062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    100064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    100066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    100068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    100070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    100072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    100074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    100076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    100078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    100080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    100082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    100084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    100086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    100088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    100090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    100092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    100094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    100096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    100098: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    400000: //RootNode
+    400002: unnamed_object1_initialShadingGroup
+    400004: unnamed_object1_pasted__pasted__lambert10SG11
+    400006: unnamed_object1_pasted__pasted__lambert12SG9
+    400008: unnamed_object1_pasted__pasted__lambert13SG23
+    400010: unnamed_object1_pasted__pasted__lambert3SG21
+    400012: unnamed_object1_pasted__pasted__lambert4SG21
+    400014: unnamed_object1_pasted__pasted__lambert5SG35
+    400016: unnamed_object1_pasted__pasted__lambert7SG20
+    400018: unnamed_object1_pasted__pasted__lambert9SG7
+    400020: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    400022: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    400024: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    400026: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    400028: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    400030: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    400032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    400034: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    400036: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    400038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    400040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    400042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    400044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    400046: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    400048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    400050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    400052: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    400054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    400056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    400058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    400060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    400062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    400064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    400066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    400068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    400070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    400072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    400074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    400076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    400078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    400080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    400082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    400084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    400086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    400088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    400090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    400092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    400094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    400096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    400098: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    2300000: unnamed_object1_initialShadingGroup
+    2300002: unnamed_object1_pasted__pasted__lambert10SG11
+    2300004: unnamed_object1_pasted__pasted__lambert12SG9
+    2300006: unnamed_object1_pasted__pasted__lambert13SG23
+    2300008: unnamed_object1_pasted__pasted__lambert3SG21
+    2300010: unnamed_object1_pasted__pasted__lambert4SG21
+    2300012: unnamed_object1_pasted__pasted__lambert5SG35
+    2300014: unnamed_object1_pasted__pasted__lambert7SG20
+    2300016: unnamed_object1_pasted__pasted__lambert9SG7
+    2300018: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    2300020: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    2300022: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    2300024: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    2300026: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    2300028: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    2300030: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    2300032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    2300034: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    2300036: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    2300038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    2300040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    2300042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    2300044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    2300046: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    2300048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    2300050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    2300052: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    2300054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    2300056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    2300058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    2300060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    2300062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    2300064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    2300066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    2300068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    2300070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    2300072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    2300074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    2300076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    2300078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    2300080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    2300082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    2300084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    2300086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    2300088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    2300090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    2300092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    2300094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    2300096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    3300000: unnamed_object1_initialShadingGroup
+    3300002: unnamed_object1_pasted__pasted__lambert10SG11
+    3300004: unnamed_object1_pasted__pasted__lambert12SG9
+    3300006: unnamed_object1_pasted__pasted__lambert13SG23
+    3300008: unnamed_object1_pasted__pasted__lambert3SG21
+    3300010: unnamed_object1_pasted__pasted__lambert4SG21
+    3300012: unnamed_object1_pasted__pasted__lambert5SG35
+    3300014: unnamed_object1_pasted__pasted__lambert7SG20
+    3300016: unnamed_object1_pasted__pasted__lambert9SG7
+    3300018: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    3300020: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    3300022: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    3300024: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    3300026: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    3300028: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    3300030: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    3300032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    3300034: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    3300036: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    3300038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    3300040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    3300042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    3300044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    3300046: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    3300048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    3300050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    3300052: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    3300054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    3300056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    3300058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    3300060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    3300062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    3300064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    3300066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    3300068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    3300070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    3300072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    3300074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    3300076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    3300078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    3300080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    3300082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    3300084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    3300086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    3300088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    3300090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    3300092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    3300094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    3300096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    4300000: unnamed_object1_initialShadingGroup
+    4300002: unnamed_object1_pasted__pasted__lambert10SG11
+    4300004: unnamed_object1_pasted__pasted__lambert12SG9
+    4300006: unnamed_object1_pasted__pasted__lambert13SG23
+    4300008: unnamed_object1_pasted__pasted__lambert3SG21
+    4300010: unnamed_object1_pasted__pasted__lambert4SG21
+    4300012: unnamed_object1_pasted__pasted__lambert5SG35
+    4300014: unnamed_object1_pasted__pasted__lambert7SG20
+    4300016: unnamed_object1_pasted__pasted__lambert9SG7
+    4300018: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    4300020: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    4300022: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    4300024: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    4300026: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    4300028: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    4300030: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    4300032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    4300034: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    4300036: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    4300038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    4300040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    4300042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    4300044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    4300046: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    4300048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    4300050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    4300052: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    4300054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    4300056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    4300058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    4300060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    4300062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    4300064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    4300066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    4300068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    4300070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    4300072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    4300074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    4300076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    4300078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    4300080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    4300082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    4300084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    4300086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    4300088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    4300090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    4300092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    4300094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    4300096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    6400000: unnamed_object1_initialShadingGroup
+    6400002: unnamed_object1_pasted__pasted__lambert10SG11
+    6400004: unnamed_object1_pasted__pasted__lambert12SG9
+    6400006: unnamed_object1_pasted__pasted__lambert13SG23
+    6400008: unnamed_object1_pasted__pasted__lambert3SG21
+    6400010: unnamed_object1_pasted__pasted__lambert4SG21
+    6400012: unnamed_object1_pasted__pasted__lambert5SG35
+    6400014: unnamed_object1_pasted__pasted__lambert7SG20
+    6400016: unnamed_object1_pasted__pasted__lambert9SG7
+    6400018: unnamed_object1_pasted__pasted__pasted__lambert4SG36
+    6400020: unnamed_object1_pasted__pasted__pasted__lambert5SG64
+    6400022: unnamed_object1_pasted__pasted__pasted__lambert5SG65
+    6400024: unnamed_object1_pasted__pasted__pasted__lambert5SG66
+    6400026: unnamed_object1_pasted__pasted__pasted__lambert7SG26
+    6400028: unnamed_object1_pasted__pasted__pasted__pasted__lambert13SG35
+    6400030: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG72
+    6400032: unnamed_object1_pasted__pasted__pasted__pasted__lambert2SG73
+    6400034: unnamed_object1_pasted__pasted__pasted__pasted__lambert4SG46
+    6400036: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG66
+    6400038: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG67
+    6400040: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG68
+    6400042: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG69
+    6400044: unnamed_object1_pasted__pasted__pasted__pasted__lambert5SG70
+    6400046: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG21
+    6400048: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG22
+    6400050: unnamed_object1_pasted__pasted__pasted__pasted__lambert6SG23
+    6400052: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    6400054: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    6400056: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    6400058: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    6400060: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    6400062: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    6400064: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    6400066: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    6400068: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    6400070: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    6400072: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    6400074: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    6400076: unnamed_object1_pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    6400078: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    6400080: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    6400082: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    6400084: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    6400086: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    6400088: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    6400090: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    6400092: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    6400094: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    6400096: unnamed_object1_pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: initialShadingGroup
+    second: {fileID: 2100000, guid: a04d509562b1346619665db4187c4a83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert10SG11
+    second: {fileID: 2100000, guid: 49b626325a98b415d819504d738912ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert12SG9
+    second: {fileID: 2100000, guid: 3c49ddd6dede94642ab2ed7da434405a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert13SG23
+    second: {fileID: 2100000, guid: 33c6296dfa36d493280a198e35c9167b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert3SG21
+    second: {fileID: 2100000, guid: 6627118cd40eb41a781a8b95cef23467, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert4SG21
+    second: {fileID: 2100000, guid: 62761f011118545f6aa429efe8b82d29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert5SG35
+    second: {fileID: 2100000, guid: e2c066850625a4d9a8b2136ff1e7bd2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert7SG20
+    second: {fileID: 2100000, guid: 358f5d9b5a47a42ddba3aa0efff1251d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert9SG7
+    second: {fileID: 2100000, guid: 614682d183c4149c6b7f5dfb25754ecd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__lambert4SG36
+    second: {fileID: 2100000, guid: 0ec174ca15dba4d55ae9a8f10c131e61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__lambert5SG64
+    second: {fileID: 2100000, guid: 2fec35921cca8473a97a40b14f656def, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__lambert5SG65
+    second: {fileID: 2100000, guid: 6485d2fcfc50f4ce8a74f5f3ca23ff0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__lambert5SG66
+    second: {fileID: 2100000, guid: 0927f3fcd6ac5457db035fb2f0dd1f45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__lambert7SG26
+    second: {fileID: 2100000, guid: fabb6a1081ff148bba052ef60da206a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert13SG35
+    second: {fileID: 2100000, guid: 8ab3b5bbc03744863ac593240875ee79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert2SG72
+    second: {fileID: 2100000, guid: 4584631375e46471498b5d6d89e53441, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert2SG73
+    second: {fileID: 2100000, guid: b6b973676e61e4d678d62b44b2076ad0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert4SG46
+    second: {fileID: 2100000, guid: 06b3475d87e684ce489ede765321203e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert5SG66
+    second: {fileID: 2100000, guid: fd2af017cbae44882875167aec13feaa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert5SG67
+    second: {fileID: 2100000, guid: 38ef3ff3152914f42915322c115313c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert5SG68
+    second: {fileID: 2100000, guid: 8d53ac4ddd7e64b0a9483e82ae078221, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert5SG69
+    second: {fileID: 2100000, guid: e1a8370666bb64c9d9575f5bf570c6b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert5SG70
+    second: {fileID: 2100000, guid: 7b20de770c6164772895dd483800f56c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert6SG21
+    second: {fileID: 2100000, guid: e0513d16f72f34720aad9b7996ed6c82, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert6SG22
+    second: {fileID: 2100000, guid: b83630c201d464bb782724e124f6d2a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__lambert6SG23
+    second: {fileID: 2100000, guid: cedaf319fb99648fd86784dec7d6d6c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert2SG73
+    second: {fileID: 2100000, guid: 63f25b81216d04285869b87ac19bddd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert2SG75
+    second: {fileID: 2100000, guid: 9634025966757476c8a1cdf3a87c7fb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert2SG76
+    second: {fileID: 2100000, guid: 2e49b9438e8174a30a010bd20c414a2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert2SG77
+    second: {fileID: 2100000, guid: 3f71095f8bd15466b9ec8a18be41920a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert2SG78
+    second: {fileID: 2100000, guid: 2122fc3004f0c44d1b24c368afdf0a67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert3SG45
+    second: {fileID: 2100000, guid: 112a7cefd0188472c97851b1831fda30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert3SG47
+    second: {fileID: 2100000, guid: c79011275680e416d8aacde587c0bdea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    second: {fileID: 2100000, guid: 331347c42af36498893f912222608fdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    second: {fileID: 2100000, guid: f14e90e11794c4e51b95c85bc66c8313, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert4SG51
+    second: {fileID: 2100000, guid: cb0e7399cebb241d194f41030ac68076, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert4SG53
+    second: {fileID: 2100000, guid: 8eef8f29b5d8f4cb6ab2fd7a3fa6b3cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert4SG54
+    second: {fileID: 2100000, guid: d2558df07f99f45bd8e499a83fcaf00d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__lambert4SG55
+    second: {fileID: 2100000, guid: 059b6c491803a43948f5fcdec14b43b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG71
+    second: {fileID: 2100000, guid: e5ab6a33fb57846c09a78fcdfc0d58d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG52
+    second: {fileID: 2100000, guid: b3007aac4aed84b3a80dc4e76090c2ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG53
+    second: {fileID: 2100000, guid: 8dcaf722fff324544b02859530d4e99e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG48
+    second: {fileID: 2100000, guid: f886a3089506644c5a07b604ecaa89b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG49
+    second: {fileID: 2100000, guid: acda69fa462884674bffb6caf4319998, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG48
+    second: {fileID: 2100000, guid: 89c0ddd5b08324aab8b9473304850d86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG49
+    second: {fileID: 2100000, guid: 50c69ee90e7274de3862569ccaa5f62b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert2SG27
+    second: {fileID: 2100000, guid: f114c9a3f87a447849ccc8d0b84b4e28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert3SG27
+    second: {fileID: 2100000, guid: 33b8f28960dc046c7a680058859da94c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4SG27
+    second: {fileID: 2100000, guid: 76694e195315b4a06b7133f291c21581, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.5
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
