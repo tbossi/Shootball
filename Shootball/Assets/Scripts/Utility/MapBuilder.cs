@@ -133,15 +133,15 @@ namespace Shootball.Utility
                             : objectsToBuild.Last();
 
                     if (i % 3 == 1) { distance = RandomDistanceFromHouse(previousObject); }
-                    else if (i % 3 == 2) { distance *= 1.13f; }
-                    else { distance *= 1.27f; }
+                    else if (i % 3 == 2) { distance *= 1.23f; }
+                    else { distance *= 1.37f; }
 
                     var bounds = HouseBounds[prefabNumber].RotatedOnYAxes(rotation);
                     for (int tryCounter = 0; tryCounter < 40; tryCounter++)
                     {
                         var yRotation = UnityEngine.Random.Range(120 * (i % 3) - 20, 120 * (1 + i % 3) + 20);
                         var positionDelta = Quaternion.Euler(0, yRotation, 0) * Vector3.forward * distance;
-                        var actualBounds = new Bounds(bounds.center, bounds.extents);
+                        var actualBounds = new Bounds(bounds.center, bounds.size);
                         actualBounds.center = previousObject.Position + positionDelta;
                         actualBounds = actualBounds.WithShrinkedY(1, 2);
 
@@ -154,7 +154,7 @@ namespace Shootball.Utility
                     }
                 }
             }
-            
+
             return objectsToBuild.Select(o =>
                     new GameObjectBuilder(_housePrefabs[o.Index], o.Position, Quaternion.Euler(0, o.YAngle, 0)));
         }
