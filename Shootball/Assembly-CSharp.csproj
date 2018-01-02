@@ -52,14 +52,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\EnumerableExtensions.cs" />
      <Compile Include="Assets\Scripts\Extensions\Random.cs" />
      <Compile Include="Assets\Scripts\Globals\Arena.cs" />
      <Compile Include="Assets\Scripts\Globals\ArenaBounds.cs" />
      <Compile Include="Assets\Scripts\Globals\Global.cs" />
-     <Compile Include="Assets\Scripts\Globals\Houses.cs" />
+     <Compile Include="Assets\Scripts\Globals\Map.cs" />
      <Compile Include="Assets\Scripts\Globals\Robot.cs" />
      <Compile Include="Assets\Scripts\Globals\Shot.cs" />
      <Compile Include="Assets\Scripts\Model\EnemyRobotModel.cs" />
+     <Compile Include="Assets\Scripts\Model\MapModel.cs" />
      <Compile Include="Assets\Scripts\Model\PlayerRobotModel.cs" />
      <Compile Include="Assets\Scripts\Model\RobotComponents.cs" />
      <Compile Include="Assets\Scripts\Model\RobotModel.cs" />

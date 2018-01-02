@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace Shootball.Extensions
 {
-
     public static class BoundsExtensions
     {
-        public static bool IntersectsButNotContains(this Bounds bound1, Bounds bound2)
+        public static bool Contains(this Bounds bound1, Bounds bounds2)
         {
-            return bound1.Intersects(bound2) && (bound1.Contains(bound2.max) ^ bound1.Contains(bound2.min));
+            return bound1.Contains(bounds2.min) && bound1.Contains(bounds2.max);
         }
 
         public static Bounds WithShrinkedY(this Bounds bound, float minY, float maxY)
@@ -24,10 +23,10 @@ namespace Shootball.Extensions
             var newBound = new Bounds(Vector3.zero, bound.size);
             var vert = new Vector3[]
             {
-            rotation * newBound.max,
-            rotation * newBound.min,
-            rotation * new Vector3(newBound.max.x, newBound.max.y, newBound.min.z),
-            rotation * new Vector3(newBound.min.x, newBound.max.y, newBound.max.z)
+                rotation * newBound.max,
+                rotation * newBound.min,
+                rotation * new Vector3(newBound.max.x, newBound.max.y, newBound.min.z),
+                rotation * new Vector3(newBound.min.x, newBound.max.y, newBound.max.z)
             };
 
             var min = new Vector2(vert[0].x, vert[0].z);

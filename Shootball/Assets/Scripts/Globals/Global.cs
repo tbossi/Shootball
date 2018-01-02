@@ -11,20 +11,32 @@ namespace Shootball
         public GameObject PlayerRobotObject;
         public GameObject Arena;
         public GameObject ArenaBounds;
+        public GameObject MapObject;
 
         private GameObject enemy;
 
         private PlayerRobotModel PlayerRobot => (PlayerRobotModel)PlayerRobotObject.GetComponent<Robot>().RobotModel;
+        private MapModel Map => MapObject.GetComponent<Map>().MapModel;
+
+        private bool _mapInstantiated = false;
 
         void Start()
         {
-            BuildArena();
+            //BuildMap();
             HideCursor();
             enemy = Instantiate(RobotPrefab, new Vector3(10, 3, 10), new Quaternion());
         }
 
         void Update()
         {
+            if (!_mapInstantiated)
+            {
+                BuildMap();
+                _mapInstantiated = true;
+            }
+
+
+
             if (Inputs.Pause.Active) { ShowCursor(); }
 
             if (Inputs.Shoot.Active) { PlayerRobot.Shoot(); }
@@ -45,8 +57,10 @@ namespace Shootball
             //playEnemy();
         }
 
-        private void BuildArena()
-        { }
+        private void BuildMap()
+        {
+            Map.Instantiate();
+        }
 
         private void playEnemy()
         {

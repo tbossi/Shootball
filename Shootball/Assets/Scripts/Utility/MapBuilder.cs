@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Shootball.Extensions;
+using Shootball.Model;
 using UnityEngine;
 
 namespace Shootball.Utility
 {
     public class MapBuilder
     {
-        private GameObject[] _housePrefabs;
-        private int[] _weights;
+        private readonly GameObject[] _housePrefabs;
+        private readonly int[] _weights;
+        private readonly float _spawnPointWidth;
+        private readonly float _betweenSpace;
         private Dictionary<Tuple<Bounds, int>, int> _weightedList;
         private Bounds[] _houseBounds;
-
         private float _totalPrefabsArea;
-        private float _betweenSpace;
 
         private Dictionary<Tuple<Bounds, int>, int> HouseBoundsIndexedWeightedList
         {
@@ -75,7 +76,7 @@ namespace Shootball.Utility
             }
         }
 
-        public MapBuilder(GameObject[] housePrefabs, int[] weights)
+        public MapBuilder(GameObject[] housePrefabs, int[] weights, float spawnPointWidth)
         {
             if (housePrefabs.Length != weights.Length)
             {
@@ -83,21 +84,30 @@ namespace Shootball.Utility
             }
             _housePrefabs = housePrefabs;
             _weights = weights;
+            _spawnPointWidth = spawnPointWidth;
             _betweenSpace = 3;
         }
 
-        public void Instantiate(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY, float fillingRate)
+        public MapModel Generate(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY,
+                float fillingRate, int spawnPointsQuantity)
         {
             var mapArea = (maxMapPosition.x - minMapPosition.x) * (maxMapPosition.y - minMapPosition.y);
-            int maxQuantity = computePrefabsQuantity(mapArea, fillingRate);
-            var objectsToBuild = fitPrefabs(maxQuantity, minMapPosition, maxMapPosition, baseY);
-            foreach (var obj in objectsToBuild)
-            {
-                obj.Instantiate();
-            }
+            int maxQuantity = ComputePrefabsQuantity(mapArea, fillingRate);
+
+            var mapBounds = new Bounds();
+            mapBounds.min = new Vector3(minMapPosition.x, 0, minMapPosition.y);
+            mapBounds.max = new Vector3(maxMapPosition.x, 3, maxMapPosition.y);
+
+            var houseList = FitPrefabs(maxQuantity, mapBounds, baseY);
+
+            var spawnPoints = FitSpawnPoints(spawnPointsQuantity, mapBounds, baseY, houseList);
+            var houses = houseList.Select(o =>
+                    new GameObjectBuilder(_housePrefabs[o.Index], o.Position, Quaternion.Euler(0, o.YAngle, 0)));
+
+            return new MapModel(spawnPoints, houses);
         }
 
-        private int computePrefabsQuantity(float mapArea, float fillingRate)
+        private int ComputePrefabsQuantity(float mapArea, float fillingRate)
         {
             if (fillingRate <= 0)
                 return 0;
@@ -108,7 +118,7 @@ namespace Shootball.Utility
                 (Math.Round(mapArea / TotalPrefabsArea, 2) * _housePrefabs.Length - 1) * 2 / 3 * fillingRate);
         }
 
-        private bool IntersectsAny(Bounds bounds, List<GameObjectIndex> others)
+        private bool IntersectsAny(Bounds bounds, IEnumerable<GameObjectIndex> others)
         {
             foreach (var inserted in others)
             {
@@ -133,23 +143,18 @@ namespace Shootball.Utility
             var availableHouseRotations = new Dictionary<int, int> {
                 {90, 16}, {30, 3}, {45, 1}, {60, 3}
             };
-            return Extensions.Random.FromWeightedList(availableHouseRotations) * Extensions.Random.Range(0,4);
+            return Extensions.Random.FromWeightedList(availableHouseRotations) * Extensions.Random.Range(0, 4);
         }
 
-        private IEnumerable<GameObjectBuilder> fitPrefabs(int quantity, Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
+        private IEnumerable<GameObjectIndex> FitPrefabs(int quantity, Bounds mapBounds, float baseY)
         {
             var objectsToBuild = new List<GameObjectIndex>();
-
-            var mapBounds = new Bounds();
-            mapBounds.min = new Vector3(minMapPosition.x, 0, minMapPosition.y);
-            mapBounds.max = new Vector3(maxMapPosition.x, 3, maxMapPosition.y);
-
             var distance = 0.0f;
 
             for (int i = 0; i < quantity; i++)
             {
                 var chosen = Extensions.Random.FromWeightedList(HouseBoundsIndexedWeightedList);
-                var rotation = RandomHouseRotation();//Extensions.Random.Range(0, 10) * 36;
+                var rotation = RandomHouseRotation();
                 int prefabNumber = chosen.Item2;
                 var bounds = chosen.Item1.RotatedOnYAxes(rotation);
 
@@ -177,7 +182,7 @@ namespace Shootball.Utility
                         actualBounds.center = previousObject.Position + positionDelta;
                         actualBounds = actualBounds.WithShrinkedY(1, 2);
 
-                        if (!mapBounds.IntersectsButNotContains(actualBounds) && !IntersectsAny(actualBounds, objectsToBuild))
+                        if (mapBounds.Contains(actualBounds) && !IntersectsAny(actualBounds, objectsToBuild))
                         {
                             var position = new Vector3(actualBounds.center.x, baseY, actualBounds.center.z);
                             objectsToBuild.Add(new GameObjectIndex(prefabNumber, position, rotation, actualBounds));
@@ -187,8 +192,30 @@ namespace Shootball.Utility
                 }
             }
 
-            return objectsToBuild.Select(o =>
-                    new GameObjectBuilder(_housePrefabs[o.Index], o.Position, Quaternion.Euler(0, o.YAngle, 0)));
+            return objectsToBuild;
+        }
+
+        private ICollection<Vector3> FitSpawnPoints(int quantity, Bounds mapBounds, float baseY, IEnumerable<GameObjectIndex> houses)
+        {
+            var spawnPoints = new List<Vector3>();
+            for (int i = 0; i < quantity; i++)
+            {
+                for (int tryCounter = 0; tryCounter < 40; tryCounter++)
+                {
+                    var position = Extensions.Random.VectorRange(0, mapBounds.extents.magnitude);
+                    position.y = baseY;
+
+                    var spawnBounds = new Bounds(position, Vector3.one * _spawnPointWidth).WithShrinkedY(1, 2);
+
+                    if (mapBounds.Contains(spawnBounds) && !IntersectsAny(spawnBounds, houses)) 
+                    {
+                        spawnPoints.Add(position);
+                        break;
+                    }
+                }
+            }
+
+            return spawnPoints;
         }
 
         private class GameObjectIndex

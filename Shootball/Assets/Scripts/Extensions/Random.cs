@@ -32,7 +32,8 @@ namespace Shootball.Extensions
             return list.ElementAt(Range(0, list.Count));
         }
 
-        public static T FromWeightedList<T>(IDictionary<T, int> weightedList) {
+        public static T FromWeightedList<T>(IDictionary<T, int> weightedList)
+        {
             var totalWeight = weightedList.Values.Sum();
             int chosen = Range(0, totalWeight);
 
@@ -48,6 +49,11 @@ namespace Shootball.Extensions
             }
 
             return selected;
+        }
+
+        public static UnityEngine.Vector3 VectorRange(float minLength, float maxLength)
+        {
+            return UnityEngine.Random.onUnitSphere * Range(minLength, maxLength);
         }
     }
 }
