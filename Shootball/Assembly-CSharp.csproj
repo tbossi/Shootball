@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\Random.cs" />
      <Compile Include="Assets\Scripts\Globals\Arena.cs" />
      <Compile Include="Assets\Scripts\Globals\ArenaBounds.cs" />
      <Compile Include="Assets\Scripts\Globals\Global.cs" />

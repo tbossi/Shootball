@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shootball.Extensions;
 using UnityEngine;
 
 namespace Shootball.Utility
@@ -8,10 +9,29 @@ namespace Shootball.Utility
     public class MapBuilder
     {
         private GameObject[] _housePrefabs;
+        private int[] _weights;
+        private Dictionary<Tuple<Bounds, int>, int> _weightedList;
         private Bounds[] _houseBounds;
 
         private float _totalPrefabsArea;
         private float _betweenSpace;
+
+        private Dictionary<Tuple<Bounds, int>, int> HouseBoundsIndexedWeightedList
+        {
+            get
+            {
+                if (_weightedList != null)
+                    return _weightedList;
+
+                _weightedList = new Dictionary<Tuple<Bounds, int>, int>();
+                for (int i = 0; i < _housePrefabs.Length; i++)
+                {
+                    var t = new Tuple<Bounds, int>(HouseBounds[i], i);
+                    _weightedList.Add(t, _weights[i]);
+                }
+                return _weightedList;
+            }
+        }
 
         private Bounds[] HouseBounds
         {
@@ -55,9 +75,14 @@ namespace Shootball.Utility
             }
         }
 
-        public MapBuilder(GameObject[] housePrefabs)
+        public MapBuilder(GameObject[] housePrefabs, int[] weights)
         {
+            if (housePrefabs.Length != weights.Length)
+            {
+                throw new System.Exception("House Prefabs quantity and Weights quantity are different.");
+            }
             _housePrefabs = housePrefabs;
+            _weights = weights;
             _betweenSpace = 3;
         }
 
@@ -100,7 +125,15 @@ namespace Shootball.Utility
             var objectExtension = objectIndex.ComputedBounds.extents;
             objectExtension.y = 0;
             var rangeMin = objectExtension.magnitude;
-            return UnityEngine.Random.Range(rangeMin, rangeMin * 1.5f) + _betweenSpace * 5;
+            return Extensions.Random.Range(rangeMin, rangeMin * 1.5f) + _betweenSpace * 5;
+        }
+
+        private int RandomHouseRotation()
+        {
+            var availableHouseRotations = new Dictionary<int, int> {
+                {90, 16}, {30, 3}, {45, 1}, {60, 3}
+            };
+            return Extensions.Random.FromWeightedList(availableHouseRotations) * Extensions.Random.Range(0,4);
         }
 
         private IEnumerable<GameObjectBuilder> fitPrefabs(int quantity, Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
@@ -115,15 +148,15 @@ namespace Shootball.Utility
 
             for (int i = 0; i < quantity; i++)
             {
-                var prefabNumber = UnityEngine.Random.Range(0, _housePrefabs.Length);
-                var rotation = UnityEngine.Random.Range(0, 4) * 90;
+                var chosen = Extensions.Random.FromWeightedList(HouseBoundsIndexedWeightedList);
+                var rotation = RandomHouseRotation();//Extensions.Random.Range(0, 10) * 36;
+                int prefabNumber = chosen.Item2;
+                var bounds = chosen.Item1.RotatedOnYAxes(rotation);
 
                 if (i == 0)
                 {
-                    var position = new Vector3(mapBounds.center.x, baseY, mapBounds.center.z);
-                    var bounds = HouseBounds[prefabNumber].RotatedOnYAxes(rotation);
-                    bounds.center = position;
-                    var obj = new GameObjectIndex(prefabNumber, position, rotation, bounds.WithShrinkedY(1, 2));
+                    bounds.center = new Vector3(mapBounds.center.x, baseY, mapBounds.center.z);
+                    var obj = new GameObjectIndex(prefabNumber, bounds.center, rotation, bounds.WithShrinkedY(1, 2));
                     objectsToBuild.Add(obj);
                 }
                 else
@@ -136,10 +169,9 @@ namespace Shootball.Utility
                     else if (i % 3 == 2) { distance *= 1.23f; }
                     else { distance *= 1.37f; }
 
-                    var bounds = HouseBounds[prefabNumber].RotatedOnYAxes(rotation);
                     for (int tryCounter = 0; tryCounter < 40; tryCounter++)
                     {
-                        var yRotation = UnityEngine.Random.Range(120 * (i % 3) - 20, 120 * (1 + i % 3) + 20);
+                        var yRotation = Extensions.Random.Range(120 * (i % 3) - 20, 120 * (1 + i % 3) + 20);
                         var positionDelta = Quaternion.Euler(0, yRotation, 0) * Vector3.forward * distance;
                         var actualBounds = new Bounds(bounds.center, bounds.size);
                         actualBounds.center = previousObject.Position + positionDelta;
