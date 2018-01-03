@@ -1,7 +1,7 @@
 using Shootball.Utility;
 using UnityEngine;
 
-namespace Shootball.Model
+namespace Shootball.Model.Robot
 {
     public class EnemyRobotModel : RobotModel
     {

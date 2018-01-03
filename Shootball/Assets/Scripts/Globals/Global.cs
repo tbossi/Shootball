@@ -1,82 +1,69 @@
-﻿using Shootball.Model;
-using Shootball.Motion;
+﻿using System.Collections.Generic;
+using Shootball.Model;
+using Shootball.Model.Player;
+using Shootball.Model.Robot;
 using Shootball.Provider;
+using Shootball.Utility;
 using UnityEngine;
 
-namespace Shootball
+namespace Shootball.GlobalScripts
 {
     public class Global : MonoBehaviour
     {
         public GameObject RobotPrefab;
-        public GameObject PlayerRobotObject;
-        public GameObject Arena;
-        public GameObject ArenaBounds;
-        public GameObject MapObject;
+        public GameObject MapBuilderScriptObject;
 
-        private GameObject enemy;
-
-        private PlayerRobotModel PlayerRobot => (PlayerRobotModel)PlayerRobotObject.GetComponent<Robot>().RobotModel;
-        private MapModel Map => MapObject.GetComponent<Map>().MapModel;
-
-        private bool _mapInstantiated = false;
+        private GameObject MapGameObject { get; set; }
+        private GameObject PlayersGameObject { get; set; }        
+        private MapModel Map => MapBuilderScriptObject.GetComponent<Map>().MapModel;
+        private List<IPlayer> Players { get; set; }
 
         void Start()
         {
-            //BuildMap();
-            HideCursor();
-            enemy = Instantiate(RobotPrefab, new Vector3(10, 3, 10), new Quaternion());
+            MapGameObject = new GameObject("Map");
+            PlayersGameObject = new GameObject("Players");
+            StartMatch();
+
+            //HideCursor();
         }
 
         void Update()
         {
-            if (!_mapInstantiated)
-            {
-                BuildMap();
-                _mapInstantiated = true;
-            }
-
-
-
             if (Inputs.Pause.Active) { ShowCursor(); }
 
-            if (Inputs.Shoot.Active) { PlayerRobot.Shoot(); }
-            PlayerRobot.Target(Inputs.Target.Active);
-
-            if (Inputs.RotateLeft.Active) { PlayerRobot.Turn(Spin.Left); }
-            else if (Inputs.RotateRight.Active) { PlayerRobot.Turn(Spin.Right); }
-
-            if (Inputs.RotateUp.Active) { PlayerRobot.Aim(Spin.Up); }
-            else if (Inputs.RotateDown.Active) { PlayerRobot.Aim(Spin.Down); }
-
-            if (Inputs.MoveForward.Active) { PlayerRobot.Move(Direction.Forward); }
-            else if (Inputs.MoveBackward.Active) { PlayerRobot.Move(Direction.Backward); }
-
-            if (Inputs.MoveLeft.Active) { PlayerRobot.Move(Direction.Left); }
-            else if (Inputs.MoveRight.Active) { PlayerRobot.Move(Direction.Right); }
-
-            //playEnemy();
+            if (Players != null)
+            {
+                Players.ForEach(player => player.OnUpdate());
+            }
         }
 
-        private void BuildMap()
+        private void StartMatch()
         {
-            Map.Instantiate();
+            Map.Instantiate(MapGameObject);
+
+            Players = new List<IPlayer>();
+            var player = SpawnRobot(true).GetComponent<Robot>();  
+            Players.Add(new LocalPlayerModel((PlayerRobotModel)player.RobotModel));
+
+            for (int i = 0; i < 3; i++)
+            {
+                var enemy = SpawnRobot(false).GetComponent<Robot>();
+                Players.Add(new AIPlayerModel((EnemyRobotModel)enemy.RobotModel));
+            }
         }
 
-        private void playEnemy()
+        private GameObject SpawnRobot(bool isPlayer)
         {
-            var enemyModel = (EnemyRobotModel)enemy.GetComponent<Robot>().RobotModel;
-            if (Random.Range(-3, 3) >= 1)
-            {
-                enemyModel.Shoot();
-            }
-            else
-            {
-                var i = Random.Range(0, 3);
-                if (i == 0) enemyModel.Move(Direction.Backward);
-                else if (i == 1) enemyModel.Move(Direction.Forward);
-                else if (i == 2) enemyModel.Move(Direction.Left);
-                else if (i == 3) enemyModel.Move(Direction.Right);
-            }
+            var spawnPoint = Map.GetSpawnPoint();
+            var player = new GameObjectBuilder(RobotPrefab, spawnPoint.Position + Vector3.up * 3, new Quaternion(),
+                    go => {
+                        go.GetComponent<Robot>().IsPlayer = isPlayer;
+                        go.GetComponent<Robot>().enabled = true;
+                    });
+
+            var spawn = spawnPoint.Instantiate(MapGameObject.transform);
+            GameObject.Destroy(spawn, 10);
+            return player.Instantiate(PlayersGameObject.transform);
         }
 
         private void HideCursor()

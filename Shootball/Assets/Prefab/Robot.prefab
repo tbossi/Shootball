@@ -444,7 +444,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164802306739134}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23c43651ea05c4ff3ad914b859adab38, type: 3}
   m_Name: 
@@ -464,6 +464,10 @@ MonoBehaviour:
   LowerAimDegree: -45
   UpperAimDegree: 50
   LaserRaySpeed: 185
+  ShotRechargeTime: 0.8
+  FireRate: 0.3
+  MaxLife: 100
+  MaxShots: 60
 --- !u!120 &120074252646165630
 LineRenderer:
   m_ObjectHideFlags: 1

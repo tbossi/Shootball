@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using Shootball.Model;
 
-public class Shot : MonoBehaviour
+namespace Shootball.GlobalScripts
 {
-    public ShotModel ShotModel;
-
-    void Update()
+    public class Shot : MonoBehaviour
     {
-        ShotModel.Move();
-    }
+        public ShotModel ShotModel;
 
-	void OnCollisionEnter(Collision collisionInfo)
-	{
-        ShotModel.Hit(collisionInfo.gameObject);
-	}
+        void Update()
+        {
+            ShotModel.Move();
+        }
+
+        void OnCollisionEnter(Collision collisionInfo)
+        {
+            ShotModel.Hit(collisionInfo.gameObject);
+        }
+    }
 }

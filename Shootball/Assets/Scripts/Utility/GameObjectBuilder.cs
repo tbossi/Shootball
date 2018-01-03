@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Shootball.Utility
@@ -7,17 +8,28 @@ namespace Shootball.Utility
         public readonly GameObject Prefab;
         public readonly Vector3 Position;
         public readonly Quaternion Rotation;
+        public readonly Action<GameObject> PostInitAction;
 
-        public GameObjectBuilder(GameObject prefab, Vector3 position, Quaternion rotation)
+        public GameObjectBuilder(GameObject prefab, Vector3 position, Quaternion rotation = new Quaternion(),
+                Action<GameObject> postInitAction = null)
         {
             Prefab = prefab;
             Position = position;
             Rotation = rotation;
+            PostInitAction = postInitAction;
         }
 
-        public GameObject Instantiate()
+        public GameObject Instantiate(Transform parent = null)
         {
-            return GameObject.Instantiate(Prefab, Position, Rotation);
+            var gameObject = parent == null
+                    ? GameObject.Instantiate(Prefab, Position, Rotation)
+                    : GameObject.Instantiate(Prefab, Position, Rotation, parent);
+            
+            if (PostInitAction != null)
+            {
+                PostInitAction.Invoke(gameObject);
+            }
+            return gameObject;
         }
     }
 }

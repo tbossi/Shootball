@@ -1,8 +1,7 @@
-﻿using Shootball.Model;
-using Shootball.Utility;
+﻿using Shootball.Model.Robot;
 using UnityEngine;
 
-namespace Shootball
+namespace Shootball.GlobalScripts
 {
     public class Robot : MonoBehaviour
     {
@@ -21,27 +20,30 @@ namespace Shootball
         public float LowerAimDegree = -45;
         public float UpperAimDegree = 50;
         public float LaserRaySpeed = 185;
-		public float ShotRechargeTime = 0.8f;
-		public float FireRate = 0.3f;
-		public float MaxLife = 100;
-		public int MaxShots = 60;
+        public float ShotRechargeTime = 0.8f;
+        public float FireRate = 0.3f;
+        public float MaxLife = 100;
+        public int MaxShots = 60;
 
         [HideInInspector]
         public RobotModel RobotModel;
 
-        void Start()
+        void OnEnable()
         {
             var settings = new RobotSettings(MoveSpeed, FixedMoveSpeed, TurnSpeed, AimSpeed, StartingAimDegree,
                     LowerAimDegree, UpperAimDegree, LaserRaySpeed, ShotRechargeTime, FireRate);
             var components = new RobotComponents(transform, RobotBody, RobotHead, RobotHeadCamera, RobotTargetCamera,
                     LaserRaySpawn, ShotPrefab);
-			var statistics = new RobotStatistics(MaxLife, MaxShots);
+            var statistics = new RobotStatistics(MaxLife, MaxShots);
 
             RobotModel = IsPlayer
                     ? new PlayerRobotModel(settings, components, statistics) as RobotModel
                     : new EnemyRobotModel(settings, components, statistics);
-			
-			StartCoroutine(RobotModel.RechargeShot());
+        }
+
+        void Start()
+        {
+            StartCoroutine(RobotModel.RechargeShot());
         }
 
         void FixedUpdate()

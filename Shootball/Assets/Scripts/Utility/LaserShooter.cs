@@ -18,7 +18,7 @@ namespace Shootball.Utility
             Physics.IgnoreCollision(shot.GetComponent<Collider>(), shooter.Collider);
             shot.transform.forward = direction;
 
-            var shotScript = shot.GetComponent<Shot>();
+            var shotScript = shot.GetComponent<GlobalScripts.Shot>();
             shotScript.ShotModel = new ShotModel(shot, shooter, speed);
             shotScript.enabled = true;
         }

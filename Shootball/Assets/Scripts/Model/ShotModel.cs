@@ -32,7 +32,8 @@ namespace Shootball.Model
 
         public void Hit(GameObject hitObject)
         {
-            var maybeRobot = hitObject.GetComponent<Robot>() ?? hitObject.GetComponentInParent<Robot>();
+            var maybeRobot = hitObject.GetComponent<GlobalScripts.Robot>()
+                    ?? hitObject.GetComponentInParent<GlobalScripts.Robot>();
 
             if (maybeRobot != null)
             {

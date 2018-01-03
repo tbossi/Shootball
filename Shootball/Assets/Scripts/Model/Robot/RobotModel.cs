@@ -1,19 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Shootball.Motion;
 using Shootball.Utility;
 using UnityEngine;
 
-namespace Shootball.Model
+namespace Shootball.Model.Robot
 {
-    public interface IShooter
-    {
-        Collider Collider { get; }
-        void Shoot();
-        IEnumerator RechargeShot();
-    }
-
     public abstract class RobotModel : IShooter
     {
         protected readonly RobotSettings Settings;
@@ -73,6 +65,11 @@ namespace Shootball.Model
             {
                 Debug.Log("Ouch!!!");
             }
+        }
+
+        public void MapBorderReached()
+        {
+            Debug.Log("I can't go on");
         }
 
         public void Move(Direction direction)
