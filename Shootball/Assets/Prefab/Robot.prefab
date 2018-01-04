@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4760660759193436}
   - component: {fileID: 20575836739268002}
   - component: {fileID: 124803746280541538}
-  - component: {fileID: 81896523181361858}
   m_Layer: 0
   m_Name: Head Camera
   m_TagString: Player
@@ -439,13 +438,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!81 &81896523181361858
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1126911408785096}
-  m_Enabled: 1
 --- !u!114 &114425905572715754
 MonoBehaviour:
   m_ObjectHideFlags: 1

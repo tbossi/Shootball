@@ -13,14 +13,16 @@ namespace Shootball.Model
         private readonly IEnumerable<GameObjectBuilder> _houses;
         private readonly Bounds _mapBorders;
         private readonly GameObjectBuilder _ground;
-
+        private readonly GameObjectBuilder _light;
+        
         public MapModel(ICollection<GameObjectBuilder> spawnPoints, IEnumerable<GameObjectBuilder> houses,
-                Bounds mapBorders, GameObjectBuilder ground)
+                Bounds mapBorders, GameObjectBuilder ground, GameObjectBuilder light)
         {
             _spawnPoints = spawnPoints;
             _houses = houses;
             _mapBorders = mapBorders;
             _ground = ground;
+            _light = light;
         }
 
         public void Instantiate(GameObject parent)
@@ -34,6 +36,7 @@ namespace Shootball.Model
             collisionScript.MapModel = this;
 
             _ground.Instantiate(parent.transform);
+            _light.Instantiate(parent.transform);
             _houses.ForEach(h => h.Instantiate(parent.transform));
         }
 

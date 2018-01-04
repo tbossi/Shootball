@@ -79,6 +79,8 @@
      <Compile Include="Assets\Scripts\Model\Scene\MatchSceneModel.cs" />
      <Compile Include="Assets\Scripts\Model\Scene\SceneModel.cs" />
      <Compile Include="Assets\Scripts\Model\ShotModel.cs" />
+     <Compile Include="Assets\Scripts\Model\UI\GameStartMenuModel.cs" />
+     <Compile Include="Assets\Scripts\Model\UI\MatchPauseMenuModel.cs" />
      <Compile Include="Assets\Scripts\Model\UI\MenuHandlerModel.cs" />
      <Compile Include="Assets\Scripts\Model\UI\MenuModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />

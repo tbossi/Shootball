@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 977770216}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.6526988, g: 0.5731359, b: 0.5206005, a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -149,6 +149,8 @@ MonoBehaviour:
     type: 2}
   GroundPrefab: {fileID: 1633232908531780, guid: 98615b5ffde2149b18899c1d1a30a571,
     type: 2}
+  MapLightPrefab: {fileID: 1391734583105798, guid: 773d39416b3b3480295ef4d5d7e46a08,
+    type: 2}
   HousePrefabs:
   - {fileID: 100000, guid: 3574d73d11ec048aeb62b4f0ef2231cc, type: 3}
   - {fileID: 100000, guid: 8e8a787a7df2341a38fb07c42ba81341, type: 3}
@@ -244,73 +246,8 @@ Transform:
   m_Children:
   - {fileID: 1004943411}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &977770215
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 977770217}
-  - component: {fileID: 977770216}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &977770216
-Light:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 977770215}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 1
-  m_Color: {r: 0.99264705, g: 0.97698116, b: 0.9342561, a: 1}
-  m_Intensity: 1
-  m_Range: 50
-  m_SpotAngle: 30
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 2
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &977770217
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 977770215}
-  m_LocalRotation: {x: 0.14508553, y: 0.34641346, z: -0.6132854, w: 0.69485897}
-  m_LocalPosition: {x: -32.4, y: 88.6, z: -62.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 38.794003, y: 22.914001, z: -74.700005}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1004943408
 Prefab:
   m_ObjectHideFlags: 0
@@ -432,7 +369,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4948563969624544, guid: 60fd411bdd85e4c049a63495e2a1ac5b, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114504336674236610, guid: 60fd411bdd85e4c049a63495e2a1ac5b,
         type: 2}

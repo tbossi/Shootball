@@ -14,6 +14,8 @@ namespace Shootball.Utility
         private readonly GameObject _spawnPointPrefab;
         private readonly float _spawnPointWidth;
         private readonly GameObject _groundPrefab;
+        private readonly GameObject _lightPrefab;
+        
         private readonly float _betweenSpace;
         private Dictionary<Tuple<Bounds, int>, int> _weightedList;
         private Bounds[] _houseBounds;
@@ -79,7 +81,7 @@ namespace Shootball.Utility
         }
 
         public MapBuilder(GameObject[] housePrefabs, int[] weights, GameObject spawnPointPrefab,
-                float spawnPointWidth, GameObject groundPrefab)
+                float spawnPointWidth, GameObject groundPrefab, GameObject lightPrefab)
         {
             if (housePrefabs.Length != weights.Length)
             {
@@ -90,6 +92,7 @@ namespace Shootball.Utility
             _spawnPointPrefab = spawnPointPrefab;
             _spawnPointWidth = spawnPointWidth;
             _groundPrefab = groundPrefab;
+            _lightPrefab = lightPrefab;
             _betweenSpace = 3;
         }
 
@@ -115,8 +118,11 @@ namespace Shootball.Utility
             var groundScale = Math.Max(maxMapPosition.x - minMapPosition.x, maxMapPosition.y - minMapPosition.y) / 10 + 10;
             var ground = new GameObjectBuilder(_groundPrefab, groundPosition, new Quaternion(),
                     go => { go.transform.localScale = Vector3.one * groundScale; });
+            
+            var lightPosition = groundPosition + Vector3.up * 160;
+            var light = new GameObjectBuilder(_lightPrefab, lightPosition, Quaternion.Euler(77, -98, -82));
 
-            return new MapModel(spawnPoints, houses, mapBorders, ground);
+            return new MapModel(spawnPoints, houses, mapBorders, ground, light);
         }
 
         private Bounds MapBorders(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
