@@ -54,12 +54,18 @@
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
      <Compile Include="Assets\Scripts\Extensions\EnumerableExtensions.cs" />
      <Compile Include="Assets\Scripts\Extensions\Random.cs" />
-     <Compile Include="Assets\Scripts\Globals\Global.cs" />
      <Compile Include="Assets\Scripts\Globals\Map.cs" />
+     <Compile Include="Assets\Scripts\Globals\MatchHandler.cs" />
      <Compile Include="Assets\Scripts\Globals\Robot.cs" />
+     <Compile Include="Assets\Scripts\Globals\SceneHandler.cs" />
      <Compile Include="Assets\Scripts\Globals\Shot.cs" />
+     <Compile Include="Assets\Scripts\Globals\UI\GameStartMenu.cs" />
+     <Compile Include="Assets\Scripts\Globals\UI\MatchPauseMenu.cs" />
+     <Compile Include="Assets\Scripts\Globals\UI\Menu.cs" />
+     <Compile Include="Assets\Scripts\Globals\UI\MenuHandler.cs" />
      <Compile Include="Assets\Scripts\Model\IShooter.cs" />
      <Compile Include="Assets\Scripts\Model\MapModel.cs" />
+     <Compile Include="Assets\Scripts\Model\MatchHandlerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AIPlayerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\LocalPlayerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\PlayerModel.cs" />
@@ -69,7 +75,12 @@
      <Compile Include="Assets\Scripts\Model\Robot\RobotModel.cs" />
      <Compile Include="Assets\Scripts\Model\Robot\RobotSettings.cs" />
      <Compile Include="Assets\Scripts\Model\Robot\RobotStatistics.cs" />
+     <Compile Include="Assets\Scripts\Model\Scene\GameStartSceneModel.cs" />
+     <Compile Include="Assets\Scripts\Model\Scene\MatchSceneModel.cs" />
+     <Compile Include="Assets\Scripts\Model\Scene\SceneModel.cs" />
      <Compile Include="Assets\Scripts\Model\ShotModel.cs" />
+     <Compile Include="Assets\Scripts\Model\UI\MenuHandlerModel.cs" />
+     <Compile Include="Assets\Scripts\Model\UI\MenuModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />
      <Compile Include="Assets\Scripts\Motion\Spin.cs" />
      <Compile Include="Assets\Scripts\Motion\Transformer.cs" />
@@ -90,11 +101,14 @@
      <None Include="Assets\VolumetricLines\Shaders\_StripShader.cginc" />
      <None Include="Assets\VolumetricLines\Shaders\Additive.shader" />
      <None Include="Assets\VolumetricLines\Shaders\AlphaBlended.shader" />
+     <None Include="Assets\Fonts\Xolonium\FONTLOG.txt" />
      <None Include="Assets\VolumetricLines\Shaders\Strip-Additive.shader" />
      <None Include="Assets\VolumetricLines\Shaders\Fast-AlphaBlended.shader" />
      <None Include="Assets\VolumetricLines\Shaders\Strip-AlphaBlended.shader" />
      <None Include="Assets\VolumetricLines\Shaders\Fast-Additive.shader" />
+     <None Include="Assets\Fonts\Sansation\Sansation_1.31_ReadMe.txt" />
      <None Include="Assets\VolumetricLines\Shaders\_SimpleShader.cginc" />
+     <None Include="Assets\Fonts\Xolonium\LICENSE.txt" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/home/tommaso/git/Shootball/Shootball/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

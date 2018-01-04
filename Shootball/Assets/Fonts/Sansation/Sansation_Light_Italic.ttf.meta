@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: db8c7a9bd16924b3180f8e4b73733194
+timeCreated: 1515000111
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sansation Light
+  fontNames:
+  - Sansation Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 13754cfd7f938410fb7df3d61773984c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

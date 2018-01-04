@@ -20,7 +20,7 @@ namespace Shootball.GlobalScripts
         [HideInInspector]
         public MapModel MapModel;
 
-        void Start()
+        void OnEnable()
         {
             var mapBuilder = new MapBuilder(HousePrefabs, Weights, SpawnPointPrefab, SpawnPointWidth, GroundPrefab);
             var halfDimensions = new Vector2(Width / 2, Length / 2);

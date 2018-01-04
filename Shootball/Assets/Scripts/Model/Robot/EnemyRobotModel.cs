@@ -10,6 +10,7 @@ namespace Shootball.Model.Robot
         {
 			Components.TargetCamera.GetComponent<Camera>().enabled = false;
 			Components.HeadCamera.GetComponent<Camera>().enabled = false;
+            Components.HeadCamera.GetComponent<AudioListener>().enabled = false;
         }
     }
 }
