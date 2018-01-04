@@ -23,6 +23,8 @@ namespace Shootball.Model.UI
 
         public void OpenMenu(MenuType type)
         {
+            if (IsMenuActive) { CloseMenu(); }
+
             ActiveMenu = new GameObject("Menu");
             var menuCanvas = GameObject.Instantiate(_menus[type], ActiveMenu.transform);
             var menuModel = menuCanvas.GetComponent<Menu>().GetMenuModel();
