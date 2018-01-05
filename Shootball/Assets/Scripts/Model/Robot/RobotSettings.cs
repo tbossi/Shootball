@@ -6,6 +6,7 @@ namespace Shootball.Model.Robot
     {
         public readonly float MoveSpeed;
 		public readonly float FixedMoveSpeed;
+        public readonly float MaxSpeed;
 		public readonly float TurnSpeed;
 		public readonly float AimSpeed;
 		public readonly float StartingAimDegree;
@@ -17,12 +18,13 @@ namespace Shootball.Model.Robot
         public readonly Vector2 MouseSensitivity;
         public readonly Vector2 MouseSmoothing;
 
-        public RobotSettings(float moveSpeed, float fixedMoveSpeed, float turnSpeed, float aimSpeed,
+        public RobotSettings(float moveSpeed, float fixedMoveSpeed, float maxSpeed, float turnSpeed, float aimSpeed,
                 float startingAimDegree, float lowerAimDegree, float upperAimDegree, float laserRaySpeed,
                 float shotRechargeTime, float fireRate, Vector2 mouseSensitivity, Vector2 mouseSmoothing)
         {
             MoveSpeed = moveSpeed;
             FixedMoveSpeed = fixedMoveSpeed;
+            MaxSpeed = maxSpeed;
             TurnSpeed = turnSpeed;
             AimSpeed = aimSpeed;
             StartingAimDegree = startingAimDegree;

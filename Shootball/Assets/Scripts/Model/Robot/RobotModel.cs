@@ -109,9 +109,14 @@ namespace Shootball.Model.Robot
             {
                 var directionVector = Transformer.DirectionRotation(direction, RotationAxis) * MoveAxis;
                 var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
-                var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
-                        + Math.Abs(oldDirection) * 4;
-                Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+                if (oldDirection <= Settings.MaxSpeed * Time.deltaTime)
+                {
+                    Debug.Log(oldDirection);
+                    var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
+                            + Math.Abs(oldDirection) * 4;
+
+                    Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+                }
             }
         }
 

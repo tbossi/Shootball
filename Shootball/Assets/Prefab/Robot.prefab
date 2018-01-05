@@ -459,6 +459,7 @@ MonoBehaviour:
     type: 2}
   IsPlayer: 0
   MoveSpeed: 1080
+  MaxSpeed: 5000
   FixedMoveSpeed: 55
   TurnSpeed: 80
   AimSpeed: 30

@@ -14,6 +14,7 @@ namespace Shootball.GlobalScripts
         public GameObject DieEffectsPrefab;
         public bool IsPlayer = false;
         public float MoveSpeed = 1080;
+        public float MaxSpeed = 50;
         public float FixedMoveSpeed = 55;
         public float TurnSpeed = 170;
         public float AimSpeed = 90;
@@ -33,7 +34,7 @@ namespace Shootball.GlobalScripts
 
         void OnEnable()
         {
-            var settings = new RobotSettings(MoveSpeed, FixedMoveSpeed, TurnSpeed, AimSpeed, StartingAimDegree,
+            var settings = new RobotSettings(MoveSpeed, FixedMoveSpeed, MaxSpeed, TurnSpeed, AimSpeed, StartingAimDegree,
                     LowerAimDegree, UpperAimDegree, LaserRaySpeed, ShotRechargeTime, FireRate, MouseSensitivity,
                     MouseSmoothing);
             var components = new RobotComponents(transform, RobotBody, RobotHead, RobotHeadCamera, RobotTargetCamera,
