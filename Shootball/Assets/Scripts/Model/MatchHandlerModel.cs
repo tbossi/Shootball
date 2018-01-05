@@ -4,6 +4,7 @@ using Shootball.Model.Player;
 using Shootball.Model.Robot;
 using Shootball.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Shootball.Model
 {
@@ -12,6 +13,7 @@ namespace Shootball.Model
         private readonly GameObject _robotPrefab;
         private readonly MapModel _map;
         private readonly Canvas _playerStatisticsPrefab;
+        private readonly Image _cursor;    
         private List<IPlayer> _players;
         private GameObject _mapGameObject;
         private GameObject _playersGameObject;
@@ -19,11 +21,13 @@ namespace Shootball.Model
 
         public bool IsMatchEnded { get; private set; }
 
-        public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab)
+        public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab,
+                Image cursor)
         {
             _robotPrefab = robotPrefab;
             _map = map;
             _playerStatisticsPrefab = playerStatisticsPrefab;
+            _cursor = cursor;
         }
 
         public void OnStart()
@@ -70,6 +74,7 @@ namespace Shootball.Model
             if (isPlayer)
             {
                 var hud = GameObject.Instantiate(_playerStatisticsPrefab, _HUDCanvas.transform);
+                GameObject.Instantiate(_cursor, _HUDCanvas.transform);
                 var statisticsHUD = hud.GetComponent<StatisticsHUD>().StatisticsHUDModel;
                 player = new LocalPlayerModel((PlayerRobotModel)robotModel, statisticsHUD);
             }

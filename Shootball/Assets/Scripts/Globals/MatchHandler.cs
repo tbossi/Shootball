@@ -5,6 +5,7 @@ using Shootball.Model.Robot;
 using Shootball.Provider;
 using Shootball.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Shootball.GlobalScripts
 {
@@ -13,13 +14,14 @@ namespace Shootball.GlobalScripts
         public GameObject RobotPrefab;
         public GameObject MapBuilderScriptObject;
         public Canvas PlayerStatisticsPrefab;
+        public Image Cursor;
 
         public MatchHandlerModel MatchHandlerModel { get; private set; }
 
         void OnEnable()
         {
             var map = MapBuilderScriptObject.GetComponent<Map>().MapModel;
-            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map, PlayerStatisticsPrefab);
+            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map, PlayerStatisticsPrefab, Cursor);
         }
     }
 }

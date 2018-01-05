@@ -10,7 +10,7 @@ namespace Shootball.Provider
         public static InputKey MoveRight => new InputKey(KeyCode.D, KeyPression.Pressed);
         public static InputMouse MouseX => new InputMouse("Mouse X", true);
         public static InputMouse MouseY => new InputMouse("Mouse Y", true);
-        public static InputKey Shoot => new InputKey(KeyCode.Space, KeyPression.Pressed);
+        public static InputMouseKey Shoot => new InputMouseKey(0, KeyPression.Pressed);
         public static InputKey Target => new InputKey(KeyCode.LeftShift, KeyPression.Pressed);
         public static InputKey Pause => new InputKey(KeyCode.Escape, KeyPression.Down);        
     }

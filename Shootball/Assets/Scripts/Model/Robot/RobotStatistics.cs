@@ -8,6 +8,7 @@ namespace Shootball.Model.Robot
         public float LifeLeft { get; private set; }
         public int ShotsLeft { get; private set; }
         public int Points { get; private set; }
+        public bool IsAlive => LifeLeft > 0;
 
         public RobotStatistics(float maxLife, int maxShots)
         {
@@ -20,17 +21,12 @@ namespace Shootball.Model.Robot
 
         public bool GetDamaged()
         {
-            var newLife = LifeLeft - 10;
-            if (newLife > 0)
+            if (IsAlive)
             {
-                LifeLeft = newLife;
-                return true;
+                LifeLeft = LifeLeft - 10;
             }
-            else
-            {
-                LifeLeft = 0;
-                return false;
-            }
+            
+            return IsAlive;
         }
 
         public void IncreasePoints()

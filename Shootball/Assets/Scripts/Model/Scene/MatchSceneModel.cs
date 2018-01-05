@@ -17,6 +17,9 @@ namespace Shootball.Model.Scene
         public override void OnStart()
         {
             _matchHandlerModel.OnStart();
+            MenuHandlerModel.SetOnOpenListener(ShowCursor);
+            MenuHandlerModel.SetOnCloseListener(LockCursor);
+            LockCursor();
         }
 
         public override void OnUpdate()
@@ -26,34 +29,21 @@ namespace Shootball.Model.Scene
                 MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_PAUSE);
             }
 
-            if (MenuHandlerModel.IsMenuActive)
+            if (!MenuHandlerModel.IsMenuActive && !_matchHandlerModel.IsMatchEnded)
             {
-                ShowCursor();
-            }
-            else
-            {
-                if (!_matchHandlerModel.IsMatchEnded)
-                {
-                    HideCursor();
-                    _matchHandlerModel.OnUpdate();
-                }
-                else
-                {
-                    ShowCursor();
-                }
+                _matchHandlerModel.OnUpdate();
             }
         }
 
-        private void HideCursor()
+        private void LockCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         private void ShowCursor()
         {
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            Cursor.visible = true; 
         }
     }
 }

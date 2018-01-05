@@ -11,6 +11,7 @@ namespace Shootball.GlobalScripts
         public GameObject ShotPrefab;
         public GameObject RobotHeadCamera;
         public GameObject RobotTargetCamera;
+        public GameObject DieEffectsPrefab;
         public bool IsPlayer = false;
         public float MoveSpeed = 1080;
         public float FixedMoveSpeed = 55;
@@ -36,7 +37,7 @@ namespace Shootball.GlobalScripts
                     LowerAimDegree, UpperAimDegree, LaserRaySpeed, ShotRechargeTime, FireRate, MouseSensitivity,
                     MouseSmoothing);
             var components = new RobotComponents(transform, RobotBody, RobotHead, RobotHeadCamera, RobotTargetCamera,
-                    LaserRaySpawn, ShotPrefab);
+                    LaserRaySpawn, ShotPrefab, DieEffectsPrefab);
             var statistics = new RobotStatistics(MaxLife, MaxShots);
 
             RobotModel = IsPlayer

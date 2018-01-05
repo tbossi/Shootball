@@ -455,19 +455,23 @@ MonoBehaviour:
   ShotPrefab: {fileID: 136330, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 2}
   RobotHeadCamera: {fileID: 1126911408785096}
   RobotTargetCamera: {fileID: 1286024421301752}
+  DieEffectsPrefab: {fileID: 1210345225812292, guid: 75faea303fbaf47d399b98e86bc56e88,
+    type: 2}
   IsPlayer: 0
   MoveSpeed: 1080
   FixedMoveSpeed: 55
-  TurnSpeed: 170
-  AimSpeed: 60
+  TurnSpeed: 80
+  AimSpeed: 30
   StartingAimDegree: 0
   LowerAimDegree: -45
   UpperAimDegree: 50
-  LaserRaySpeed: 185
-  ShotRechargeTime: 0.8
-  FireRate: 0.3
+  LaserRaySpeed: 195
+  ShotRechargeTime: 0.9
+  FireRate: 0.2
   MaxLife: 100
-  MaxShots: 60
+  MaxShots: 40
+  MouseSensitivity: {x: 2, y: 2}
+  MouseSmoothing: {x: 3, y: 3}
 --- !u!120 &120074252646165630
 LineRenderer:
   m_ObjectHideFlags: 1

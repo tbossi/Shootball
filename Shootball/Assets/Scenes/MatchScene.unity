@@ -207,6 +207,7 @@ MonoBehaviour:
   MapBuilderScriptObject: {fileID: 240244949}
   PlayerStatisticsPrefab: {fileID: 223734652264827922, guid: b58ce9dd84c53495096f240acdca3998,
     type: 2}
+  Cursor: {fileID: 114417536693485106, guid: 9d8dfd36f62274b93be4b78eed75b70b, type: 2}
 --- !u!4 &592092333
 Transform:
   m_ObjectHideFlags: 0

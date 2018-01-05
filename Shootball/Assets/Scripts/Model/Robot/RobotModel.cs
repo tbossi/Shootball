@@ -59,7 +59,10 @@ namespace Shootball.Model.Robot
             while (true)
             {
                 yield return new WaitForSeconds(Settings.ShotRechargeTime);
-                Statistics.RechargeShot();
+                if (Statistics.IsAlive)
+                {
+                    Statistics.RechargeShot();
+                }
             }
         }
 
@@ -70,15 +73,22 @@ namespace Shootball.Model.Robot
 
         public void GetDamaged()
         {
-            var isAlive = Statistics.GetDamaged();
-            if (!isAlive)
+            if (Statistics.IsAlive)
             {
-                Die();
+                var isAlive = Statistics.GetDamaged();
+                if (!isAlive)
+                {
+                    Die();
+                }
             }
         }
 
         public void Die()
         {
+            Components.RobotBodyRigidBody.drag *= 10;
+            Components.RobotBodyRigidBody.angularDrag *= 10;
+            GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
+
             _deathCallbacks.ForEach(c => c.Invoke());
         }
 
@@ -89,58 +99,70 @@ namespace Shootball.Model.Robot
 
         public void MapBorderReached()
         {
-            Debug.Log("I can't go on");
             Die();
+            Debug.Log("I can't go on");
         }
 
         public void Move(Direction direction)
         {
-            var directionVector = Transformer.DirectionRotation(direction, RotationAxis) * MoveAxis;
-            var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
-            var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
-                    + Math.Abs(oldDirection) * 4;
-            Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+            if (Statistics.IsAlive)
+            {
+                var directionVector = Transformer.DirectionRotation(direction, RotationAxis) * MoveAxis;
+                var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
+                var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
+                        + Math.Abs(oldDirection) * 4;
+                Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+            }
         }
 
         public void Turn(float rawX)
         {
-            var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
-            _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
-            var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
+            if (Statistics.IsAlive)
+            {
+                var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
+                _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
+                var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
 
-            Components.RobotPosition.Rotate(RotationAxis, turnAmount);
+                Components.RobotPosition.Rotate(RotationAxis, turnAmount);
+            }
         }
 
         public void Aim(float rawY)
         {
-            var y = rawY * Settings.MouseSensitivity.y * Settings.MouseSmoothing.y;
-            _smoothMouseY = Mathf.Lerp(_smoothMouseY, y, 1f / Settings.MouseSmoothing.y);
-            var aimAmount = _smoothMouseY * Settings.AimSpeed * Time.deltaTime;
+            if (Statistics.IsAlive)
+            {
+                var y = rawY * Settings.MouseSensitivity.y * Settings.MouseSmoothing.y;
+                _smoothMouseY = Mathf.Lerp(_smoothMouseY, y, 1f / Settings.MouseSmoothing.y);
+                var aimAmount = _smoothMouseY * Settings.AimSpeed * Time.deltaTime;
 
-            if (_aimDegree + aimAmount > Settings.UpperAimDegree)
-            {
-                _aimDegree = Settings.UpperAimDegree;
-            }
-            else if (_aimDegree + aimAmount < Settings.LowerAimDegree)
-            {
-                _aimDegree = Settings.LowerAimDegree;
-            }
-            else
-            {
-                _aimDegree += aimAmount;
-            }
+                if (_aimDegree + aimAmount > Settings.UpperAimDegree)
+                {
+                    _aimDegree = Settings.UpperAimDegree;
+                }
+                else if (_aimDegree + aimAmount < Settings.LowerAimDegree)
+                {
+                    _aimDegree = Settings.LowerAimDegree;
+                }
+                else
+                {
+                    _aimDegree += aimAmount;
+                }
 
-            Components.HeadCamera.transform.forward = ShootDirection;
-            Components.TargetCamera.transform.forward = ShootDirection;
+                Components.HeadCamera.transform.forward = ShootDirection;
+                Components.TargetCamera.transform.forward = ShootDirection;
+            }
         }
 
         public void Shoot()
         {
-            if (Time.time > _nextFire && Statistics.Shoot())
+            if (Statistics.IsAlive)
             {
-                _nextFire = Time.time + Settings.FireRate;
-                _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
-                    ShootRotation, ShootDirection, Settings.LaserRaySpeed);
+                if (Time.time > _nextFire && Statistics.Shoot())
+                {
+                    _nextFire = Time.time + Settings.FireRate;
+                    _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
+                        ShootRotation, ShootDirection, Settings.LaserRaySpeed);
+                }
             }
         }
     }

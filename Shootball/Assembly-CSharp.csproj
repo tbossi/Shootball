@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scripts\Provider\Input.cs" />
      <Compile Include="Assets\Scripts\Provider\InputKey.cs" />
      <Compile Include="Assets\Scripts\Provider\InputMouse.cs" />
+     <Compile Include="Assets\Scripts\Provider\InputMouseKey.cs" />
      <Compile Include="Assets\Scripts\Provider\Inputs.cs" />
      <Compile Include="Assets\Scripts\Provider\KeyPression.cs" />
      <Compile Include="Assets\Scripts\Utility\GameObjectBuilder.cs" />

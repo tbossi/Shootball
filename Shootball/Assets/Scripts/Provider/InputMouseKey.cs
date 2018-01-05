@@ -1,10 +1,8 @@
-using UnityEngine;
-
 namespace Shootball.Provider
 {
-    public class InputKey : Input<bool>
+    public class InputMouseKey : Input<bool>
     {
-        private readonly KeyCode _key;
+        private readonly int _key;
         private readonly KeyPression _type;
 
         public bool Value 
@@ -14,21 +12,21 @@ namespace Shootball.Provider
                 switch(_type)
                 {
                     case KeyPression.Up:
-                        return UnityEngine.Input.GetKeyUp(_key);
+                        return UnityEngine.Input.GetMouseButtonUp(_key);
                     case KeyPression.Down:
-                        return UnityEngine.Input.GetKeyDown(_key);
+                        return UnityEngine.Input.GetMouseButtonDown(_key);
                     case KeyPression.Pressed:
-                        return UnityEngine.Input.GetKey(_key);
+                        return UnityEngine.Input.GetMouseButton(_key);
                     default:
                         return false;
                 }               
             }
         }
 
-        public InputKey(KeyCode key, KeyPression type)
+        public InputMouseKey(int key, KeyPression type)
         {
             _key = key;
             _type = type;
         }
-    }
+    }  
 }
