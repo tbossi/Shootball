@@ -1,7 +1,7 @@
 namespace Shootball.Provider
 {
-    public interface Input
+    public interface Input<T>
     {
-        bool Active { get; }
+        T Value { get; }
     }
 }

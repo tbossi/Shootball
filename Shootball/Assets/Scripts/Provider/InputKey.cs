@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace Shootball.Provider
 {
-    public class InputKey : Input
+    public class InputKey : Input<bool>
     {
         private readonly KeyCode _key;
         private readonly KeyPression _type;
 
-        public virtual bool Active 
+        public bool Value 
         {
             get
             {

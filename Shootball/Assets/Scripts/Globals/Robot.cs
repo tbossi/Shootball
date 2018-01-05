@@ -24,6 +24,8 @@ namespace Shootball.GlobalScripts
         public float FireRate = 0.3f;
         public float MaxLife = 100;
         public int MaxShots = 60;
+        public Vector2 MouseSensitivity = new Vector2(2, 2);
+        public Vector2 MouseSmoothing = new Vector2(3, 3); 
 
         [HideInInspector]
         public RobotModel RobotModel;
@@ -31,7 +33,8 @@ namespace Shootball.GlobalScripts
         void OnEnable()
         {
             var settings = new RobotSettings(MoveSpeed, FixedMoveSpeed, TurnSpeed, AimSpeed, StartingAimDegree,
-                    LowerAimDegree, UpperAimDegree, LaserRaySpeed, ShotRechargeTime, FireRate);
+                    LowerAimDegree, UpperAimDegree, LaserRaySpeed, ShotRechargeTime, FireRate, MouseSensitivity,
+                    MouseSmoothing);
             var components = new RobotComponents(transform, RobotBody, RobotHead, RobotHeadCamera, RobotTargetCamera,
                     LaserRaySpawn, ShotPrefab);
             var statistics = new RobotStatistics(MaxLife, MaxShots);

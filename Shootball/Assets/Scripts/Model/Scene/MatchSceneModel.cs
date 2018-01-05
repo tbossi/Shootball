@@ -21,7 +21,7 @@ namespace Shootball.Model.Scene
 
         public override void OnUpdate()
         {
-            if (Inputs.Pause.Active)
+            if (Inputs.Pause.Value)
             {
                 MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_PAUSE);
             }

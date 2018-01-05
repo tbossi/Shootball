@@ -14,6 +14,8 @@ namespace Shootball.Model.Robot
         public readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
+        private float _smoothMouseX = 0;
+        private float _smoothMouseY = 0;
         private float _aimDegree;
         private float _nextFire;
         private List<Action> _deathCallbacks;
@@ -100,41 +102,32 @@ namespace Shootball.Model.Robot
             Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
         }
 
-        public void Turn(Spin spin)
+        public void Turn(float rawX)
         {
-            var turnAmount = Settings.TurnSpeed * Time.deltaTime;
+            var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
+            _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
+            var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
 
-            switch (spin)
-            {
-                case Spin.Right:
-                    Components.RobotPosition.Rotate(RotationAxis, turnAmount);
-                    break;
-                case Spin.Left:
-                    Components.RobotPosition.Rotate(RotationAxis, -turnAmount);
-                    break;
-                default:
-                    throw new ArgumentException("Bad spin value");
-            }
+            Components.RobotPosition.Rotate(RotationAxis, turnAmount);
         }
 
-        public void Aim(Spin spin)
+        public void Aim(float rawY)
         {
-            var aimAmount = Settings.AimSpeed * Time.deltaTime;
+            var y = rawY * Settings.MouseSensitivity.y * Settings.MouseSmoothing.y;
+            _smoothMouseY = Mathf.Lerp(_smoothMouseY, y, 1f / Settings.MouseSmoothing.y);
+            var aimAmount = _smoothMouseY * Settings.AimSpeed * Time.deltaTime;
 
-            switch (spin)
+            if (_aimDegree + aimAmount > Settings.UpperAimDegree)
             {
-                case Spin.Up:
-                    _aimDegree = (_aimDegree + aimAmount > Settings.UpperAimDegree)
-                            ? Settings.UpperAimDegree
-                            : _aimDegree + aimAmount;
-                    break;
-                case Spin.Down:
-                    _aimDegree = (_aimDegree - aimAmount < Settings.LowerAimDegree)
-                            ? Settings.LowerAimDegree
-                            : _aimDegree - aimAmount;
-                    break;
-                default:
-                    throw new ArgumentException("Bad spin value");
+                _aimDegree = Settings.UpperAimDegree;
+            }
+            else if (_aimDegree + aimAmount < Settings.LowerAimDegree)
+            {
+                _aimDegree = Settings.LowerAimDegree;
+            }
+            else
+            {
+                _aimDegree += aimAmount;
             }
 
             Components.HeadCamera.transform.forward = ShootDirection;
