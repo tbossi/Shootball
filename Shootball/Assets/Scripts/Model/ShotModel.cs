@@ -37,11 +37,9 @@ namespace Shootball.Model
 
             if (maybeRobot != null)
             {
-                var robotModel = maybeRobot.RobotModel;
-                robotModel.GetDamaged(10);
+                maybeRobot.RobotModel.GetDamaged();
+                _shooter.OnEnemyHit();
             }
-
-            Debug.Log("Boom");
 
             GameObject.Destroy(_shot);
         }

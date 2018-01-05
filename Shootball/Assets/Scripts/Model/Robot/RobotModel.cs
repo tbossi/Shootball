@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Shootball.Motion;
 using Shootball.Utility;
 using UnityEngine;
 
 namespace Shootball.Model.Robot
 {
-    public abstract class RobotModel : IShooter
+    public abstract class RobotModel : IShooter, IMortal
     {
         protected readonly RobotSettings Settings;
         protected readonly RobotComponents Components;
-        protected readonly RobotStatistics Statistics;
+        public readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
         private float _aimDegree;
         private float _nextFire;
+        private List<Action> _deathCallbacks;
 
         public Collider Collider => Components.RobotHead.GetComponent<Collider>();
 
@@ -37,6 +39,7 @@ namespace Shootball.Model.Robot
             _aimDegree = Settings.StartingAimDegree;
             _nextFire = 0;
             _shooter = new LaserShooter(this);
+            _deathCallbacks = new List<Action>();
         }
 
         public void UpdateRelativePositions()
@@ -58,18 +61,34 @@ namespace Shootball.Model.Robot
             }
         }
 
-        public void GetDamaged(float amount)
+        public void OnEnemyHit()
         {
-            var isAlive = Statistics.GetDamaged(amount);
+            Statistics.IncreasePoints();
+        }
+
+        public void GetDamaged()
+        {
+            var isAlive = Statistics.GetDamaged();
             if (!isAlive)
             {
-                Debug.Log("Ouch!!!");
+                Die();
             }
+        }
+
+        public void Die()
+        {
+            _deathCallbacks.ForEach(c => c.Invoke());
+        }
+
+        public void SetOnDeathListener(Action callback)
+        {
+            _deathCallbacks.Add(callback);
         }
 
         public void MapBorderReached()
         {
             Debug.Log("I can't go on");
+            Die();
         }
 
         public void Move(Direction direction)

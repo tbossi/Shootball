@@ -205,6 +205,8 @@ MonoBehaviour:
   RobotPrefab: {fileID: 1164802306739134, guid: d605a45ff092740be90bd28470fe38f2,
     type: 2}
   MapBuilderScriptObject: {fileID: 240244949}
+  PlayerStatisticsPrefab: {fileID: 223734652264827922, guid: b58ce9dd84c53495096f240acdca3998,
+    type: 2}
 --- !u!4 &592092333
 Transform:
   m_ObjectHideFlags: 0

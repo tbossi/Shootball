@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\Globals\UI\MatchPauseMenu.cs" />
      <Compile Include="Assets\Scripts\Globals\UI\Menu.cs" />
      <Compile Include="Assets\Scripts\Globals\UI\MenuHandler.cs" />
+     <Compile Include="Assets\Scripts\Globals\UI\StatisticsHUD.cs" />
+     <Compile Include="Assets\Scripts\Model\IMortal.cs" />
      <Compile Include="Assets\Scripts\Model\IShooter.cs" />
      <Compile Include="Assets\Scripts\Model\MapModel.cs" />
      <Compile Include="Assets\Scripts\Model\MatchHandlerModel.cs" />
@@ -83,6 +85,7 @@
      <Compile Include="Assets\Scripts\Model\UI\MatchPauseMenuModel.cs" />
      <Compile Include="Assets\Scripts\Model\UI\MenuHandlerModel.cs" />
      <Compile Include="Assets\Scripts\Model\UI\MenuModel.cs" />
+     <Compile Include="Assets\Scripts\Model\UI\StatisticsHUDModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />
      <Compile Include="Assets\Scripts\Motion\Spin.cs" />
      <Compile Include="Assets\Scripts\Motion\Transformer.cs" />

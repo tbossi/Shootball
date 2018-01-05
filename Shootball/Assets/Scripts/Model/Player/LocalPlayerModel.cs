@@ -1,4 +1,5 @@
 using Shootball.Model.Robot;
+using Shootball.Model.UI;
 using Shootball.Motion;
 using Shootball.Provider;
 using UnityEngine;
@@ -7,8 +8,12 @@ namespace Shootball.Model.Player
 {
     public class LocalPlayerModel : PlayerModel<PlayerRobotModel>
     {
-        public LocalPlayerModel(PlayerRobotModel robot) : base(robot)
-        { }
+        private readonly StatisticsHUDModel _statisticsHUD;
+
+        public LocalPlayerModel(PlayerRobotModel robot, StatisticsHUDModel statisticsHUD) : base(robot)
+        {
+            _statisticsHUD = statisticsHUD;
+        }
 
         public override void OnUpdate()
         {
@@ -26,6 +31,15 @@ namespace Shootball.Model.Player
 
             if (Inputs.MoveLeft.Active) { Robot.Move(Direction.Left); }
             else if (Inputs.MoveRight.Active) { Robot.Move(Direction.Right); }
+
+            UpdateStatistics();
+        }
+
+        private void UpdateStatistics()
+        {
+            _statisticsHUD.SetScore(Robot.Statistics.Points);
+            _statisticsHUD.SetLife(Robot.Statistics.LifeLeft, Robot.Statistics.MaxLife);
+            _statisticsHUD.SetShots(Robot.Statistics.ShotsLeft, Robot.Statistics.MaxShots);            
         }
     }
 }

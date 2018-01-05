@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Shootball.GlobalScripts.UI;
 using Shootball.Model.Player;
 using Shootball.Model.Robot;
 using Shootball.Utility;
@@ -10,45 +11,74 @@ namespace Shootball.Model
     {
         private readonly GameObject _robotPrefab;
         private readonly MapModel _map;
+        private readonly Canvas _playerStatisticsPrefab;
         private List<IPlayer> _players;
         private GameObject _mapGameObject;
         private GameObject _playersGameObject;
+        private GameObject _HUDCanvas;
 
-        public MatchHandlerModel(GameObject robotPrefab, MapModel map)
+        public bool IsMatchEnded { get; private set; }
+
+        public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab)
         {
             _robotPrefab = robotPrefab;
             _map = map;
+            _playerStatisticsPrefab = playerStatisticsPrefab;
         }
 
         public void OnStart()
         {
             _mapGameObject = new GameObject("Map");
             _playersGameObject = new GameObject("Players");
+            _HUDCanvas = new GameObject("HUD");
+            _HUDCanvas.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
             BeginMatch();
         }
 
         public void OnUpdate()
         {
-            if (_players != null)
+            if (!IsMatchEnded)
             {
-                _players.ForEach(player => player.OnUpdate());
+                if (_players != null)
+                {
+                    _players.ForEach(player => player.OnUpdate());
+                }
             }
         }
 
         private void BeginMatch()
         {
             _map.Instantiate(_mapGameObject);
-
             _players = new List<IPlayer>();
-            var player = SpawnRobot(true).GetComponent<GlobalScripts.Robot>();
-            _players.Add(new LocalPlayerModel((PlayerRobotModel)player.RobotModel));
 
-            for (int i = 0; i < 3; i++)
+            _players.Add(CreatePlayer(true));
+            for (int i = 0; i < 10; i++)
             {
-                var enemy = SpawnRobot(false).GetComponent<GlobalScripts.Robot>();
-                _players.Add(new AIPlayerModel((EnemyRobotModel)enemy.RobotModel));
+                _players.Add(CreatePlayer(false));
             }
+            IsMatchEnded = false;
+        }
+
+        private IPlayer CreatePlayer(bool isPlayer)
+        {
+            var robot = SpawnRobot(isPlayer);
+            var robotModel = robot.GetComponent<GlobalScripts.Robot>().RobotModel;
+            robotModel.SetOnDeathListener(() => {/* IsMatchEnded = true;*/ });
+
+            IPlayer player;
+            if (isPlayer)
+            {
+                var hud = GameObject.Instantiate(_playerStatisticsPrefab, _HUDCanvas.transform);
+                var statisticsHUD = hud.GetComponent<StatisticsHUD>().StatisticsHUDModel;
+                player = new LocalPlayerModel((PlayerRobotModel)robotModel, statisticsHUD);
+            }
+            else
+            {
+                player = new AIPlayerModel((EnemyRobotModel)robotModel);
+            }
+
+            return player;
         }
 
         private GameObject SpawnRobot(bool isPlayer)

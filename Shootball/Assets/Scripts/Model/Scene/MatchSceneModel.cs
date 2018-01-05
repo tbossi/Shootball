@@ -25,16 +25,23 @@ namespace Shootball.Model.Scene
             {
                 MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_PAUSE);
             }
-            
+
             if (MenuHandlerModel.IsMenuActive)
             {
                 ShowCursor();
             }
             else
             {
-                HideCursor();
-                _matchHandlerModel.OnUpdate();
-            }            
+                if (!_matchHandlerModel.IsMatchEnded)
+                {
+                    HideCursor();
+                    _matchHandlerModel.OnUpdate();
+                }
+                else
+                {
+                    ShowCursor();
+                }
+            }
         }
 
         private void HideCursor()

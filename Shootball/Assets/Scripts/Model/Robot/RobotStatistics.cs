@@ -2,22 +2,25 @@ namespace Shootball.Model.Robot
 {
     public class RobotStatistics
     {
-        public float MaxLife { get; }
+        public readonly float MaxLife;
+        public readonly int MaxShots;
+
         public float LifeLeft { get; private set; }
-        public int MaxShots { get; }
         public int ShotsLeft { get; private set; }
+        public int Points { get; private set; }
 
         public RobotStatistics(float maxLife, int maxShots)
         {
             MaxLife = maxLife;
-            LifeLeft = MaxLife;
             MaxShots = maxShots;
-            ShotsLeft = MaxShots;            
+            LifeLeft = MaxLife;
+            ShotsLeft = MaxShots;
+            Points = 0;
         }
 
-        public bool GetDamaged(float amount)
+        public bool GetDamaged()
         {
-            var newLife = LifeLeft - amount;
+            var newLife = LifeLeft - 10;
             if (newLife > 0)
             {
                 LifeLeft = newLife;
@@ -30,8 +33,13 @@ namespace Shootball.Model.Robot
             }
         }
 
+        public void IncreasePoints()
+        {
+            Points += 50;
+        }
+
         public bool Shoot()
-        {     
+        {
             if (ShotsLeft <= 0)
             {
                 return false;

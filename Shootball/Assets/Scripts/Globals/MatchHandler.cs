@@ -12,13 +12,14 @@ namespace Shootball.GlobalScripts
     {
         public GameObject RobotPrefab;
         public GameObject MapBuilderScriptObject;
+        public Canvas PlayerStatisticsPrefab;
 
         public MatchHandlerModel MatchHandlerModel { get; private set; }
 
         void OnEnable()
         {
             var map = MapBuilderScriptObject.GetComponent<Map>().MapModel;
-            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map);
+            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map, PlayerStatisticsPrefab);
         }
     }
 }
