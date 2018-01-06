@@ -14,6 +14,8 @@ namespace Shootball.GlobalScripts
         public GameObject RobotPrefab;
         public GameObject MapBuilderScriptObject;
         public Canvas PlayerStatisticsPrefab;
+        public Camera MinimapCamera;
+        public CanvasRenderer MinimapPrefab;
         public Image Cursor;
 
         public MatchHandlerModel MatchHandlerModel { get; private set; }
@@ -21,7 +23,8 @@ namespace Shootball.GlobalScripts
         void OnEnable()
         {
             var map = MapBuilderScriptObject.GetComponent<Map>().MapModel;
-            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map, PlayerStatisticsPrefab, Cursor);
+            MatchHandlerModel = new MatchHandlerModel(RobotPrefab, map, PlayerStatisticsPrefab, MinimapCamera,
+                    MinimapPrefab, Cursor);
         }
     }
 }

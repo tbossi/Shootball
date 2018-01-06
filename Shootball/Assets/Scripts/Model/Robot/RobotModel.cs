@@ -10,7 +10,7 @@ namespace Shootball.Model.Robot
     public abstract class RobotModel : IShooter, IMortal
     {
         protected readonly RobotSettings Settings;
-        protected readonly RobotComponents Components;
+        public readonly RobotComponents Components;
         public readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
@@ -30,7 +30,8 @@ namespace Shootball.Model.Robot
 
         protected Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
 
-        public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics)
+        public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
+                Color minimapInidicator)
         {
             Settings = settings;
             Components = components;
@@ -42,6 +43,7 @@ namespace Shootball.Model.Robot
             _nextFire = 0;
             _shooter = new LaserShooter(this);
             _deathCallbacks = new List<Action>();
+            Components.MinimapIndicator.GetComponent<Renderer>().material.SetColor("_Color", minimapInidicator);
         }
 
         public void UpdateRelativePositions()
@@ -100,7 +102,6 @@ namespace Shootball.Model.Robot
         public void MapBorderReached()
         {
             Die();
-            Debug.Log("I can't go on");
         }
 
         public void Move(Direction direction)
@@ -111,7 +112,6 @@ namespace Shootball.Model.Robot
                 var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
                 if (oldDirection <= Settings.MaxSpeed * Time.deltaTime)
                 {
-                    Debug.Log(oldDirection);
                     var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
                             + Math.Abs(oldDirection) * 4;
 

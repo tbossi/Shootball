@@ -8,17 +8,17 @@ namespace Shootball.Model.Robot
         public readonly GameObject RobotBody;
 		public readonly GameObject RobotHead;
 		public readonly GameObject LaserRaySpawn;
-		public readonly GameObject ShotPrefab;		
+		public readonly GameObject ShotPrefab;
 		public readonly GameObject HeadCamera;
 		public readonly GameObject TargetCamera;
 		public readonly GameObject DieEffectsPrefab;
-		
+		public readonly GameObject MinimapIndicator;
 
 		public Rigidbody RobotBodyRigidBody => RobotBody.GetComponent<Rigidbody>();
 
 		public RobotComponents(Transform robotPosition, GameObject robotBody, GameObject robotHead,
 				GameObject headCamera, GameObject targetCamera, GameObject laserRaySpawn, GameObject shotPrefab,
-				GameObject dieEffectsPrefab)
+				GameObject dieEffectsPrefab, GameObject minimapIndicator)
         {
             RobotPosition = robotPosition;
             RobotBody = robotBody;
@@ -28,6 +28,7 @@ namespace Shootball.Model.Robot
             LaserRaySpawn = laserRaySpawn;
 			ShotPrefab = shotPrefab;
 			DieEffectsPrefab = dieEffectsPrefab;
+			MinimapIndicator = minimapIndicator;
 		}
 	}
 }

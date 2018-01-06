@@ -13,6 +13,8 @@ namespace Shootball.Model
         private readonly GameObject _robotPrefab;
         private readonly MapModel _map;
         private readonly Canvas _playerStatisticsPrefab;
+        private readonly Camera _minimapCamera;
+        private readonly CanvasRenderer _minimapPrefab;        
         private readonly Image _cursor;    
         private List<IPlayer> _players;
         private GameObject _mapGameObject;
@@ -22,11 +24,13 @@ namespace Shootball.Model
         public bool IsMatchEnded { get; private set; }
 
         public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab,
-                Image cursor)
+                Camera minimapCamera, CanvasRenderer minimapPrefab, Image cursor)
         {
             _robotPrefab = robotPrefab;
             _map = map;
             _playerStatisticsPrefab = playerStatisticsPrefab;
+            _minimapCamera = minimapCamera;
+            _minimapPrefab = minimapPrefab;
             _cursor = cursor;
         }
 
@@ -74,9 +78,11 @@ namespace Shootball.Model
             if (isPlayer)
             {
                 var hud = GameObject.Instantiate(_playerStatisticsPrefab, _HUDCanvas.transform);
+                GameObject.Instantiate(_minimapPrefab, _HUDCanvas.transform);                
                 GameObject.Instantiate(_cursor, _HUDCanvas.transform);
                 var statisticsHUD = hud.GetComponent<StatisticsHUD>().StatisticsHUDModel;
-                player = new LocalPlayerModel((PlayerRobotModel)robotModel, statisticsHUD);
+                var minimapCamera = GameObject.Instantiate(_minimapCamera, _playersGameObject.transform);
+                player = new LocalPlayerModel((PlayerRobotModel)robotModel, statisticsHUD, minimapCamera);
             }
             else
             {
