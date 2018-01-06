@@ -9,20 +9,22 @@ namespace Shootball.Model
 {
     public class MapModel
     {
-        private readonly ICollection<GameObjectBuilder> _spawnPoints;
+        private readonly IList<GameObjectBuilder> _spawnPoints;
         private readonly IEnumerable<GameObjectBuilder> _houses;
         private readonly Bounds _mapBorders;
         private readonly GameObjectBuilder _ground;
         private readonly GameObjectBuilder _light;
-        
+        private int _spawnPointCounter;
+
         public MapModel(ICollection<GameObjectBuilder> spawnPoints, IEnumerable<GameObjectBuilder> houses,
                 Bounds mapBorders, GameObjectBuilder ground, GameObjectBuilder light)
         {
-            _spawnPoints = spawnPoints;
+            _spawnPoints = spawnPoints.ToList();
             _houses = houses;
             _mapBorders = mapBorders;
             _ground = ground;
             _light = light;
+            _spawnPointCounter = 0;
         }
 
         public void Instantiate(GameObject parent)
@@ -42,7 +44,8 @@ namespace Shootball.Model
 
         public GameObjectBuilder GetSpawnPoint()
         {
-            return Extensions.Random.FromCollection(_spawnPoints);
+            _spawnPointCounter = _spawnPointCounter >= _spawnPoints.Count - 1 ? 0 : _spawnPointCounter + 1;
+            return _spawnPoints[_spawnPointCounter];
         }
 
         public void OnBorderReached(Collider otherObject)
