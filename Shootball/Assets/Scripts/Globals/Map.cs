@@ -17,6 +17,7 @@ namespace Shootball.GlobalScripts
         public GameObject MapLightPrefab;
         public GameObject[] HousePrefabs;
         public int[] Weights;
+        public GameObject[] BorderPrefabs;
 
         [HideInInspector]
         public MapModel MapModel;
@@ -24,7 +25,7 @@ namespace Shootball.GlobalScripts
         void OnEnable()
         {
             var mapBuilder = new MapBuilder(HousePrefabs, Weights, SpawnPointPrefab, SpawnPointWidth, GroundPrefab,
-                    MapLightPrefab);
+                    MapLightPrefab, BorderPrefabs);
             var halfDimensions = new Vector2(Width / 2, Length / 2);
             MapModel = mapBuilder.Generate(-halfDimensions, halfDimensions, BaseHeight, FillingRate, SpawnPoints);
         }

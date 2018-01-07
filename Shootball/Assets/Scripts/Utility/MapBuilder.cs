@@ -15,7 +15,8 @@ namespace Shootball.Utility
         private readonly float _spawnPointWidth;
         private readonly GameObject _groundPrefab;
         private readonly GameObject _lightPrefab;
-        
+        private readonly GameObject[] _borderPrefabs;
+
         private readonly float _betweenSpace;
         private Dictionary<Tuple<Bounds, int>, int> _weightedList;
         private Bounds[] _houseBounds;
@@ -81,7 +82,8 @@ namespace Shootball.Utility
         }
 
         public MapBuilder(GameObject[] housePrefabs, int[] weights, GameObject spawnPointPrefab,
-                float spawnPointWidth, GameObject groundPrefab, GameObject lightPrefab)
+                float spawnPointWidth, GameObject groundPrefab, GameObject lightPrefab,
+                GameObject[] borderPrefabs)
         {
             if (housePrefabs.Length != weights.Length)
             {
@@ -93,6 +95,7 @@ namespace Shootball.Utility
             _spawnPointWidth = spawnPointWidth;
             _groundPrefab = groundPrefab;
             _lightPrefab = lightPrefab;
+            _borderPrefabs = borderPrefabs;
             _betweenSpace = 3;
         }
 
@@ -111,29 +114,58 @@ namespace Shootball.Utility
             var spawnPoints = FitSpawnPoints(spawnPointsQuantity, temporaryMapBounds, baseY, houseList);
             var houses = houseList.Select(o =>
                     new GameObjectBuilder(_housePrefabs[o.Index], o.Position, Quaternion.Euler(0, o.YAngle, 0)));
-            var mapBorders = MapBorders(minMapPosition, maxMapPosition, baseY);
+            var mapBounds = MapBounds(minMapPosition, maxMapPosition, baseY);
 
-            var groundPosition = mapBorders.center;
+            var borders = Borders(minMapPosition, maxMapPosition, baseY);
+
+            var groundPosition = mapBounds.center;
             groundPosition.y = baseY;
-            var groundScale = Math.Max(maxMapPosition.x - minMapPosition.x, maxMapPosition.y - minMapPosition.y) / 10 + 10;
+            var groundScale = Math.Max(maxMapPosition.x - minMapPosition.x, maxMapPosition.y - minMapPosition.y) / 10 + 20;
             var ground = new GameObjectBuilder(_groundPrefab, groundPosition, new Quaternion(),
                     go => { go.transform.localScale = Vector3.one * groundScale; });
-            
+
             var lightPosition = groundPosition + Vector3.up * 160;
             var light = new GameObjectBuilder(_lightPrefab, lightPosition, Quaternion.Euler(77, -98, -82));
 
-            return new MapModel(spawnPoints, houses, mapBorders, ground, light);
+            return new MapModel(spawnPoints, houses, borders, mapBounds, ground, light);
         }
 
-        private Bounds MapBorders(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
+        private Bounds MapBounds(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
         {
             var center = new Vector3(
                 (maxMapPosition.x + minMapPosition.x) / 2,
                 25 + baseY,
                 (maxMapPosition.y + minMapPosition.y) / 2
             );
-            var size = new Vector3(maxMapPosition.x - minMapPosition.x, 55, maxMapPosition.y - minMapPosition.y);
+            var size = new Vector3(maxMapPosition.x - minMapPosition.x + 50, 55, maxMapPosition.y - minMapPosition.y + 50);
             return new Bounds(center, size);
+        }
+
+        private IEnumerable<GameObjectBuilder> Borders(Vector2 minMapPosition, Vector2 maxMapPosition, float baseY)
+        {
+            var borders = new List<GameObjectBuilder>();
+
+            var prefab = _borderPrefabs[Extensions.Random.Range(0, _borderPrefabs.Length)];
+            var position = new Vector3((minMapPosition.x + maxMapPosition.x) / 2, baseY, minMapPosition.y);
+            var border = new GameObjectBuilder(prefab, position, new Quaternion());
+            borders.Add(border);
+
+            prefab = _borderPrefabs[Extensions.Random.Range(0, _borderPrefabs.Length)];
+            position = new Vector3((minMapPosition.x + maxMapPosition.x) / 2, baseY, maxMapPosition.y);
+            border = new GameObjectBuilder(prefab, position, Quaternion.Euler(0, 180, 0));
+            borders.Add(border);
+
+            prefab = _borderPrefabs[Extensions.Random.Range(0, _borderPrefabs.Length)];
+            position = new Vector3(minMapPosition.x, baseY, (minMapPosition.y + maxMapPosition.y) / 2);
+            border = new GameObjectBuilder(prefab, position, Quaternion.Euler(0, 90, 0));
+            borders.Add(border);
+
+            prefab = _borderPrefabs[Extensions.Random.Range(0, _borderPrefabs.Length)];
+            position = new Vector3(maxMapPosition.x, baseY, (minMapPosition.y + maxMapPosition.y) / 2);
+            border = new GameObjectBuilder(prefab, position, Quaternion.Euler(0, 270, 0));
+            borders.Add(border);
+
+            return borders;
         }
 
         private int ComputePrefabsQuantity(float mapArea, float fillingRate)

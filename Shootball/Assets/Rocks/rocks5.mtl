@@ -1,0 +1,10 @@
+# Exported from Wings 3D 2.1.5
+newmtl checker
+Ns 90.0
+d 1.0
+illum 2
+Kd 0.6 0.6 0.6
+Ka 0.6 0.6 0.6
+Ks 0.9 0.9 0.9
+Ke 0.0 0.0 0.0
+

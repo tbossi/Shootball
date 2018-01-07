@@ -11,16 +11,19 @@ namespace Shootball.Model
     {
         private readonly IList<GameObjectBuilder> _spawnPoints;
         private readonly IEnumerable<GameObjectBuilder> _houses;
+        private readonly IEnumerable<GameObjectBuilder> _borders;
         private readonly Bounds _mapBorders;
         private readonly GameObjectBuilder _ground;
         private readonly GameObjectBuilder _light;
         private int _spawnPointCounter;
 
         public MapModel(ICollection<GameObjectBuilder> spawnPoints, IEnumerable<GameObjectBuilder> houses,
-                Bounds mapBorders, GameObjectBuilder ground, GameObjectBuilder light)
+                IEnumerable<GameObjectBuilder> borders, Bounds mapBorders, GameObjectBuilder ground,
+                GameObjectBuilder light)
         {
             _spawnPoints = spawnPoints.ToList();
             _houses = houses;
+            _borders = borders;
             _mapBorders = mapBorders;
             _ground = ground;
             _light = light;
@@ -38,6 +41,7 @@ namespace Shootball.Model
             collisionScript.MapModel = this;
 
             _ground.Instantiate(parent.transform);
+            _borders.ForEach(b => b.Instantiate(parent.transform));
             _light.Instantiate(parent.transform);
             _houses.ForEach(h => h.Instantiate(parent.transform));
         }

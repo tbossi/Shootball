@@ -87,8 +87,8 @@ namespace Shootball.Model.Robot
 
         public void Die()
         {
-            Components.RobotBodyRigidBody.drag *= 10;
-            Components.RobotBodyRigidBody.angularDrag *= 10;
+            Components.RobotBodyRigidBody.drag *= 5;
+            Components.RobotBodyRigidBody.angularDrag *= 5;
             GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
 
             _deathCallbacks.ForEach(c => c.Invoke());
