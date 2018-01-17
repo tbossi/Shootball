@@ -57,6 +57,8 @@ namespace Shootball.Model.Player.AI
                 _pointCounter = 0;
             }
 
+            /*
+            //Debug: show _currentPath
             Vector3? old = null;
             foreach (var node in _currentPath)
             {
@@ -68,6 +70,7 @@ namespace Shootball.Model.Player.AI
                 Debug.DrawLine(old.Value, node, Color.green, 10);
                 old = node;
             }
+            */
 
             if (Vector3.Distance(robotPosition, _currentPath[_pointCounter]) <= 3)
             {
