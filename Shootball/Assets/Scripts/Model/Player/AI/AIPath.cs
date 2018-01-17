@@ -6,6 +6,7 @@ namespace Shootball.Model.Player.AI
 {
     public class AIPath
     {
+        private const float minimumDistanceToChangePoint = 3;
         private readonly Graph<Vector3> _navGraph;
         private readonly Vector3Heuristic _heuristic;
         private Vector3 _checkPoint;
@@ -72,7 +73,7 @@ namespace Shootball.Model.Player.AI
             }
             */
 
-            if (Vector3.Distance(robotPosition, _currentPath[_pointCounter]) <= 3)
+            if (Vector3.Distance(robotPosition, _currentPath[_pointCounter]) <= minimumDistanceToChangePoint)
             {
                 _pointCounter++;
             }
@@ -82,6 +83,12 @@ namespace Shootball.Model.Player.AI
         public void ForceNextPoint()
         {
             _pointCounter++;
+        }
+
+        public bool IsCheckPointReached(Vector3 robotPosition)
+        {
+            return _pointCounter >= _currentPath.Count - 1
+                && Vector3.Distance(robotPosition, CheckPoint(false)) <= minimumDistanceToChangePoint;
         }
     }
 }

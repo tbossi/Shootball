@@ -47,5 +47,10 @@ namespace Shootball.Model.Robot
                 Turn(angle * 2 / 5);
             }
         }
+
+        public void SlowDown()
+        {            
+            MoveTowards(-Components.RobotBodyRigidBody.velocity.normalized);
+        }
     }
 }
