@@ -23,7 +23,7 @@ namespace Shootball.Model.Player
             if (Inputs.Shoot.Value) { Robot.Shoot(); }
             Robot.Target(Inputs.Target.Value);
 
-            Robot.Turn(Inputs.MouseX.Value);
+            Robot.TurnMouse(Inputs.MouseX.Value);
             Robot.Aim(Inputs.MouseY.Value);
 
             if (Inputs.MoveForward.Value) { Robot.Move(Direction.Forward); }

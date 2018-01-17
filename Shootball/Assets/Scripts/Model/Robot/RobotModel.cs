@@ -120,14 +120,20 @@ namespace Shootball.Model.Robot
             }
         }
 
-        public void Turn(float rawX)
+        public void TurnMouse(float rawX)
+        {
+
+            var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
+            _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
+            var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
+
+            Turn(turnAmount);
+        }
+
+        public void Turn(float turnAmount)
         {
             if (Statistics.IsAlive)
             {
-                var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
-                _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
-                var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
-
                 Components.RobotPosition.Rotate(RotationAxis, turnAmount);
             }
         }

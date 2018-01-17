@@ -3,6 +3,7 @@ using Shootball.GlobalScripts.UI;
 using Shootball.Model.Player;
 using Shootball.Model.Robot;
 using Shootball.Utility;
+using Shootball.Utility.Navigation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,18 +58,32 @@ namespace Shootball.Model
 
         private void BeginMatch()
         {
-            _map.Instantiate(_mapGameObject);
+            var navGraph = _map.Instantiate(_mapGameObject);
+
+            /*
+            //Debug: shows navGraph
+            foreach (var node in navGraph.GetNodes())
+            {
+                var neighbors = navGraph.GetNeighbors(node);
+                foreach (var neighbor in neighbors)
+                {
+                    Debug.DrawLine(node, neighbor.Key, Color.cyan, 300);
+                }
+            }
+            */            
+
+            var enemies = 1;
             _players = new List<IPlayer>();
 
-            _players.Add(CreatePlayer(true));
-            for (int i = 0; i < 10; i++)
+            _players.Add(CreatePlayer(true, navGraph));
+            for (int i = 0; i < enemies; i++)
             {
-                _players.Add(CreatePlayer(false));
+                _players.Add(CreatePlayer(false, navGraph));
             }
             IsMatchEnded = false;
         }
 
-        private IPlayer CreatePlayer(bool isPlayer)
+        private IPlayer CreatePlayer(bool isPlayer, Graph<Vector3> navGraph)
         {
             var robot = SpawnRobot(isPlayer);
             var robotModel = robot.GetComponent<GlobalScripts.Robot>().RobotModel;
@@ -86,7 +101,7 @@ namespace Shootball.Model
             }
             else
             {
-                player = new AIPlayerModel((EnemyRobotModel)robotModel);
+                player = new AIPlayerModel((EnemyRobotModel)robotModel, navGraph);
             }
 
             return player;

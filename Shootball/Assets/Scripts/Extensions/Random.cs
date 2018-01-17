@@ -55,5 +55,10 @@ namespace Shootball.Extensions
         {
             return UnityEngine.Random.onUnitSphere * Range(minLength, maxLength);
         }
+
+        public static bool Coin(float trueProbability = 0.5f) 
+        { 
+            return Range(0f, 1f) < trueProbability; 
+        }
     }
 }

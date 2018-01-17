@@ -24,7 +24,7 @@ namespace Shootball.Utility
             var gameObject = parent == null
                     ? GameObject.Instantiate(Prefab, Position, Rotation)
                     : GameObject.Instantiate(Prefab, Position, Rotation, parent);
-            
+
             if (PostInitAction != null)
             {
                 PostInitAction.Invoke(gameObject);

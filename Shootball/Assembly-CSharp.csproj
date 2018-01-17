@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Model\IShooter.cs" />
      <Compile Include="Assets\Scripts\Model\MapModel.cs" />
      <Compile Include="Assets\Scripts\Model\MatchHandlerModel.cs" />
+     <Compile Include="Assets\Scripts\Model\Player\AI\AIPath.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AIPlayerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\LocalPlayerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\PlayerModel.cs" />
@@ -98,6 +99,11 @@
      <Compile Include="Assets\Scripts\Utility\GameObjectBuilder.cs" />
      <Compile Include="Assets\Scripts\Utility\LaserShooter.cs" />
      <Compile Include="Assets\Scripts\Utility\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\Utility\Navigation\AStarHeuristic.cs" />
+     <Compile Include="Assets\Scripts\Utility\Navigation\AStarPathFinder.cs" />
+     <Compile Include="Assets\Scripts\Utility\Navigation\Graph.cs" />
+     <Compile Include="Assets\Scripts\Utility\Navigation\GraphExtensions.cs" />
+     <Compile Include="Assets\Scripts\Utility\Navigation\Vector3Heuristic.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\Utils\TransformExtensionMethods.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineSettings.cs" />
