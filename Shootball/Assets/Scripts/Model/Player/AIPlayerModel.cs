@@ -8,19 +8,61 @@ namespace Shootball.Model.Player
 {
     public class AIPlayerModel : PlayerModel<EnemyRobotModel>
     {
+        enum AIState { Patrol, Fight }
+
         private readonly Graph<Vector3> _navGraph;
-        private readonly AIBehavior _patrolBehavior; 
+        private AIState _currentState;
+        private AIBehavior _patrolBehavior;
+        private AIBehavior _fightBehavior;
+        private AIPlayerBehaviorFactory _factory;
+
+        private AIPlayerBehaviorFactory BehaviorFactory =>
+                _factory ?? (_factory = new AIPlayerBehaviorFactory(Robot, _navGraph, PlayersList));
+        private AIBehavior PatrolBehavior =>
+                _patrolBehavior ?? (_patrolBehavior = BehaviorFactory.CreatePatrolBehavior());
+        private AIBehavior FightBehavior =>
+                _fightBehavior ?? (_fightBehavior = BehaviorFactory.CreateFightBehavior());
 
         public AIPlayerModel(EnemyRobotModel robot, Graph<Vector3> navGraph) : base(robot)
         {
             _navGraph = navGraph;
-            var behaviorFactory = new AIPlayerBehaviorFactory(robot, _navGraph);
-            _patrolBehavior = behaviorFactory.CreatePatrolBehavior();
+            _currentState = AIState.Patrol;
         }
 
+        private int _enemyLostCountdown = 20;
         public override void OnUpdate()
         {
-            _patrolBehavior.Run();
+            if (Robot.SeeEnemy())
+            {
+                _currentState = AIState.Fight;
+                _enemyLostCountdown = 20;
+            }
+            else
+            {
+                if (_enemyLostCountdown > 0)
+                {
+                    _enemyLostCountdown--;
+                }
+                else
+                {
+                    _currentState = AIState.Patrol;
+                }
+            }
+
+            RunBehavior();
+        }
+
+        private void RunBehavior()
+        {
+            switch (_currentState)
+            {
+                case AIState.Patrol:
+                    PatrolBehavior.Run();
+                    break;
+                case AIState.Fight:
+                    FightBehavior.Run();
+                    break;
+            }
         }
     }
 }

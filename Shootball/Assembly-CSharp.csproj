@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Extensions\BoundsExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\CameraExtensions.cs" />
      <Compile Include="Assets\Scripts\Extensions\EnumerableExtensions.cs" />
      <Compile Include="Assets\Scripts\Extensions\Random.cs" />
      <Compile Include="Assets\Scripts\Globals\Map.cs" />
@@ -78,6 +79,7 @@
      <Compile Include="Assets\Scripts\Model\MapModel.cs" />
      <Compile Include="Assets\Scripts\Model\MatchHandlerModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIActions.cs" />
+     <Compile Include="Assets\Scripts\Model\Player\AI\AIFightActions.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIMotionActions.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIPath.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIPlayerBehaviorFactory.cs" />

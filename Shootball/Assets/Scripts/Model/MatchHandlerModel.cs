@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 namespace Shootball.Model
 {
+
     public class MatchHandlerModel
     {
         private readonly GameObject _robotPrefab;
@@ -80,6 +81,8 @@ namespace Shootball.Model
             {
                 _players.Add(CreatePlayer(false, navGraph));
             }
+
+            _players.ForEach(p => p.SetPlayersList(_players));
             IsMatchEnded = false;
         }
 

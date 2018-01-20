@@ -28,7 +28,7 @@ namespace Shootball.Model.Robot
 
         protected Quaternion ShootRotation => Quaternion.AngleAxis(_aimDegree, Vector3.Cross(MoveAxis, RotationAxis));
 
-        protected Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
+        public Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
 
         public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
                 Color minimapInidicator)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Shootball.Model.Behavior;
 using Shootball.Model.Robot;
 using Shootball.Utility.Navigation;
@@ -10,7 +11,8 @@ namespace Shootball.Model.Player.AI
         private Vector3 _lastPointToReach;
         private float timeSpent;
 
-        public AIMotionActions(EnemyRobotModel robotModel, Graph<Vector3> navGraph) : base(robotModel, navGraph)
+        public AIMotionActions(EnemyRobotModel robotModel, Graph<Vector3> navGraph, IList<IPlayer> playersList)
+            : base(robotModel, navGraph, playersList)
         {
         }
 
@@ -41,7 +43,7 @@ namespace Shootball.Model.Player.AI
                 {
                     RobotModel.MoveTowards(pointToReach - position);
                 }
-                RobotModel.RotateTowards(pointToReach - position);
+                RobotModel.RotateTowardsSmooth(pointToReach - position);
             }
 
             return AIPath.IsCheckPointReached(position) ? BehaviorState.Complete : BehaviorState.Running;
