@@ -24,7 +24,7 @@ namespace Shootball.Model.Robot
 
         protected Vector3 MoveAxis => Components.RobotPosition.forward;
 
-        protected Vector3 RotationAxis => Components.RobotHead.transform.up;
+        public Vector3 RotationAxis => Components.RobotHead.transform.up;
 
         protected Quaternion ShootRotation => Quaternion.AngleAxis(_aimDegree, Vector3.Cross(MoveAxis, RotationAxis));
 

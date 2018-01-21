@@ -88,24 +88,5 @@ namespace Shootball.Model.Player.AI
             if (result == BehaviorState.Complete) { _slowDown = null; }
             return result;
         }
-        /*
-        public BehaviorState CheckVisibleEnemies()
-        {
-            return NearestEnemy == null ? BehaviorState.Failed : BehaviorState.Complete;
-        }
-
-        public BehaviorState EnemyCanSeeMe()
-        {
-            var enemy = NearestEnemy;
-            if (enemy == null)
-                return BehaviorState.Failed;
-
-            var camera = enemy.Components.HeadCamera.GetComponent<Camera>();
-            if (camera.CanSee(RobotModel.Components.RobotPosition.position))
-            {
-                return BehaviorState.Complete;
-            }
-            return BehaviorState.Failed;
-        }*/
     }
 }

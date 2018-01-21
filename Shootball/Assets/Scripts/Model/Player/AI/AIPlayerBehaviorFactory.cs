@@ -38,13 +38,11 @@ namespace Shootball.Model.Player.AI
             var builder = new BehaviorBuilder();
             builder
                 .Sequence()
-                    //.Do(actions.CheckVisibleEnemies)
-                    //.Choice()
-                    //    .Do(actions.EnemyCanSeeMe)
-                    //    .Do(actions.Pursue)
-                    //.End()
                     .Do(actions.AimEnemy)
-                    .Do(actions.Shoot)
+                    .Choice()
+                        .Do(actions.Shoot)
+                        .Do(actions.Flee)
+                    .End()
                     .Do(actions.WaitForRecharge)
                 .End();
 

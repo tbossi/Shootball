@@ -48,6 +48,14 @@ namespace Shootball.Model.Player.AI
             {
                 return BehaviorState.Failed;
             }
+            else if (RobotModel.Statistics.ShotsLeft <= RobotModel.Statistics.MaxShots / 6
+                || RobotModel.Statistics.LifeLeft <= RobotModel.Statistics.MaxLife / 8)
+            {
+                if (Extensions.Random.Coin(0.6f))
+                {
+                    return BehaviorState.Failed;
+                }
+            }
 
             var nearestEnemy = NearestEnemy;
             if (nearestEnemy == null)
@@ -56,6 +64,7 @@ namespace Shootball.Model.Player.AI
             }
             var position = RobotModel.Components.RobotPosition.position;
             var direction = nearestEnemy.Components.RobotPosition.position - position;
+            direction.Normalize();
 
             RobotModel.RotateTowardsApproximately(direction, 2);
             RobotModel.Shoot();
@@ -63,32 +72,33 @@ namespace Shootball.Model.Player.AI
             return Extensions.Random.Coin(0.90f) ? BehaviorState.Complete : BehaviorState.Running;
         }
 
-        /*
-        public BehaviorState Pursue()
+        public BehaviorState Flee()
         {
             var nearestEnemy = NearestEnemy;
             if (nearestEnemy == null)
             {
-                return BehaviorState.Failed;
-            }
-            var position = RobotModel.Components.RobotPosition.position;
-            var enemyPosition = nearestEnemy.Components.RobotPosition.position;
-            var distance = Vector3.Distance(position, enemyPosition);
-
-            if (distance < 15)
-            {
-                RobotModel.SlowDown();
                 return BehaviorState.Complete;
             }
-            else if (distance > 50)
+            var position = RobotModel.Components.RobotPosition.position;
+            var directionFromEnemy = position - nearestEnemy.Components.RobotPosition.position;
+            directionFromEnemy.Normalize();
+            if (Vector3.Dot(directionFromEnemy, nearestEnemy.ShootDirection) > 0.975f)
             {
-                return BehaviorState.Failed;
+                return BehaviorState.Complete;
             }
 
-            var direction = enemyPosition - position;
-            RobotModel.MoveTowards(direction);
-            RobotModel.RotateTowardsSmooth(direction);
+            if (Vector3.Dot(nearestEnemy.RotationAxis,
+                    Vector3.Cross(nearestEnemy.ShootDirection, directionFromEnemy)) > 0)
+            {
+                RobotModel.MoveTowards(RobotModel.Components.RobotPosition.right);
+            }
+            else
+            {
+                RobotModel.MoveTowards(-RobotModel.Components.RobotPosition.right);
+            }
+            RobotModel.RotateTowardsSmooth(-directionFromEnemy);
+
             return BehaviorState.Running;
-        }*/
+        }
     }
 }
