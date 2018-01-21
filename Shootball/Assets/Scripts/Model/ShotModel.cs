@@ -35,7 +35,7 @@ namespace Shootball.Model
             var maybeRobot = hitObject.GetComponent<GlobalScripts.Robot>()
                     ?? hitObject.GetComponentInParent<GlobalScripts.Robot>();
 
-            if (maybeRobot != null)
+            if (maybeRobot != null && maybeRobot.RobotModel.Statistics.IsAlive)
             {
                 var effectiveness = Vector3.Dot(_shot.transform.forward, -normal);
                 maybeRobot.RobotModel.GetDamaged(effectiveness);

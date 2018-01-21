@@ -30,12 +30,15 @@ namespace Shootball.Model.Robot
 
         public Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
 
+        public Color LaserColor { get; }
+
         public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
-                Color minimapInidicator)
+                Color minimapInidicator, Color laserColor)
         {
             Settings = settings;
             Components = components;
             Statistics = statistics;
+            LaserColor = laserColor;
             Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(), Components.RobotHead.GetComponent<Collider>());
 
             _distanceBodyHead = Components.RobotBody.transform.position - Components.RobotHead.transform.position;
@@ -92,7 +95,7 @@ namespace Shootball.Model.Robot
             Components.RobotBodyRigidBody.drag *= 5;
             Components.RobotBodyRigidBody.angularDrag *= 5;
             GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
-
+            Components.MinimapIndicator.SetActive(false);
             _deathCallbacks.ForEach(c => c.Invoke());
         }
 
@@ -122,22 +125,24 @@ namespace Shootball.Model.Robot
             }
         }
 
-        private Quaternion RotationFromDirection(Direction direction, Vector3 axis) {
+        private Quaternion RotationFromDirection(Direction direction, Vector3 axis)
+        {
             float angle = 0;
-            switch(direction) {
-				case Direction.Forward:
-					angle = 0;
+            switch (direction)
+            {
+                case Direction.Forward:
+                    angle = 0;
                     break;
-				case Direction.Backward:
-					angle = 180;
-					break;
-				case Direction.Right:
-					angle = 90;
-					break;
-				case Direction.Left:
-					angle = -90;
-					break;
-			}
+                case Direction.Backward:
+                    angle = 180;
+                    break;
+                case Direction.Right:
+                    angle = 90;
+                    break;
+                case Direction.Left:
+                    angle = -90;
+                    break;
+            }
             return Quaternion.AngleAxis(angle, axis);
         }
 

@@ -8,8 +8,8 @@ namespace Shootball.Model.Robot
     {
         private float _smoothAngle;
 
-        public EnemyRobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics)
-                : base(settings, components, statistics, Color.red)
+        public EnemyRobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
+                Color laserColor) : base(settings, components, statistics, Color.red, laserColor)
         {
             Components.TargetCamera.GetComponent<Camera>().enabled = false;
             Components.HeadCamera.GetComponent<Camera>().enabled = false;

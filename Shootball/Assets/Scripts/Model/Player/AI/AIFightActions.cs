@@ -51,7 +51,7 @@ namespace Shootball.Model.Player.AI
             else if (RobotModel.Statistics.ShotsLeft <= RobotModel.Statistics.MaxShots / 6
                 || RobotModel.Statistics.LifeLeft <= RobotModel.Statistics.MaxLife / 8)
             {
-                if (Extensions.Random.Coin(0.6f))
+                if (Extensions.Random.Coin(0.2f))
                 {
                     return BehaviorState.Failed;
                 }

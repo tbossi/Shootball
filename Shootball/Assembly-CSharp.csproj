@@ -104,7 +104,6 @@
      <Compile Include="Assets\Scripts\Model\UI\StatisticsHUDModel.cs" />
      <Compile Include="Assets\Scripts\Motion\Direction.cs" />
      <Compile Include="Assets\Scripts\Motion\Spin.cs" />
-     <Compile Include="Assets\Scripts\Motion\Transformer.cs" />
      <Compile Include="Assets\Scripts\Provider\Input.cs" />
      <Compile Include="Assets\Scripts\Provider\InputKey.cs" />
      <Compile Include="Assets\Scripts\Provider\InputMouse.cs" />

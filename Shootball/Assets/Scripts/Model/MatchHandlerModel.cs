@@ -72,7 +72,7 @@ namespace Shootball.Model
             }
             */            
 
-            var enemies = 1;
+            var enemies = 5;
             _players = new List<IPlayer>();
 
             _players.Add(CreatePlayer(true, navGraph));

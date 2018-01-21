@@ -5,6 +5,11 @@ namespace Shootball.GlobalScripts
 {
     public class Robot : MonoBehaviour
     {
+        private static Color[] _laserColors =
+            new[] {
+                Color.blue, Color.cyan, Color.green, Color.yellow, Color.red, Color.magenta
+            };
+        
         public GameObject RobotBody;
         public GameObject RobotHead;
         public GameObject LaserRaySpawn;
@@ -28,7 +33,7 @@ namespace Shootball.GlobalScripts
         public float MaxLife = 100;
         public int MaxShots = 60;
         public Vector2 MouseSensitivity = new Vector2(2, 2);
-        public Vector2 MouseSmoothing = new Vector2(3, 3); 
+        public Vector2 MouseSmoothing = new Vector2(3, 3);
 
         [HideInInspector]
         public RobotModel RobotModel;
@@ -42,9 +47,11 @@ namespace Shootball.GlobalScripts
                     LaserRaySpawn, ShotPrefab, DieEffectsPrefab, MinimapIndicator);
             var statistics = new RobotStatistics(MaxLife, MaxShots);
 
+            var color = Extensions.Random.FromCollection(_laserColors);
+
             RobotModel = IsPlayer
-                    ? new PlayerRobotModel(settings, components, statistics) as RobotModel
-                    : new EnemyRobotModel(settings, components, statistics);
+                    ? new PlayerRobotModel(settings, components, statistics, color) as RobotModel
+                    : new EnemyRobotModel(settings, components, statistics, color);
         }
 
         void Start()
