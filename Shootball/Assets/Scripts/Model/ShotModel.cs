@@ -24,21 +24,22 @@ namespace Shootball.Model
             if (Physics.Raycast(oldPosition, (newPosition - oldPosition).normalized, out hit,
                     Vector3.Distance(newPosition, oldPosition)))
             {
-                Hit(hit.transform.gameObject);
+                Hit(hit.transform.gameObject, hit.normal);
             }
 
             _shot.transform.position = newPosition;
         }
 
-        public void Hit(GameObject hitObject)
+        public void Hit(GameObject hitObject, Vector3 normal)
         {
             var maybeRobot = hitObject.GetComponent<GlobalScripts.Robot>()
                     ?? hitObject.GetComponentInParent<GlobalScripts.Robot>();
 
             if (maybeRobot != null)
             {
-                maybeRobot.RobotModel.GetDamaged();
-                _shooter.OnEnemyHit();
+                var effectiveness = Vector3.Dot(_shot.transform.forward, -normal);
+                maybeRobot.RobotModel.GetDamaged(effectiveness);
+                _shooter.OnEnemyHit(effectiveness);
             }
 
             GameObject.Destroy(_shot);

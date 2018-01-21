@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 namespace Shootball.Model
 {
-
     public class MatchHandlerModel
     {
         private readonly GameObject _robotPrefab;

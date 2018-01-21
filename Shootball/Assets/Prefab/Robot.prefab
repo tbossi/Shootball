@@ -542,7 +542,7 @@ MonoBehaviour:
   LaserRaySpeed: 195
   ShotRechargeTime: 0.9
   FireRate: 0.2
-  MaxLife: 100
+  MaxLife: 200
   MaxShots: 40
   MouseSensitivity: {x: 2, y: 2}
   MouseSmoothing: {x: 3, y: 3}

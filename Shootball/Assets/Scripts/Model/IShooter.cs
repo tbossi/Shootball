@@ -8,6 +8,6 @@ namespace Shootball.Model
         Collider Collider { get; }
         void Shoot();
         IEnumerator RechargeShot();
-        void OnEnemyHit();
+        void OnEnemyHit(float effectiveness);
     }
 }

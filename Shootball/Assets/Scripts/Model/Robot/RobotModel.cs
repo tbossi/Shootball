@@ -44,6 +44,8 @@ namespace Shootball.Model.Robot
             _shooter = new LaserShooter(this);
             _deathCallbacks = new List<Action>();
             Components.MinimapIndicator.GetComponent<Renderer>().material.SetColor("_Color", minimapInidicator);
+            Components.RobotBody.AddComponent<RobotCollision>().RobotModel = this;
+            Components.RobotHead.AddComponent<RobotCollision>().RobotModel = this;
         }
 
         public void UpdateRelativePositions()
@@ -68,16 +70,16 @@ namespace Shootball.Model.Robot
             }
         }
 
-        public void OnEnemyHit()
+        public void OnEnemyHit(float effectiveness)
         {
-            Statistics.IncreasePoints();
+            Statistics.IncreasePoints(effectiveness);
         }
 
-        public void GetDamaged()
+        public void GetDamaged(float effectiveness)
         {
             if (Statistics.IsAlive)
             {
-                var isAlive = Statistics.GetDamaged();
+                var isAlive = Statistics.GetDamaged(effectiveness);
                 if (!isAlive)
                 {
                     Die();
@@ -108,7 +110,7 @@ namespace Shootball.Model.Robot
         {
             if (Statistics.IsAlive)
             {
-                var directionVector = Transformer.DirectionRotation(direction, RotationAxis) * MoveAxis;
+                var directionVector = RotationFromDirection(direction, RotationAxis) * MoveAxis;
                 var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
                 if (oldDirection <= Settings.MaxSpeed * Time.deltaTime)
                 {
@@ -118,6 +120,25 @@ namespace Shootball.Model.Robot
                     Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
                 }
             }
+        }
+
+        private Quaternion RotationFromDirection(Direction direction, Vector3 axis) {
+            float angle = 0;
+            switch(direction) {
+				case Direction.Forward:
+					angle = 0;
+                    break;
+				case Direction.Backward:
+					angle = 180;
+					break;
+				case Direction.Right:
+					angle = 90;
+					break;
+				case Direction.Left:
+					angle = -90;
+					break;
+			}
+            return Quaternion.AngleAxis(angle, axis);
         }
 
         public void TurnMouse(float rawX)
@@ -174,6 +195,21 @@ namespace Shootball.Model.Robot
                     _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
                         ShootRotation, ShootDirection, Settings.LaserRaySpeed);
                 }
+            }
+        }
+
+        [RequireComponent(typeof(Collider))]
+        private class RobotCollision : MonoBehaviour
+        {
+            [HideInInspector]
+            public RobotModel RobotModel;
+
+            private const float threshold = 80f;
+            void OnCollisionEnter(Collision collisionInfo)
+            {
+                var rawMagnitude = collisionInfo.impulse.magnitude;
+                var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 1 / 2;
+                RobotModel.GetDamaged(impactEffectiveness);
             }
         }
     }

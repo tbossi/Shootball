@@ -14,7 +14,7 @@ namespace Shootball.GlobalScripts
 
         void OnCollisionEnter(Collision collisionInfo)
         {
-            ShotModel.Hit(collisionInfo.gameObject);
+            ShotModel.Hit(collisionInfo.gameObject, collisionInfo.contacts[0].normal);
         }
     }
 }

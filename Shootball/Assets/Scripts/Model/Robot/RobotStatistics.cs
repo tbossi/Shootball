@@ -19,19 +19,23 @@ namespace Shootball.Model.Robot
             Points = 0;
         }
 
-        public bool GetDamaged()
+        public bool GetDamaged(float effectiveness)
         {
             if (IsAlive)
             {
-                LifeLeft = LifeLeft - 10;
+                if (effectiveness < 0) effectiveness = 0;
+                else if (effectiveness > 1) effectiveness = 1;
+                LifeLeft = LifeLeft - 10 * effectiveness;
             }
-            
+
             return IsAlive;
         }
 
-        public void IncreasePoints()
+        public void IncreasePoints(float effectiveness)
         {
-            Points += 50;
+            if (effectiveness < 0) effectiveness = 0;
+            else if (effectiveness > 1) effectiveness = 1;
+            Points += (int)(50 * effectiveness);
         }
 
         public bool Shoot()
