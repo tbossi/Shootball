@@ -5,6 +5,9 @@ namespace Shootball.GlobalScripts
 {
     public class Shot : MonoBehaviour
     {
+        public GameObject BurnPrefab;
+
+        [HideInInspector]
         public ShotModel ShotModel;
 
         void Update()
@@ -14,7 +17,8 @@ namespace Shootball.GlobalScripts
 
         void OnCollisionEnter(Collision collisionInfo)
         {
-            ShotModel.Hit(collisionInfo.gameObject, collisionInfo.contacts[0].normal);
+            ShotModel.Hit(collisionInfo.gameObject, collisionInfo.contacts[0].point,
+                collisionInfo.contacts[0].normal);
         }
     }
 }

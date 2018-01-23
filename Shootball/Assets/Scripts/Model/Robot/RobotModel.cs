@@ -44,7 +44,7 @@ namespace Shootball.Model.Robot
             _distanceBodyHead = Components.RobotBody.transform.position - Components.RobotHead.transform.position;
             _aimDegree = Settings.StartingAimDegree;
             _nextFire = 0;
-            _shooter = new LaserShooter(this);
+            _shooter = new LaserShooter(this, Components.ShotPrefab);
             _deathCallbacks = new List<Action>();
             Components.MinimapIndicator.GetComponent<Renderer>().material.SetColor("_Color", minimapInidicator);
             Components.RobotBody.AddComponent<RobotCollision>().RobotModel = this;
@@ -197,8 +197,8 @@ namespace Shootball.Model.Robot
                 if (Time.time > _nextFire && Statistics.Shoot())
                 {
                     _nextFire = Time.time + Settings.FireRate;
-                    _shooter.Shoot(Components.ShotPrefab, Components.LaserRaySpawn.transform.position,
-                        ShootRotation, ShootDirection, Settings.LaserRaySpeed);
+                    _shooter.Shoot(Components.LaserRaySpawn.transform.position, ShootRotation, ShootDirection,
+                        Settings.LaserRaySpeed);
                 }
             }
         }

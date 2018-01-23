@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11359c4b9e8874a89a694fe188103c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BurnPrefab: {fileID: 1225656679215802, guid: 60e5b847e7dfe46a599e7310919d4e91, type: 2}
 --- !u!136 &136846515634295538
 CapsuleCollider:
   m_ObjectHideFlags: 1
