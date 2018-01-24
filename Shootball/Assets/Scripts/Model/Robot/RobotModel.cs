@@ -95,6 +95,7 @@ namespace Shootball.Model.Robot
             Components.RobotBodyRigidBody.drag *= 5;
             Components.RobotBodyRigidBody.angularDrag *= 5;
             GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
+            Components.RobotBody.GetComponents<AudioSource>()[2].Play();
             Components.MinimapIndicator.SetActive(false);
             _deathCallbacks.ForEach(c => c.Invoke());
         }
@@ -199,6 +200,7 @@ namespace Shootball.Model.Robot
                     _nextFire = Time.time + Settings.FireRate;
                     _shooter.Shoot(Components.LaserRaySpawn.transform.position, ShootRotation, ShootDirection,
                         Settings.LaserRaySpeed);
+                    Components.RobotHead.GetComponent<AudioSource>().Play();
                 }
             }
         }
@@ -209,11 +211,23 @@ namespace Shootball.Model.Robot
             [HideInInspector]
             public RobotModel RobotModel;
 
-            private const float threshold = 80f;
+            private const float threshold = 75f;
             void OnCollisionEnter(Collision collisionInfo)
             {
                 var rawMagnitude = collisionInfo.impulse.magnitude;
                 var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 1 / 2;
+                var other = collisionInfo.gameObject;
+
+                var robot = other.GetComponent<GlobalScripts.Robot>()
+                        ?? other.GetComponentInParent<GlobalScripts.Robot>();
+
+                var audioSource = robot == null
+                        ? RobotModel.Components.RobotBody.GetComponents<AudioSource>()[0]
+                        : RobotModel.Components.RobotBody.GetComponents<AudioSource>()[1];
+
+                audioSource.volume = impactEffectiveness * 0.55f + 0.45f;
+                audioSource.Play();
+
                 RobotModel.GetDamaged(impactEffectiveness);
             }
         }
