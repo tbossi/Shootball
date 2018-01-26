@@ -87,6 +87,10 @@ namespace Shootball.Model.Robot
                 {
                     Die();
                 }
+                else
+                {
+                    Components.RobotBody.GetComponents<AudioSource>()[3].Play();
+                }
             }
         }
 
@@ -216,6 +220,7 @@ namespace Shootball.Model.Robot
             {
                 var rawMagnitude = collisionInfo.impulse.magnitude;
                 var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 1 / 2;
+
                 var other = collisionInfo.gameObject;
 
                 var robot = other.GetComponent<GlobalScripts.Robot>()
@@ -228,7 +233,10 @@ namespace Shootball.Model.Robot
                 audioSource.volume = impactEffectiveness * 0.55f + 0.45f;
                 audioSource.Play();
 
-                RobotModel.GetDamaged(impactEffectiveness);
+                if (impactEffectiveness > 0.01)
+                {
+                    RobotModel.GetDamaged(impactEffectiveness);
+                }
             }
         }
     }
