@@ -29,7 +29,7 @@ namespace Shootball.Model.Scene
                 MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_PAUSE);
             }
 
-            if (!MenuHandlerModel.IsMenuActive && !_matchHandlerModel.IsMatchEnded)
+            if (!MenuHandlerModel.IsMenuActive && !_matchHandlerModel.MatchStatusModel.IsMatchEnded)
             {
                 _matchHandlerModel.OnUpdate();
             }

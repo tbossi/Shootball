@@ -7,14 +7,14 @@ namespace Shootball.Model.Player
     public interface IPlayer
     {
         void OnUpdate();
-        void SetPlayersList(IList<IPlayer> playersList);
+        void SetMatchStatus(MatchStatusModel matchStatusModel);
     }
 
     public abstract class PlayerModel<T> : IPlayer where T : RobotModel
     {
         public readonly string Name;
         public readonly T Robot;
-        protected IList<IPlayer> PlayersList { get; private set; }
+        protected MatchStatusModel MatchStatusModel { get; private set; }
 
         public PlayerModel(string name, T robot)
         {
@@ -25,9 +25,9 @@ namespace Shootball.Model.Player
             Robot = robot;
         }
 
-        public void SetPlayersList(IList<IPlayer> playersList)
+        public void SetMatchStatus(MatchStatusModel matchStatusModel)
         {
-            PlayersList = playersList;
+            MatchStatusModel = matchStatusModel;
         }
 
         public abstract void OnUpdate();

@@ -78,6 +78,7 @@
      <Compile Include="Assets\Scripts\Model\IShooter.cs" />
      <Compile Include="Assets\Scripts\Model\MapModel.cs" />
      <Compile Include="Assets\Scripts\Model\MatchHandlerModel.cs" />
+     <Compile Include="Assets\Scripts\Model\MatchStatusModel.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIActions.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIFightActions.cs" />
      <Compile Include="Assets\Scripts\Model\Player\AI\AIMotionActions.cs" />

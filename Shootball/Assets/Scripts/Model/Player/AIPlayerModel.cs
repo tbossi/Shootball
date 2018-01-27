@@ -17,11 +17,11 @@ namespace Shootball.Model.Player
         private AIPlayerBehaviorFactory _factory;
 
         private AIPlayerBehaviorFactory BehaviorFactory =>
-                _factory ?? (_factory = new AIPlayerBehaviorFactory(Robot, _navGraph, PlayersList));
+            _factory ?? (_factory = new AIPlayerBehaviorFactory(Robot, _navGraph, MatchStatusModel.Players));
         private AIBehavior PatrolBehavior =>
-                _patrolBehavior ?? (_patrolBehavior = BehaviorFactory.CreatePatrolBehavior());
+            _patrolBehavior ?? (_patrolBehavior = BehaviorFactory.CreatePatrolBehavior());
         private AIBehavior FightBehavior =>
-                _fightBehavior ?? (_fightBehavior = BehaviorFactory.CreateFightBehavior());
+            _fightBehavior ?? (_fightBehavior = BehaviorFactory.CreateFightBehavior());
 
         public AIPlayerModel(string name, EnemyRobotModel robot, Graph<Vector3> navGraph) : base(name, robot)
         {

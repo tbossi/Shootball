@@ -18,13 +18,12 @@ namespace Shootball.Model
         private readonly Camera _minimapCamera;
         private readonly CanvasRenderer _minimapPrefab;
         private readonly Image _cursor;
-        private List<IPlayer> _players;
         private GameObject _mapGameObject;
         private GameObject _playersGameObject;
         private GameObject _HUDCanvas;
         private int _totalEnemies;
 
-        public bool IsMatchEnded { get; private set; }
+        public MatchStatusModel MatchStatusModel { get; private set; }
 
         public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab,
                 Camera minimapCamera, CanvasRenderer minimapPrefab, Image cursor)
@@ -43,26 +42,23 @@ namespace Shootball.Model
             _playersGameObject = new GameObject("Players");
             _HUDCanvas = new GameObject("HUD");
             _HUDCanvas.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            _totalEnemies = 5;
 
-            BeginMatch();
+            MatchStatusModel = BeginMatch(_totalEnemies);
         }
 
         public void OnUpdate()
         {
-            if (!IsMatchEnded)
+            if (!MatchStatusModel.IsMatchEnded)
             {
-                if (_players != null)
-                {
-                    _players.ForEach(player => player.OnUpdate());
-                }
+                MatchStatusModel.Players.ForEach(player => player.OnUpdate());
             }
         }
 
-        private void BeginMatch()
+        private MatchStatusModel BeginMatch(int totalEnemies)
         {
             var navGraph = _map.Instantiate(_mapGameObject);
-            _totalEnemies = 5;
-
+            
             /*
             //Debug: shows navGraph
             foreach (var node in navGraph.GetNodes())
@@ -75,14 +71,14 @@ namespace Shootball.Model
             }
             */
 
-            _players = new List<IPlayer>();
-            _players.Add(CreatePlayer(true, "LocalPlayer", navGraph));
-            for (int i = 0; i < _totalEnemies; i++)
+            var players = new List<IPlayer>();
+            players.Add(CreatePlayer(true, "LocalPlayer", navGraph));
+            for (int i = 0; i < totalEnemies; i++)
             {
-                _players.Add(CreatePlayer(false, $"E{i}-BX", navGraph));
+                players.Add(CreatePlayer(false, $"E{i}-BX", navGraph));
             }
-            _players.ForEach(p => p.SetPlayersList(_players));
-            IsMatchEnded = false;
+
+            return new MatchStatusModel(players);
         }
 
         private IPlayer CreatePlayer(bool isPlayer, string name, Graph<Vector3> navGraph)
@@ -91,7 +87,6 @@ namespace Shootball.Model
             var robotModel = robot.GetComponent<GlobalScripts.Robot>().RobotModel;
 
             IPlayer player;
-            Action onDeathAction;
             if (isPlayer)
             {
                 var hud = GameObject.Instantiate(_playerStatisticsPrefab, _HUDCanvas.transform);
@@ -100,18 +95,11 @@ namespace Shootball.Model
                 var statisticsHUD = hud.GetComponent<StatisticsHUD>().StatisticsHUDModel;
                 var minimapCamera = GameObject.Instantiate(_minimapCamera, _playersGameObject.transform);
                 player = new LocalPlayerModel(name, (PlayerRobotModel)robotModel, statisticsHUD, minimapCamera);
-                onDeathAction = () => { IsMatchEnded = true; };
             }
             else
             {
                 player = new AIPlayerModel(name, (EnemyRobotModel)robotModel, navGraph);
-                onDeathAction = () =>
-                {
-                    _totalEnemies--;
-                    if (_totalEnemies <= 0) { IsMatchEnded = true; }
-                };
             }
-            robotModel.SetOnDeathListener(onDeathAction);            
             return player;
         }
 
