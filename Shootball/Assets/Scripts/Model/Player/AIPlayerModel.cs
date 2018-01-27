@@ -23,7 +23,7 @@ namespace Shootball.Model.Player
         private AIBehavior FightBehavior =>
                 _fightBehavior ?? (_fightBehavior = BehaviorFactory.CreateFightBehavior());
 
-        public AIPlayerModel(EnemyRobotModel robot, Graph<Vector3> navGraph) : base(robot)
+        public AIPlayerModel(string name, EnemyRobotModel robot, Graph<Vector3> navGraph) : base(name, robot)
         {
             _navGraph = navGraph;
             _currentState = AIState.Patrol;

@@ -12,14 +12,16 @@ namespace Shootball.Model.Player
 
     public abstract class PlayerModel<T> : IPlayer where T : RobotModel
     {
+        public readonly string Name;
         public readonly T Robot;
         protected IList<IPlayer> PlayersList { get; private set; }
 
-        public PlayerModel(T robot)
+        public PlayerModel(string name, T robot)
         {
             if (robot == null)
                 throw new ArgumentNullException();
 
+            Name = name;
             Robot = robot;
         }
 

@@ -18,7 +18,7 @@ namespace Shootball.Model.UI
         public override void InitializeButtons(MenuHandlerModel menuHandlerModel)
         {
             _resumeButton.onClick.AddListener(() => OnResumeMatch(menuHandlerModel));
-            _endMatchButton.onClick.AddListener(OnEndMatch);
+            _endMatchButton.onClick.AddListener(OnExitMatch);
         }
 
         private void OnResumeMatch(MenuHandlerModel menuHandlerModel)
@@ -26,7 +26,7 @@ namespace Shootball.Model.UI
             menuHandlerModel.CloseMenu();
         }
 
-        private void OnEndMatch()
+        private void OnExitMatch()
         {
             SceneManager.LoadScene(SceneHandler.GAME_START_SCENE);
         }

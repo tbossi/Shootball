@@ -11,8 +11,8 @@ namespace Shootball.Model.Player
         private readonly StatisticsHUDModel _statisticsHUD;
         private readonly Camera _minimapCamera;
 
-        public LocalPlayerModel(PlayerRobotModel robot, StatisticsHUDModel statisticsHUD, Camera minimapCamera)
-                : base(robot)
+        public LocalPlayerModel(string name, PlayerRobotModel robot, StatisticsHUDModel statisticsHUD,
+            Camera minimapCamera) : base(name, robot)
         {
             _statisticsHUD = statisticsHUD;
             _minimapCamera = minimapCamera;
