@@ -9,17 +9,15 @@ namespace Shootball.Model.UI
     {
         public enum MenuType
         {
-            GAME_START, MATCH_PAUSE
+            GAME_START, MATCH_PAUSE, MATCH_END
         }
 
         private readonly Dictionary<MenuType, Canvas> _menus;
-
-        private GameObject ActiveMenu { get; set; }
-        public bool IsMenuActive => ActiveMenu != null;
-
         private List<Action> _onOpenCallbacks;
         private List<Action> _onCloseCallbacks;
 
+        private GameObject ActiveMenu { get; set; }
+        public bool IsMenuActive => ActiveMenu != null;
 
         public MenuHandlerModel(Dictionary<MenuType, Canvas> menus)
         {
@@ -38,7 +36,7 @@ namespace Shootball.Model.UI
             _onCloseCallbacks.Add(action);
         }
 
-        public void OpenMenu(MenuType type)
+        public void OpenMenu(MenuType type, object additionalData = null)
         {
             if (IsMenuActive) { CloseMenu(); }
 
@@ -46,7 +44,7 @@ namespace Shootball.Model.UI
             ActiveMenu = new GameObject("Menu");
             var menuCanvas = GameObject.Instantiate(_menus[type], ActiveMenu.transform);
             var menuModel = menuCanvas.GetComponent<Menu>().GetMenuModel();
-            menuModel.InitializeButtons(this);
+            menuModel.Initialize(this, additionalData);
         }
 
         public void CloseMenu()

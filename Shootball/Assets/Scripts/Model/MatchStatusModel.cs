@@ -14,6 +14,9 @@ namespace Shootball.Model
         private IEnumerable<AIPlayerModel> EnemyPlayers =>
             Players.Where(p => p.GetType() == typeof(AIPlayerModel)).Select(p => (AIPlayerModel)p);
 
+        public bool LocalPlayerWon =>
+            LocalPlayer.Robot.Statistics.IsAlive && EnemyPlayers.All(p => !p.Robot.Statistics.IsAlive);
+
         public bool IsMatchEnded =>
             !LocalPlayer.Robot.Statistics.IsAlive || EnemyPlayers.All(p => !p.Robot.Statistics.IsAlive);
 

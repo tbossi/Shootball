@@ -85,6 +85,8 @@ MonoBehaviour:
     type: 2}
   MatchPauseCanvasPrefab: {fileID: 223687078592843086, guid: 2a4eb5386c3c04789b3a6be263430ab9,
     type: 2}
+  MatchEndCanvasPrefab: {fileID: 223110173503030650, guid: 278253d177e2c4b93ade140456d02fc9,
+    type: 2}
 --- !u!114 &114504336674236610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,4 +101,4 @@ MonoBehaviour:
   EventSystemPrefab: {fileID: 1923443810745648, guid: 8e4450092c6f14a239e0c3dac1aff797,
     type: 2}
   MenuHandlerObject: {fileID: 1717304895693390}
-  GamePlayHandlerObject: {fileID: 0}
+  MatchHandlerObject: {fileID: 0}

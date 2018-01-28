@@ -15,7 +15,7 @@ namespace Shootball.Model.UI
             _exitButton = exitButton;
         }
 
-        public override void InitializeButtons(MenuHandlerModel menuHandlerModel)
+        public override void Initialize(MenuHandlerModel menuHandlerModel, object additionalInfo = null)
         {
             _playButton.onClick.AddListener(OnPlayButton);
             _exitButton.onClick.AddListener(OnExitButton);

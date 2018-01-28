@@ -29,9 +29,17 @@ namespace Shootball.Model.Scene
                 MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_PAUSE);
             }
 
-            if (!MenuHandlerModel.IsMenuActive && !_matchHandlerModel.MatchStatusModel.IsMatchEnded)
+            if (!MenuHandlerModel.IsMenuActive)
             {
-                _matchHandlerModel.OnUpdate();
+                if (_matchHandlerModel.MatchStatusModel.IsMatchEnded)
+                {
+                    MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_END,
+                        _matchHandlerModel.MatchStatusModel);
+                }
+                else
+                {
+                    _matchHandlerModel.OnUpdate();
+                }
             }
         }
 
@@ -43,7 +51,7 @@ namespace Shootball.Model.Scene
         private void ShowCursor()
         {
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true; 
+            Cursor.visible = true;
         }
     }
 }
