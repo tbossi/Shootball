@@ -48,10 +48,10 @@ namespace Shootball.Model.Player.AI
             {
                 return BehaviorState.Failed;
             }
-            else if (RobotModel.Statistics.ShotsLeft <= RobotModel.Statistics.MaxShots / 6
-                || RobotModel.Statistics.LifeLeft <= RobotModel.Statistics.MaxLife / 8)
+            else if (RobotModel.Statistics.ShotsLeft <= RobotModel.Statistics.MaxShots / 7
+                || RobotModel.Statistics.LifeLeft <= RobotModel.Statistics.MaxLife / 9)
             {
-                if (Extensions.Random.Coin(0.2f))
+                if (Extensions.Random.Coin(0.16f))
                 {
                     return BehaviorState.Failed;
                 }

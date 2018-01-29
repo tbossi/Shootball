@@ -1,5 +1,6 @@
 ﻿using Shootball.Model;
 using Shootball.Utility;
+using Shootball.Utility.Map;
 using UnityEngine;
 
 namespace Shootball.GlobalScripts
@@ -25,9 +26,9 @@ namespace Shootball.GlobalScripts
         void OnEnable()
         {
             var mapBuilder = new MapBuilder(HousePrefabs, Weights, SpawnPointPrefab, SpawnPointWidth, GroundPrefab,
-                    MapLightPrefab, BorderPrefabs);
+                    MapLightPrefab, BorderPrefabs, FillingRate, SpawnPoints);
             var halfDimensions = new Vector2(Width / 2, Length / 2);
-            MapModel = mapBuilder.Generate(-halfDimensions, halfDimensions, BaseHeight, FillingRate, SpawnPoints);
+            MapModel = mapBuilder.Generate(-halfDimensions, halfDimensions, BaseHeight);
         }
     }
 }

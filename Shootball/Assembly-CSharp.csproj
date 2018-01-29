@@ -115,7 +115,14 @@
      <Compile Include="Assets\Scripts\Provider\KeyPression.cs" />
      <Compile Include="Assets\Scripts\Utility\GameObjectBuilder.cs" />
      <Compile Include="Assets\Scripts\Utility\LaserShooter.cs" />
-     <Compile Include="Assets\Scripts\Utility\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\BordersFiller.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\GroundFiller.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\HouseFiller.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\LightFiller.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\MapBuilder.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\MapFiller.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\MapToFill.cs" />
+     <Compile Include="Assets\Scripts\Utility\Map\SpawnPointFiller.cs" />
      <Compile Include="Assets\Scripts\Utility\Navigation\AStarHeuristic.cs" />
      <Compile Include="Assets\Scripts\Utility\Navigation\AStarPathFinder.cs" />
      <Compile Include="Assets\Scripts\Utility\Navigation\Graph.cs" />
