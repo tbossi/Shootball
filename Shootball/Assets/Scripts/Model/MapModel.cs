@@ -118,6 +118,7 @@ namespace Shootball.Model
             yield return null;
             graph.RemoveIsolatedSubGraphs(300);
 
+            //graph.DebugDraw(Color.cyan, 300);
             yield return null;
             callback.Invoke(graph);
         }

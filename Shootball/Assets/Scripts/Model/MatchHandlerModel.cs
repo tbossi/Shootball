@@ -67,16 +67,6 @@ namespace Shootball.Model
 
             _matchHandler.StartCoroutine(_map.GenerateNavPoints(navGraph =>
             {
-                //Debug: shows navGraph
-                foreach (var node in navGraph.GetNodes())
-                {
-                    var neighbors = navGraph.GetNeighbors(node);
-                    foreach (var neighbor in neighbors)
-                    {
-                        Debug.DrawLine(node, neighbor.Key, Color.cyan, 300);
-                    }
-                }
-
                 var players = new List<IPlayer>();
                 players.Add(CreatePlayer(true, "LocalPlayer", navGraph));
                 for (int i = 0; i < totalEnemies; i++)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Shootball.Utility.Navigation
 {
@@ -25,6 +26,18 @@ namespace Shootball.Utility.Navigation
                 }
             }
             return result;
+        }
+
+        public static void DebugDraw(this Graph<Vector3> graph, Color color, float duration)
+        {
+            foreach (var node in graph.GetNodes())
+            {
+                var neighbors = graph.GetNeighbors(node);
+                foreach (var neighbor in neighbors)
+                {
+                    Debug.DrawLine(node, neighbor.Key, color, duration);
+                }
+            }
         }
     }
 }
