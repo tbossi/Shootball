@@ -40,6 +40,7 @@ namespace Shootball.Model.Player.AI
                 .Sequence()
                     .Do(actions.AimEnemy)
                     .Choice()
+                        .Do(actions.Follow)                    
                         .Do(actions.Shoot)
                         .Do(actions.Flee)
                     .End()

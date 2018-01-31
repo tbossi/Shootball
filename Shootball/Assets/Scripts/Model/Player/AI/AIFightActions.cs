@@ -100,5 +100,24 @@ namespace Shootball.Model.Player.AI
 
             return BehaviorState.Running;
         }
+
+        public BehaviorState Follow()
+        {
+            var nearestEnemy = NearestEnemy;
+            if (nearestEnemy == null)
+            {
+                return BehaviorState.Failed;
+            }
+            var position = RobotModel.Components.RobotPosition.position;
+            if (Vector3.Distance(position, nearestEnemy.Components.RobotPosition.position) < 10)
+            {
+                return BehaviorState.Complete;
+            }
+            var direction = nearestEnemy.Components.RobotPosition.position - position;
+            RobotModel.MoveTowards(direction);
+            RobotModel.RotateTowardsSmooth(direction);
+
+            return Extensions.Random.Coin(0.6f) ? BehaviorState.Complete : BehaviorState.Running;
+        }
     }
 }
