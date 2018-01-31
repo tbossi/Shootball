@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Shootball</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      	var gameInstance = UnityLoader.instantiate("gameContainer", "Build/buildWeb.json", {onProgress: UnityProgress});
+    </script>
+    <style type="text/css">
+    .webgl-content {
+    	max-width: 960px;
+		margin: 0 auto;
+		position: static;
+		-webkit-transform: unset;
+		transform: unset;
+    }
+    .help {
+    	margin-top: 10px;
+    	font-family: Arial;
+    	margin-bottom: 20px;
+    }
+
+    .help h1 {
+    	text-align: center;
+    }
+
+    .help li {
+    	line-height: 1.8em;
+    }
+
+    .key {
+    	border-radius: 3px;
+    	border: 1px solid grey;
+    	color: grey;
+    	background-color: lightgrey;
+    	padding: 2px;
+    	box-sizing: border-box;
+    	margin-right: 7px;
+    	font-family: "Courier New";
+    	font-weight: bold;
+    }
+	</style>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px; border: 1px solid lightgrey;"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Shootball</div>
+      </div>
+      <div class="help">
+      	<h1>Keys:</h1>
+      	<ul>
+      		<li><span class="key">W</span>Move forward</li>
+      		<li><span class="key">A</span>Move left</li>
+      		<li><span class="key">S</span>Move backward</li>
+      		<li><span class="key">D</span>Move right</li>
+      		<li><span class="key">Space</span>Use sight</li>
+      		<li><span class="key">Mouse move up/down</span>Aim</li>
+      		<li><span class="key">Mouse move left/right</span>Rotate</li>
+      		<li><span class="key">Mouse click</span>Shoot</li>
+      		<li><span class="key">P</span>Pause</li>
+      	</ul>
+      </div>
+    </div>
+  </body>
+</html>
