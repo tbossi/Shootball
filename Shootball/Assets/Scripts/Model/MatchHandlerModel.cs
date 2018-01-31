@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Shootball.GlobalScripts;
 using Shootball.GlobalScripts.UI;
 using Shootball.Model.Player;
 using Shootball.Model.Robot;
@@ -12,6 +13,7 @@ namespace Shootball.Model
 {
     public class MatchHandlerModel
     {
+        private readonly MatchHandler _matchHandler;
         private readonly GameObject _robotPrefab;
         private readonly MapModel _map;
         private readonly Canvas _playerStatisticsPrefab;
@@ -25,9 +27,10 @@ namespace Shootball.Model
 
         public MatchStatusModel MatchStatusModel { get; private set; }
 
-        public MatchHandlerModel(GameObject robotPrefab, MapModel map, Canvas playerStatisticsPrefab,
-                Camera minimapCamera, CanvasRenderer minimapPrefab, Image cursor)
+        public MatchHandlerModel(MatchHandler matchHandler, GameObject robotPrefab, MapModel map,
+            Canvas playerStatisticsPrefab, Camera minimapCamera, CanvasRenderer minimapPrefab, Image cursor)
         {
+            _matchHandler = matchHandler;
             _robotPrefab = robotPrefab;
             _map = map;
             _playerStatisticsPrefab = playerStatisticsPrefab;
@@ -44,41 +47,45 @@ namespace Shootball.Model
             _HUDCanvas.AddComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
             _totalEnemies = 5;
 
-            MatchStatusModel = BeginMatch(_totalEnemies);
+            BeginMatch(_totalEnemies);
         }
 
         public void OnUpdate()
         {
-            if (!MatchStatusModel.IsMatchEnded)
+            if (MatchStatusModel != null)
             {
-                MatchStatusModel.Players.ForEach(player => player.OnUpdate());
+                if (!MatchStatusModel.IsMatchEnded)
+                {
+                    MatchStatusModel.Players.ForEach(player => player.OnUpdate());
+                }
             }
         }
 
-        private MatchStatusModel BeginMatch(int totalEnemies)
+        private void BeginMatch(int totalEnemies)
         {
-            var navGraph = _map.Instantiate(_mapGameObject);
-            
-            /*
-            //Debug: shows navGraph
-            foreach (var node in navGraph.GetNodes())
+            _map.InstantiateObjects(_mapGameObject);
+
+            _matchHandler.StartCoroutine(_map.GenerateNavPoints(navGraph =>
             {
-                var neighbors = navGraph.GetNeighbors(node);
-                foreach (var neighbor in neighbors)
+                //Debug: shows navGraph
+                foreach (var node in navGraph.GetNodes())
                 {
-                    Debug.DrawLine(node, neighbor.Key, Color.cyan, 300);
+                    var neighbors = navGraph.GetNeighbors(node);
+                    foreach (var neighbor in neighbors)
+                    {
+                        Debug.DrawLine(node, neighbor.Key, Color.cyan, 300);
+                    }
                 }
-            }
-            */
 
-            var players = new List<IPlayer>();
-            players.Add(CreatePlayer(true, "LocalPlayer", navGraph));
-            for (int i = 0; i < totalEnemies; i++)
-            {
-                players.Add(CreatePlayer(false, $"E{i}-BX", navGraph));
-            }
+                var players = new List<IPlayer>();
+                players.Add(CreatePlayer(true, "LocalPlayer", navGraph));
+                for (int i = 0; i < totalEnemies; i++)
+                {
+                    players.Add(CreatePlayer(false, $"E{i}-BX", navGraph));
+                }
 
-            return new MatchStatusModel(players);
+                MatchStatusModel = new MatchStatusModel(players);
+            }));
         }
 
         private IPlayer CreatePlayer(bool isPlayer, string name, Graph<Vector3> navGraph)

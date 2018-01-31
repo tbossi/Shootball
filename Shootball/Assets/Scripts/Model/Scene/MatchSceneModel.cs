@@ -31,7 +31,8 @@ namespace Shootball.Model.Scene
 
             if (!MenuHandlerModel.IsMenuActive)
             {
-                if (_matchHandlerModel.MatchStatusModel.IsMatchEnded)
+                if (_matchHandlerModel.MatchStatusModel != null
+                    && _matchHandlerModel.MatchStatusModel.IsMatchEnded)
                 {
                     MenuHandlerModel.OpenMenu(MenuHandlerModel.MenuType.MATCH_END,
                         _matchHandlerModel.MatchStatusModel);

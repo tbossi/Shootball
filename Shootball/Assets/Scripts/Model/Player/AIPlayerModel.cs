@@ -32,6 +32,8 @@ namespace Shootball.Model.Player
         private int _enemyLostCountdown = 20;
         public override void OnUpdate()
         {
+            if (!Robot.Statistics.IsAlive) { return; }
+            
             if (Robot.SeeEnemy())
             {
                 _currentState = AIState.Fight;

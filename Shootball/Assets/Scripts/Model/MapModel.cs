@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Shootball.Extensions;
@@ -17,10 +18,12 @@ namespace Shootball.Model
         private readonly GameObjectBuilder _ground;
         private readonly GameObjectBuilder _light;
         private int _spawnPointCounter;
+        private bool _isInstantiated;
+        private GameObject _parentInstantiated;
 
         public MapModel(ICollection<GameObjectBuilder> spawnPoints, IEnumerable<GameObjectBuilder> houses,
-                IEnumerable<GameObjectBuilder> borders, Bounds mapBorders, GameObjectBuilder ground,
-                GameObjectBuilder light)
+            IEnumerable<GameObjectBuilder> borders, Bounds mapBorders, GameObjectBuilder ground,
+            GameObjectBuilder light)
         {
             _spawnPoints = spawnPoints.ToList();
             _houses = houses;
@@ -29,9 +32,10 @@ namespace Shootball.Model
             _ground = ground;
             _light = light;
             _spawnPointCounter = 0;
+            _isInstantiated = false;
         }
 
-        public Graph<Vector3> Instantiate(GameObject parent)
+        public void InstantiateObjects(GameObject parent)
         {
             var collider = parent.AddComponent<BoxCollider>();
             collider.size = _mapBorders.size;
@@ -41,32 +45,48 @@ namespace Shootball.Model
             var collisionScript = parent.AddComponent<MapBoundsCollision>();
             collisionScript.MapModel = this;
 
-            var ground = _ground.Instantiate(parent.transform);
+            _ground.Instantiate(parent.transform);
             _borders.ForEach(b => b.Instantiate(parent.transform));
             _light.Instantiate(parent.transform);
             _houses.ForEach(h => h.Instantiate(parent.transform));
 
-            return GenerateNavPoints(ground.transform.position.y + 1);
+            _isInstantiated = true;
+            _parentInstantiated = parent;
         }
 
-        private Graph<Vector3> GenerateNavPoints(float baseY)
+        private bool SafeLinecast(Vector3 start, Vector3 end)
         {
-            var distance = 4;
+            return Physics.Linecast(start, end) || Physics.Linecast(end, start);
+        }
+
+        private void TryAddLink(Graph<Vector3> graph, Vector3 start, Vector3 end, float weight)
+        {
+            if (graph.ContainsNode(end) && !SafeLinecast(start, end))
+            {
+                graph.AddDoubleLink(start, end, weight);
+            }
+        }
+
+        public IEnumerator GenerateNavPoints(Action<Graph<Vector3>> callback)
+        {
+            if (!_isInstantiated) { throw new Exception("Must call InstantiateObjects() first."); }
+
+            const float distance = 4;
+            var baseY = _parentInstantiated.transform.position.y + 0.01f;
             var xDiff = _mapBorders.size.x - distance / 2 - Mathf.Floor(_mapBorders.size.x / distance) * distance;
-            var xMin = Mathf.FloorToInt(_mapBorders.min.x + xDiff);
-            var xMax = Mathf.CeilToInt(_mapBorders.max.x - xDiff);
+            var xMin = Mathf.Floor(_mapBorders.min.x + xDiff);
+            var xMax = Mathf.Ceil(_mapBorders.max.x - xDiff);
             var zDiff = _mapBorders.size.z - distance / 2 - Mathf.Floor(_mapBorders.size.z / distance) * distance;
-            var zMin = Mathf.FloorToInt(_mapBorders.min.z + zDiff);
-            var zMax = Mathf.CeilToInt(_mapBorders.max.z - zDiff);
+            var zMin = Mathf.Floor(_mapBorders.min.z + zDiff);
+            var zMax = Mathf.Ceil(_mapBorders.max.z - zDiff);
 
             var xDirection = Vector3.right;
             var zDirection = Vector3.forward;
-            var diagonalDirection = xDirection + zDirection;
-            var diagonalReverseDirection = xDirection - zDirection;
+
             var xStep = xDirection * distance;
             var zStep = zDirection * distance;
-            var diagonalStep = diagonalDirection * distance;
-            var diagonalReverseStep = diagonalReverseDirection * distance;
+            var diagonalStep = (xDirection + zDirection) * distance;
+            var diagonalReverseStep = (xDirection - zDirection) * distance;
 
             var graph = new Graph<Vector3>();
             for (var x = xMin; x < xMax; x += distance)
@@ -75,33 +95,31 @@ namespace Shootball.Model
                 {
                     var current = new Vector3(x, baseY, z);
                     graph.AddNode(current);
-                    if (z > zMin && !Physics.Linecast(current, current - zStep)
-                        && !Physics.Linecast(current - zStep, current))
+                    if (z > zMin)
                     {
-                        graph.AddDoubleLink(current, current - zStep, 1);
+                        TryAddLink(graph, current, current - zStep, 1);
                     }
                     if (x > xMin)
                     {
-                        if (!Physics.Linecast(current, current - xStep)
-                            && !Physics.Linecast(current - xStep, current))
+                        TryAddLink(graph, current, current - xStep, 1);
+
+                        if (z > zMin)
                         {
-                            graph.AddDoubleLink(current, current - xStep, 1);
+                            TryAddLink(graph, current, current - diagonalStep, 1.4f);
                         }
-                        if (z > zMin && !Physics.Linecast(current,  current - diagonalStep)
-                            && !Physics.Linecast(current - diagonalStep, current))
+                        if (z < zMax - distance)
                         {
-                            graph.AddDoubleLink(current, current - diagonalStep, 1.4f);
-                        }
-                        if (z < zMax - distance && !Physics.Linecast(current, current - diagonalReverseStep)
-                            && !Physics.Linecast(current - diagonalReverseStep, current))
-                        {
-                            graph.AddDoubleLink(current, current - diagonalReverseStep, 1.4f);
+                            TryAddLink(graph, current, current - diagonalReverseStep, 1.4f);
                         }
                     }
                 }
             }
+
+            yield return null;
             graph.RemoveIsolatedSubGraphs(300);
-            return graph;
+
+            yield return null;
+            callback.Invoke(graph);
         }
 
         public GameObjectBuilder GetSpawnPoint()

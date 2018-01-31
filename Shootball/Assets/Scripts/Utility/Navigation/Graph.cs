@@ -17,12 +17,17 @@ namespace Shootball.Utility.Navigation
             _nodesWithWeightedNeighbors.Add(node, new Dictionary<T, float>());
         }
 
+        public bool ContainsNode(T node)
+        {
+            return _nodesWithWeightedNeighbors.ContainsKey(node);
+        }
+
         public void AddLink(T start, T end, float weight)
         {
-            if (!_nodesWithWeightedNeighbors.ContainsKey(end))
+            if (!ContainsNode(end))
                 throw new ArgumentException();
 
-            _nodesWithWeightedNeighbors[start].Add(end, weight);
+            _nodesWithWeightedNeighbors[start][end] = weight;
         }
 
         public void AddDoubleLink(T start, T end, float weight)
@@ -33,7 +38,7 @@ namespace Shootball.Utility.Navigation
 
         public IDictionary<T, float> GetNeighbors(T node)
         {
-            return _nodesWithWeightedNeighbors.ContainsKey(node)
+            return ContainsNode(node)
                 ? _nodesWithWeightedNeighbors[node]
                 : new Dictionary<T, float>();
         }
