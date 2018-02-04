@@ -53,12 +53,15 @@ namespace Shootball.Model.Robot
 
         public void UpdateRelativePositions()
         {
-            var bodyPosition = Components.RobotBody.transform.position;
-            Components.RobotHead.transform.position = bodyPosition - _distanceBodyHead;
+            if (Statistics.IsAlive)
+            {
+                var bodyPosition = Components.RobotBody.transform.position;
+                Components.RobotHead.transform.position = bodyPosition - _distanceBodyHead;
 
-            var oldParentPosition = Components.RobotPosition.position;
-            Components.RobotPosition.position = bodyPosition;
-            Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+                var oldParentPosition = Components.RobotPosition.position;
+                Components.RobotPosition.position = bodyPosition;
+                Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+            }
         }
 
         public IEnumerator RechargeShot()
@@ -96,11 +99,20 @@ namespace Shootball.Model.Robot
 
         public void Die()
         {
-            Components.RobotBodyRigidBody.drag *= 5;
-            Components.RobotBodyRigidBody.angularDrag *= 5;
             GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
             Components.RobotBody.GetComponents<AudioSource>()[2].Play();
             Components.MinimapIndicator.SetActive(false);
+            Components.RobotBodyRigidBody.drag *= 3;
+            Components.RobotBodyRigidBody.angularDrag *= 3;
+            var robotHeadRigidBody = Components.RobotHead.GetComponent<Rigidbody>();
+            robotHeadRigidBody.useGravity = true;
+            robotHeadRigidBody.isKinematic = false;
+            var direction = Extensions.Random.VectorRange(5, 25);
+            direction.y = 300;
+            robotHeadRigidBody.AddForce(direction);
+            robotHeadRigidBody.AddTorque(Extensions.Random.VectorRange(15, 90));
+            Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(),
+                Components.RobotHead.GetComponent<Collider>(), false);
             _deathCallbacks.ForEach(c => c.Invoke());
         }
 
@@ -111,7 +123,7 @@ namespace Shootball.Model.Robot
 
         public void MapBorderReached()
         {
-            Die();
+            //Die();
         }
 
         public void Move(Direction direction)
