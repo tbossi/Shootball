@@ -5,7 +5,7 @@ namespace Shootball.Model
 {
     public interface IShooter
     {
-        Collider Collider { get; }
+        Collider HeadCollider { get; }
         Color LaserColor { get; }
         void Shoot();
         IEnumerator RechargeShot();

@@ -20,16 +20,11 @@ namespace Shootball.Model.Robot
         private float _nextFire;
         private List<Action> _deathCallbacks;
 
-        public Collider Collider => Components.RobotHead.GetComponent<Collider>();
-
+        public Collider HeadCollider => Components.RobotHead.GetComponent<Collider>();
         protected Vector3 MoveAxis => Components.RobotPosition.forward;
-
-        public Vector3 RotationAxis => Components.RobotHead.transform.up;
-
+        public Vector3 RotationAxis => Components.RobotPosition.up;
         protected Quaternion ShootRotation => Quaternion.AngleAxis(_aimDegree, Vector3.Cross(MoveAxis, RotationAxis));
-
         public Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
-
         public Color LaserColor { get; }
 
         public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
@@ -51,16 +46,26 @@ namespace Shootball.Model.Robot
             Components.RobotHead.AddComponent<RobotCollision>().RobotModel = this;
         }
 
-        public void UpdateRelativePositions()
+        public void UpdateHeadAndBobyRelativePositions()
         {
             if (Statistics.IsAlive)
             {
                 var bodyPosition = Components.RobotBody.transform.position;
                 Components.RobotHead.transform.position = bodyPosition - _distanceBodyHead;
+                Components.RobotHead.transform.rotation = new Quaternion();
 
                 var oldParentPosition = Components.RobotPosition.position;
                 Components.RobotPosition.position = bodyPosition;
                 Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+
+                var s = Settings.MaxSpeed * Time.deltaTime;
+                var angle = Mathf.Clamp(Components.RobotBodyRigidBody.velocity.magnitude, 0, s);
+                angle = angle / s - 0.5f;
+                angle = 4 * angle * angle * angle + 0.5f;
+
+                var headRotationAxis = Vector3.Cross(RotationAxis, MoveAxis).normalized;
+                Components.RobotHead.transform.RotateAround(Components.RobotBody.transform.position,
+                    headRotationAxis, 15f * angle);
             }
         }
 
@@ -130,14 +135,14 @@ namespace Shootball.Model.Robot
         {
             if (Statistics.IsAlive)
             {
-                var directionVector = RotationFromDirection(direction, RotationAxis) * MoveAxis;
+                var directionVector = (RotationFromDirection(direction, RotationAxis) * MoveAxis).normalized;
                 var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
                 if (oldDirection <= Settings.MaxSpeed * Time.deltaTime)
                 {
-                    var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
-                            + Math.Abs(oldDirection) * 4;
+                    var moveAmount = (Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
+                        + Math.Abs(oldDirection) * 4.2f) * 70;
 
-                    Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+                    Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount * Time.deltaTime);
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace Shootball.Model.Robot
         private float _smoothAngle;
 
         public EnemyRobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
-                Color laserColor) : base(settings, components, statistics, Color.red, laserColor)
+            Color laserColor) : base(settings, components, statistics, Color.red, laserColor)
         {
             Components.TargetCamera.GetComponent<Camera>().enabled = false;
             Components.HeadCamera.GetComponent<Camera>().enabled = false;
@@ -32,14 +32,20 @@ namespace Shootball.Model.Robot
         {
             var angle = AngleFromDirection(direction);
 
-            if (angle > -45 && angle < 45) { Move(Direction.Forward); }
-            else if (angle < -135 || angle > 135) { Move(Direction.Backward); }
+            if (angle > -50 && angle < 50)
+            {
+                Move(Direction.Forward);
+            }
+            else if (angle < -130 || angle > 130)
+            {
+                Move(Direction.Backward);
+            }
 
-            if (angle > 45 && angle < 135)
+            if (angle > 40 && angle < 140)
             {
                 Move(Direction.Left);
             }
-            else if (angle < -45 && angle > -135)
+            else if (angle < -40 && angle > -140)
             {
                 Move(Direction.Right);
             }
@@ -48,16 +54,21 @@ namespace Shootball.Model.Robot
         public void RotateTowardsSmooth(Vector3 direction)
         {
             var angle = AngleFromDirection(direction);
-            _smoothAngle = Mathf.LerpAngle(angle + 180, _smoothAngle + 180, 0.15f) - 180;
-
+            var distance = 180 - Mathf.Abs(Mathf.Abs(angle - _smoothAngle) - 180);
+            var interpolationFactor = distance > 120 ? 0.6f * distance / 180 :
+                (distance > 60 ? 0.4f * (distance - 24) / 96 : 0.15f);
+            _smoothAngle = Mathf.LerpAngle(angle + 180, _smoothAngle + 180, interpolationFactor) - 180;
             Turn(_smoothAngle);
         }
 
         public void RotateTowardsApproximately(Vector3 direction, float maxDegreeVariation)
         {
             var angle = AngleFromDirection(direction) +
-                    Extensions.Random.Range(-maxDegreeVariation, maxDegreeVariation);
-            Turn(angle);
+                Extensions.Random.Range(-maxDegreeVariation, maxDegreeVariation);
+            var distance = 180 - Mathf.Abs(Mathf.Abs(angle - _smoothAngle) - 180);
+            var interpolationFactor = Extensions.Random.Range(0.16f, 0.26f) + 0.34f * distance / 180;
+            _smoothAngle = Mathf.LerpAngle(angle + 180, _smoothAngle + 180, interpolationFactor) - 180;
+            Turn(_smoothAngle);
         }
 
         public void SlowDown()

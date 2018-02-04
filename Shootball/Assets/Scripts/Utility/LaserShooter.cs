@@ -18,7 +18,7 @@ namespace Shootball.Utility
         public void Shoot(Vector3 origin, Quaternion rotation, Vector3 direction, float speed)
         {
             var shot = GameObject.Instantiate(_shotPrefab, origin, rotation);
-            Physics.IgnoreCollision(shot.GetComponent<Collider>(), _shooter.Collider);
+            Physics.IgnoreCollision(shot.GetComponent<Collider>(), _shooter.HeadCollider);
             shot.transform.forward = direction;
             shot.GetComponent<Light>().color = _shooter.LaserColor;
             shot.GetComponent<Renderer>().material.SetColor("_Color", _shooter.LaserColor);

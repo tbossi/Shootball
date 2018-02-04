@@ -61,7 +61,7 @@ namespace Shootball.GlobalScripts
 
         void FixedUpdate()
         {
-            RobotModel.UpdateRelativePositions();
+            RobotModel.UpdateHeadAndBobyRelativePositions();
         }
     }
 }
