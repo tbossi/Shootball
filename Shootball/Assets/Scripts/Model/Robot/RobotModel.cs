@@ -14,8 +14,6 @@ namespace Shootball.Model.Robot
         public readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
-        private float _smoothMouseX = 0;
-        private float _smoothMouseY = 0;
         private float _aimDegree;
         private float _nextFire;
         private List<Action> _deathCallbacks;
@@ -128,7 +126,8 @@ namespace Shootball.Model.Robot
 
         public void MapBorderReached()
         {
-            //Die();
+            Components.RobotBodyRigidBody.velocity *= -0.3f;
+            Components.RobotBodyRigidBody.angularVelocity *= -0.3f;
         }
 
         public void Move(Direction direction)
@@ -168,16 +167,6 @@ namespace Shootball.Model.Robot
             return Quaternion.AngleAxis(angle, axis);
         }
 
-        public void TurnMouse(float rawX)
-        {
-
-            var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
-            _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
-            var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
-
-            Turn(turnAmount);
-        }
-
         public void Turn(float turnAmount)
         {
             if (Statistics.IsAlive)
@@ -186,14 +175,10 @@ namespace Shootball.Model.Robot
             }
         }
 
-        public void Aim(float rawY)
+        public void Aim(float aimAmount)
         {
             if (Statistics.IsAlive)
             {
-                var y = rawY * Settings.MouseSensitivity.y * Settings.MouseSmoothing.y;
-                _smoothMouseY = Mathf.Lerp(_smoothMouseY, y, 1f / Settings.MouseSmoothing.y);
-                var aimAmount = _smoothMouseY * Settings.AimSpeed * Time.deltaTime;
-
                 if (_aimDegree + aimAmount > Settings.UpperAimDegree)
                 {
                     _aimDegree = Settings.UpperAimDegree;
@@ -236,7 +221,7 @@ namespace Shootball.Model.Robot
             void OnCollisionEnter(Collision collisionInfo)
             {
                 var rawMagnitude = collisionInfo.impulse.magnitude;
-                var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 1 / 2;
+                var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 0.5f;
 
                 var other = collisionInfo.gameObject;
 
@@ -247,7 +232,7 @@ namespace Shootball.Model.Robot
                         ? RobotModel.Components.RobotBody.GetComponents<AudioSource>()[0]
                         : RobotModel.Components.RobotBody.GetComponents<AudioSource>()[1];
 
-                audioSource.volume = impactEffectiveness * 0.55f + 0.45f;
+                audioSource.volume = impactEffectiveness * 0.58f + 0.42f;
                 audioSource.Play();
 
                 if (impactEffectiveness > 0.01)
