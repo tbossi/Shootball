@@ -6,6 +6,7 @@ namespace Shootball.GlobalScripts
     public class Shot : MonoBehaviour
     {
         public GameObject BurnPrefab;
+        public GameObject SparklesPrefab;
 
         [HideInInspector]
         public ShotModel ShotModel;

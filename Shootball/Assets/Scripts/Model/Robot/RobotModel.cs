@@ -14,22 +14,15 @@ namespace Shootball.Model.Robot
         public readonly RobotStatistics Statistics;
         private readonly LaserShooter _shooter;
         private readonly Vector3 _distanceBodyHead;
-        private float _smoothMouseX = 0;
-        private float _smoothMouseY = 0;
         private float _aimDegree;
         private float _nextFire;
         private List<Action> _deathCallbacks;
 
-        public Collider Collider => Components.RobotHead.GetComponent<Collider>();
-
+        public Collider HeadCollider => Components.RobotHead.GetComponent<Collider>();
         protected Vector3 MoveAxis => Components.RobotPosition.forward;
-
-        public Vector3 RotationAxis => Components.RobotHead.transform.up;
-
+        public Vector3 RotationAxis => Components.RobotPosition.up;
         protected Quaternion ShootRotation => Quaternion.AngleAxis(_aimDegree, Vector3.Cross(MoveAxis, RotationAxis));
-
         public Vector3 ShootDirection => (ShootRotation * MoveAxis).normalized;
-
         public Color LaserColor { get; }
 
         public RobotModel(RobotSettings settings, RobotComponents components, RobotStatistics statistics,
@@ -51,14 +44,27 @@ namespace Shootball.Model.Robot
             Components.RobotHead.AddComponent<RobotCollision>().RobotModel = this;
         }
 
-        public void UpdateRelativePositions()
+        public void UpdateHeadAndBobyRelativePositions()
         {
-            var bodyPosition = Components.RobotBody.transform.position;
-            Components.RobotHead.transform.position = bodyPosition - _distanceBodyHead;
+            if (Statistics.IsAlive)
+            {
+                var bodyPosition = Components.RobotBody.transform.position;
+                Components.RobotHead.transform.position = bodyPosition - _distanceBodyHead;
+                Components.RobotHead.transform.rotation = new Quaternion();
 
-            var oldParentPosition = Components.RobotPosition.position;
-            Components.RobotPosition.position = bodyPosition;
-            Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+                var oldParentPosition = Components.RobotPosition.position;
+                Components.RobotPosition.position = bodyPosition;
+                Components.RobotBody.transform.position += oldParentPosition - bodyPosition;
+
+                var s = Settings.MaxSpeed * Time.deltaTime;
+                var angle = Mathf.Clamp(Components.RobotBodyRigidBody.velocity.magnitude, 0, s);
+                angle = angle / s - 0.5f;
+                angle = 4 * angle * angle * angle + 0.5f;
+
+                var headRotationAxis = Vector3.Cross(RotationAxis, MoveAxis).normalized;
+                Components.RobotHead.transform.RotateAround(Components.RobotBody.transform.position,
+                    headRotationAxis, 15f * angle);
+            }
         }
 
         public IEnumerator RechargeShot()
@@ -96,11 +102,20 @@ namespace Shootball.Model.Robot
 
         public void Die()
         {
-            Components.RobotBodyRigidBody.drag *= 5;
-            Components.RobotBodyRigidBody.angularDrag *= 5;
             GameObject.Instantiate(Components.DieEffectsPrefab, Components.RobotPosition);
             Components.RobotBody.GetComponents<AudioSource>()[2].Play();
             Components.MinimapIndicator.SetActive(false);
+            Components.RobotBodyRigidBody.drag *= 3;
+            Components.RobotBodyRigidBody.angularDrag *= 3;
+            var robotHeadRigidBody = Components.RobotHead.GetComponent<Rigidbody>();
+            robotHeadRigidBody.useGravity = true;
+            robotHeadRigidBody.isKinematic = false;
+            var direction = Extensions.Random.VectorRange(5, 25);
+            direction.y = 300;
+            robotHeadRigidBody.AddForce(direction);
+            robotHeadRigidBody.AddTorque(Extensions.Random.VectorRange(15, 90));
+            Physics.IgnoreCollision(Components.RobotBody.GetComponent<Collider>(),
+                Components.RobotHead.GetComponent<Collider>(), false);
             _deathCallbacks.ForEach(c => c.Invoke());
         }
 
@@ -111,21 +126,22 @@ namespace Shootball.Model.Robot
 
         public void MapBorderReached()
         {
-            Die();
+            Components.RobotBodyRigidBody.velocity *= -0.3f;
+            Components.RobotBodyRigidBody.angularVelocity *= -0.3f;
         }
 
         public void Move(Direction direction)
         {
             if (Statistics.IsAlive)
             {
-                var directionVector = RotationFromDirection(direction, RotationAxis) * MoveAxis;
+                var directionVector = (RotationFromDirection(direction, RotationAxis) * MoveAxis).normalized;
                 var oldDirection = Vector3.Dot(directionVector, Components.RobotBodyRigidBody.velocity);
                 if (oldDirection <= Settings.MaxSpeed * Time.deltaTime)
                 {
-                    var moveAmount = Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
-                            + Math.Abs(oldDirection) * 4;
+                    var moveAmount = (Settings.MoveSpeed * Time.deltaTime + Settings.FixedMoveSpeed
+                        + Math.Abs(oldDirection) * 4.2f) * 70;
 
-                    Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount);
+                    Components.RobotBodyRigidBody.AddForce(directionVector * moveAmount * Time.deltaTime);
                 }
             }
         }
@@ -151,16 +167,6 @@ namespace Shootball.Model.Robot
             return Quaternion.AngleAxis(angle, axis);
         }
 
-        public void TurnMouse(float rawX)
-        {
-
-            var x = rawX * Settings.MouseSensitivity.x * Settings.MouseSmoothing.x;
-            _smoothMouseX = Mathf.Lerp(_smoothMouseX, x, 1f / Settings.MouseSmoothing.x);
-            var turnAmount = _smoothMouseX * Settings.TurnSpeed * Time.deltaTime;
-
-            Turn(turnAmount);
-        }
-
         public void Turn(float turnAmount)
         {
             if (Statistics.IsAlive)
@@ -169,14 +175,10 @@ namespace Shootball.Model.Robot
             }
         }
 
-        public void Aim(float rawY)
+        public void Aim(float aimAmount)
         {
             if (Statistics.IsAlive)
             {
-                var y = rawY * Settings.MouseSensitivity.y * Settings.MouseSmoothing.y;
-                _smoothMouseY = Mathf.Lerp(_smoothMouseY, y, 1f / Settings.MouseSmoothing.y);
-                var aimAmount = _smoothMouseY * Settings.AimSpeed * Time.deltaTime;
-
                 if (_aimDegree + aimAmount > Settings.UpperAimDegree)
                 {
                     _aimDegree = Settings.UpperAimDegree;
@@ -219,7 +221,7 @@ namespace Shootball.Model.Robot
             void OnCollisionEnter(Collision collisionInfo)
             {
                 var rawMagnitude = collisionInfo.impulse.magnitude;
-                var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 1 / 2;
+                var impactEffectiveness = Mathf.Atan(rawMagnitude - threshold) / 3 + 0.5f;
 
                 var other = collisionInfo.gameObject;
 
@@ -230,7 +232,7 @@ namespace Shootball.Model.Robot
                         ? RobotModel.Components.RobotBody.GetComponents<AudioSource>()[0]
                         : RobotModel.Components.RobotBody.GetComponents<AudioSource>()[1];
 
-                audioSource.volume = impactEffectiveness * 0.55f + 0.45f;
+                audioSource.volume = impactEffectiveness * 0.58f + 0.42f;
                 audioSource.Play();
 
                 if (impactEffectiveness > 0.01)
