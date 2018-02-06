@@ -85,8 +85,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 2
-  m_Range: 1.5
+  m_Intensity: 1.75
+  m_Range: 8
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -103,10 +103,10 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294963199
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 1.15
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_endPos: {x: 0, y: 0, z: 200}
   m_lineColor: {r: 0.034482718, g: 1, b: 0, a: 0}
   m_lineWidth: 20
-  m_lightSaberFactor: 0.619
+  m_lightSaberFactor: 0.67
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BurnPrefab: {fileID: 1225656679215802, guid: 60e5b847e7dfe46a599e7310919d4e91, type: 2}
+  SparklesPrefab: {fileID: 1961535658274758, guid: f42b429df6b184165bb3310add62d2d9,
+    type: 2}
 --- !u!136 &136846515634295538
 CapsuleCollider:
   m_ObjectHideFlags: 1

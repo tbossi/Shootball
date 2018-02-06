@@ -25,7 +25,7 @@ namespace Shootball.Utility
             shot.GetComponent<VolumetricLineBehavior>().LineColor = _shooter.LaserColor;
 
             var shotScript = shot.GetComponent<GlobalScripts.Shot>();
-            shotScript.ShotModel = new ShotModel(shot, shotScript.BurnPrefab, _shooter, speed);
+            shotScript.ShotModel = new ShotModel(shot, shotScript.BurnPrefab, shotScript.SparklesPrefab, _shooter, speed);
             shotScript.enabled = true;
         }
     }
